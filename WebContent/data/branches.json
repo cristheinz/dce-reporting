@@ -1,0 +1,7 @@
+{
+    "success": true,
+    "branches": [
+    	{"id": 1, "suc": '1', "txt": 'Rua Augusta'},
+        {"id": 2, "suc": '2', "txt": 'Saldanha'}
+    ]
+}

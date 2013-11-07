@@ -1,0 +1,106 @@
+{
+    "text": ".",
+    "children": [
+        {
+            "cta": "10",
+            "nam": "CAIXA E DISPONIBILIDADES EM BANCOS CENTRAIS",
+            "deb": 13.25,
+            "cre": 13.25,
+            "iconCls": "task-folder",
+            "expanded": true,
+            "children": [
+                {
+                    "cta": "100",
+                    "nam": "CAIXA",
+                    "deb": 1.25,
+                    "cre": 1.25,
+                    "iconCls": "task-folder",
+                    "children": [
+                        {
+                            "cta": "1000",
+                            "nam": "NOTAS E MOEDAS NACIONAIS",
+                            "deb": 0.25,
+                            "cre": 0.25,
+                            "iconCls": "task-folder",
+                            "children": [
+                            	{
+                            		"cta": "1052",
+                            		"nam": "CAIXA",
+                            		"deb": .4,
+                            		"cre": .5,
+                            		"leaf": true,
+                            		"iconCls": "task",
+                            		"done": true
+                            	},{
+                            		"cta": "1124",
+                            		"nam": "CAIXA CENTRAL",
+                            		"deb": .4,
+                            		"cre": .5,
+                            		"leaf": true,
+                            		"iconCls": "task",
+                            		"done": true
+                            	},{
+                            		"cta": "8957",
+                            		"nam": "CAIXA CAIXAS AUTOMÁTICAS DESLOCADOS",
+                            		"deb": .4,
+                            		"cre": .5,
+                            		"leaf": true,
+                            		"iconCls": "task",
+                            		"done": true
+                            	}
+                            ]
+                        },{
+                            "cta": "1001",
+                            "nam": "NOTAS E MOEDAS ESTRANGEIRAS",
+                            "deb": 0.25,
+                            "cre": 0.25,
+                            "iconCls": "task-folder",
+                            "children": [
+                            	{
+                            		"cta": "1054",
+                            		"nam": "MOEDAS E NOTAS ESTRANG.",
+                            		"deb": .4,
+                            		"cre": .5,
+                            		"leaf": true,
+                            		"iconCls": "task",
+                            		"done": true
+                            	},{
+                            		"cta": "6194",
+                            		"nam": "DEP.PRESTADOS A BANCOS OPER.NO PAÍS-VENCIDOS-",
+                            		"deb": .4,
+                            		"cre": .5,
+                            		"leaf": true,
+                            		"iconCls": "task",
+                            		"done": true
+                            	}
+                            ]
+                        }
+                    ]
+                },{
+                    "cta": "101",
+                    "nam": "DEPÓSITOS À ORDEM NO BANCO DE PORTUGAL",
+                    "deb": 1.25,
+                    "cre": 1.25,
+                    "iconCls": "task-folder",
+                    "children": [
+                        {
+                            "cta": "5986",
+                            "nam": "BANCO DE PORTUGAL-CONTA DE TESOURARIA",
+                            "deb": 0.25,
+                            "cre": 0.25,
+                            "iconCls": "task-folder",
+                            "leaf": true
+                        }
+                    ]
+                },{
+                    "cta": "102",
+                    "nam": "DISPONIBILIDADES SOBRE BANCOS CENTRAIS NO ESTRANGEIRO",
+                    "deb": 1.25,
+                    "cre": 1.25,
+                    "iconCls": "task-folder",
+                    "leaf": true
+                }
+            ]
+        }
+    ]
+}

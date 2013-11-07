@@ -1,0 +1,34 @@
+Ext.define('AM.model.File', {
+    extend: 'Ext.data.Model',
+    fields: [{
+        name: 'id',
+        type: 'int'
+    }, {
+        name: 'name',
+        type: 'string'
+    }, {
+        name: 'data',
+        type: 'string'
+    }, {
+        name: 'userId',
+        type: 'int'
+    }, {
+        name: 'creationDate',
+        type: 'date'
+    }, {
+        name: 'fid',
+        type: 'string'
+    }, {
+        name: 'title',
+        type: 'string'
+    }, {
+        name: 'dta',
+        type: 'date'
+    }, {
+        name: 'dtp',
+        type: 'date'
+    }, {
+        name: 'pdata',
+        type: 'string'
+    }]
+});

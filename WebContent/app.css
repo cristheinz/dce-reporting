@@ -1,0 +1,63 @@
+/*#app-header {
+	/*background-image: -webkit-gradient(linear,50% 0,50% 100%,color-stop(0%,#f3f6fc),color-stop(100%,#cbdaf0));
+	background-image: -webkit-linear-gradient(top,#f3f6fc,#cbdaf0);
+	background-image: -moz-linear-gradient(top,#f3f6fc,#cbdaf0);
+	background-image: -o-linear-gradient(top,#f3f6fc,#cbdaf0);
+	background-image: -ms-linear-gradient(top,#f3f6fc,#cbdaf0);
+	background-image: linear-gradient(top,#f3f6fc,#cbdaf0);
+	border-bottom: 1px solid #a3bde5;
+}
+#app-header {
+	background-image: -webkit-gradient(linear,50% 0,50% 100%,color-stop(0%,#8fc33a),color-stop(100%,#739b2e));
+	background-image: -webkit-linear-gradient(top,#8fc33a,#739b2e);
+	background-image: -moz-linear-gradient(top,#8fc33a,#739b2e);
+	background-image: -o-linear-gradient(top,#8fc33a,#739b2e);
+	background-image: -ms-linear-gradient(top,#8fc33a,#739b2e);
+	background-image: linear-gradient(top,#8fc33a,#739b2e);
+	border-bottom: 1px solid #567422;
+}
+#app-header {
+background-image: linear-gradient(bottom, rgb(168,0,39) 7%, rgb(212,148,148) 62%);
+background-image: -o-linear-gradient(bottom, rgb(168,0,39) 7%, rgb(212,148,148) 62%);
+background-image: -moz-linear-gradient(bottom, rgb(168,0,39) 7%, rgb(212,148,148) 62%);
+background-image: -webkit-linear-gradient(bottom, rgb(168,0,39) 7%, rgb(212,148,148) 62%);
+background-image: -ms-linear-gradient(bottom, rgb(168,0,39) 7%, rgb(212,148,148) 62%);
+
+background-image: -webkit-gradient(
+	linear,
+	left bottom,
+	left top,
+	color-stop(0.07, rgb(168,0,39)),
+	color-stop(0.62, rgb(212,148,148))
+);
+}*/
+#app-header, .loginBody {
+	background-image: -webkit-gradient(linear,50% 0,50% 100%,color-stop(0%,#A80027),color-stop(100%,#D49494));
+	background-image: -webkit-linear-gradient(top,#A80027,#D49494);
+	background-image: -moz-linear-gradient(top,#A80027,#D49494);
+	background-image: -o-linear-gradient(top,#A80027,#D49494);
+	background-image: -ms-linear-gradient(top,#A80027,#D49494);
+	background-image: linear-gradient(top,#A80027,#D49494);
+	background-color: #A80027;
+	border-bottom: 1px solid #567422;
+}
+#app-header-title {
+	padding: 15px 10px 10px 11px;
+	//color: #04408c;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	text-shadow: 0 1px 0 gray;
+}
+.map-icon {
+	background-image: url(https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/location-24-16.png) !important;
+}
+.upload-icon {
+	//background-image: url(https://cdn3.iconfinder.com/data/icons/wpzoom-developer-icon-set/500/66-16.png) !important;
+	background-image: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/folder_open.png) !important;
+}
+#loginTarget {
+	width: 250px;
+	margin-top:20%;
+	margin-left:40%;
+}
