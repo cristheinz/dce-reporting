@@ -11,7 +11,6 @@ Ext.application({
     ],
     launch: function() {
     	Ext.create('AM.view.authentication.Login',{ 
-            //renderTo: Ext.getBody()
             renderTo: 'loginTarget'
         });
     }

@@ -1,41 +1,40 @@
-Ext.define('AM.view.layout.ApplicationsMenu' ,{
+Ext.define('AM.view.layout.Module' ,{
     extend: 'Ext.tree.Panel',
 
-    alias: 'widget.applicationsmenu',
-    
-    
+    alias: 'widget.module',
+
     initComponent: function() {
     	Ext.apply(this, {
-    		id: 'menutree',
+    		//id: 'menutree',
     		root: {
-    	        text: 'Menu',
+    	        text: 'Módulos',
     	        expanded: true,
     	        children: [{
-    	        		id: 'appBalance',
+    	        		id: 'moduleBalance',
     	                text: 'Balancete',
     	                leaf: true
     	            },{
-    	            	id: 'app2',
+    	            	id: 'module2',
     	                text: 'Controlo de contas',
     	                leaf: true
     	            },{
-    	            	id: 'app3',
+    	            	id: 'module3',
     	                text: 'Crédito Vencido',
     	                leaf: true
     	            },{
     	                text: 'Papel comercial',
     	                expanded: true,
     	                children: [{
-    	                		id: 'app41',
+    	                		id: 'module41',
     	                        text: 'Cliente e emissões',
     	                        leaf: true
     	                    },{
-    	                    	id: 'app42',
+    	                    	id: 'module42',
     	                        text: 'Gerar ficheiro',
     	                        leaf: true
     	                    }]
     	            },{
-    	            	id: 'appBranch',
+    	            	id: 'moduleBranch',
     	                text: 'Sucursais',
     	                leaf: true
     	            }]

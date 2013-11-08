@@ -32,7 +32,7 @@ Ext.define('AM.controller.Authentication', {
                             failure: function(form, action) {
                             	var field = this.getLoginForm().down('textfield[name=loginPassword]');
                             	field.setValue("");
-                            	Ext.Msg.alert('Login Failed!', 'Try again.',function(btn){
+                            	Ext.Msg.alert('Autenticação Falhou!', action.result.message ,function(btn){
                             		field.focus(false, 1000);
                             	});
                             }

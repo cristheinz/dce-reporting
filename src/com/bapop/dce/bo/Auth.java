@@ -1,4 +1,4 @@
-package com.bapop.dce.model;
+package com.bapop.dce.bo;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 

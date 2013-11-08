@@ -2,7 +2,7 @@ Ext.define('AM.view.file.Upload' ,{
 	extend: 'Ext.form.Panel',
 
     alias: 'widget.upload',
-    id: 'appupload',
+    //id: 'appupload',
     //title: 'Importar ficheiro...',
     width: 500,
     frame: true,

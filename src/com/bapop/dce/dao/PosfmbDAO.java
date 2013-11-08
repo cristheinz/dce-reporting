@@ -1,11 +1,6 @@
 package com.bapop.dce.dao;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -17,7 +12,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.bapop.dce.model.PosfmbTO;
+import com.bapop.dce.util.Function;
 
 @Repository
 public class PosfmbDAO {
@@ -33,12 +28,12 @@ public class PosfmbDAO {
 	 * @return list of all Reports
 	 */
 	@SuppressWarnings("unchecked")
-	public List<PosfmbTO> getPosfmb(final String anomes) {
-		return hibernateTemplate.execute(new HibernateCallback<List<PosfmbTO>>() {
+	public List<Object[]> getPosfmb(final String anomes) {
+		return hibernateTemplate.execute(new HibernateCallback<List<Object[]>>() {
 
-			public List<PosfmbTO> doInHibernate(Session s)
+			public List<Object[]> doInHibernate(Session s)
 	                throws HibernateException, SQLException {
-				String[] ym=getAnomeses(anomes);
+				String[] ym=Function.getDashboradPeriods(anomes);
 				
 	        	String q ="select dce_batch.fn_getGRPtxt(grp) as ctab," +
 				" cast(round(abs(sum(case when anomes= "+anomes+" then val else 0 end)/1000000),3,1) as decimal(14,2)) as val,"+
@@ -89,64 +84,24 @@ public class PosfmbDAO {
 	            sql.addScalar("val3");
 	            sql.addScalar("valh");
 	            
-	            
-	            List<PosfmbTO> tos=new ArrayList<PosfmbTO>();
+	            /*
+	            List<DashBoardWrapper> tos=new ArrayList<DashBoardWrapper>();
 	            List<Object[]> l=sql.list();
 	            for(Object[] o:l) {
-	            	/*for(int i=0;i<o.length;i++) {
-	            		System.out.println("aaaaaaa"+o[i]);
-	            		
-	            	}*/
 	            	String cta=o[0].toString();
 	            	BigDecimal val=new BigDecimal(o[1].toString());
 	            	BigDecimal val1=new BigDecimal(o[2].toString());
 	            	BigDecimal val2=new BigDecimal(o[3].toString());
 	            	BigDecimal val3=new BigDecimal(o[4].toString());
 	            	BigDecimal valh=new BigDecimal(o[5].toString());
-	            	tos.add(new PosfmbTO(cta,val,val1,val2,val3,valh));
+	            	tos.add(new DashBoardWrapper(cta,val,val1,val2,val3,valh));
 	            }
-	            return tos;
-	            //return sql.list();
+	            return tos;*/
+	            return sql.list();
 	        }
 	    });
 	}
 	
-	private static String[] getAnomeses(String anomes) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
-		
-		int y=Integer.parseInt(anomes.substring(0, 4));
-		int m=Integer.parseInt(anomes.substring(4));
-		m=m-1;
-		//System.out.println(m+";"+y);
-
-		Calendar cal = Calendar.getInstance();
-		cal.set(y, m, 1);
-		Date d1 = cal.getTime();
-		//System.out.println(sdf.format(d1));
-		
-		cal.add(Calendar.MONTH, -1);
-		d1 = cal.getTime();
-		//System.out.println(d1.toString());
-		
-		cal.add(Calendar.MONTH, -1);
-		Date d2 = cal.getTime();
-		//System.out.println(d2.toString());
-
-		cal.add(Calendar.MONTH, -1);
-		Date d3 = cal.getTime();
-		//System.out.println(d3.toString());
-
-		cal.add(Calendar.MONTH, -9);
-		Date dh = cal.getTime();
-		//System.out.println(dh.toString());
-
-		return new String[]{sdf.format(d1),sdf.format(d2),sdf.format(d3),sdf.format(dh)};
-	}
 	
-	public static void main(String[] args) {
-		for(String s:PosfmbDAO.getAnomeses("201309")) {
-			System.out.println(s);
-		};
-	}
 
 }

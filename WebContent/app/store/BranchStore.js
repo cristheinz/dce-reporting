@@ -1,4 +1,4 @@
-Ext.define('AM.store.Branches', {
+Ext.define('AM.store.BranchStore', {
     extend: 'Ext.data.Store',
 
     model: 'AM.model.Branch',
@@ -7,7 +7,7 @@ Ext.define('AM.store.Branches', {
         {suc: '2', txt: 'Saldanha'}
     ]*/
     autoLoad: false,
-    //autoSync: true,
+    autoSync: true,
     /*filters: [{
     	property: 'txt',
         value: /LISBOA - SALDANHA/
@@ -30,7 +30,7 @@ Ext.define('AM.store.Branches', {
             totalProperty: 'total',
             successProperty: 'success',
             idProperty: 'id',
-            root: 'branches',
+            root: 'data',
             messageProperty: 'message'  // <-- New "messageProperty" meta-data
         },
     	writer: {

@@ -19,14 +19,14 @@ Ext.define('AM.store.AuthData', {
     proxy: {
         type: 'ajax',
         api: {
-        	read : 'user/auth.action'//?user='+AM.user//Ext.state.Manager.get('username',''),
+        	read : 'auth.action'//?user='+AM.user//Ext.state.Manager.get('username',''),
     	},
         reader: {
             type: 'json',
             totalProperty: 'total',
             successProperty: 'success',
             idProperty: 'key',
-            root: 'keys',
+            root: 'data',
             messageProperty: 'message'  // <-- New "messageProperty" meta-data
         }
     }

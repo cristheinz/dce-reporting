@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.bapop.dce.model.FileIO;
 
 @Repository
-public class FileIODAO implements IFileIODAO {
+public class FileIODAO {
 	private HibernateTemplate hibernateTemplate;
 
 	@Autowired
@@ -23,7 +23,6 @@ public class FileIODAO implements IFileIODAO {
 	 * @return list of all Files
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<FileIO> getFiles(int userID) {
 		return hibernateTemplate.find("from FileIO where user_id="+userID);
 	}
@@ -32,7 +31,6 @@ public class FileIODAO implements IFileIODAO {
 	 * Delete a File with the id passed as parameter
 	 * @param id
 	 */
-	@Override
 	public void deleteFile(int id){
 		Object record = hibernateTemplate.load(FileIO.class, id);
 		hibernateTemplate.delete(record);
@@ -44,7 +42,6 @@ public class FileIODAO implements IFileIODAO {
 	 * @param File
 	 * @return File added or updated in DB
 	 */
-	@Override
 	public FileIO saveFile(FileIO file){
 		hibernateTemplate.saveOrUpdate(file);
 		return file;

@@ -11,8 +11,8 @@ Ext.application({
     controllers: [
         'Application',
         'BalanceController',
-        'FileController',
-        'Branches'
+        'BranchController',
+        'FileController'
     ],
     launch: function() {
         Ext.create('Ext.container.Viewport', {

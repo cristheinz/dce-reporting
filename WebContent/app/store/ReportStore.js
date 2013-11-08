@@ -1,12 +1,8 @@
-Ext.define('AM.store.ReportsTree', {
+Ext.define('AM.store.ReportStore', {
     extend: 'Ext.data.TreeStore',
 
     autoLoad: false,
 
-    /*proxy: {
-    	type: 'ajax',
-    	url: 'report/tree.action'
-	},*/
     proxy: {
         type: 'ajax',
         api: {
@@ -17,8 +13,8 @@ Ext.define('AM.store.ReportsTree', {
             totalProperty: 'total',
             successProperty: 'success',
             idProperty: 'id',
-            root: 'tree',
-            messageProperty: 'message'  // <-- New "messageProperty" meta-data
+            root: 'data',
+            messageProperty: 'message'
         }
     },
 

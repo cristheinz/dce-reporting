@@ -2,7 +2,8 @@ Ext.define('AM.view.balance.List' ,{
     extend: 'Ext.tree.Panel',
 
     alias: 'widget.balancelist',
-    id: 'appbalance',
+    id: 'module_balance',
+    
     title: 'Balancete',
     closable: true,
 

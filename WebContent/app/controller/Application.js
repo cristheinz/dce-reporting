@@ -1,15 +1,20 @@
 Ext.define('AM.controller.Application', {
-    extend: 'AM.controller.AppController',
+    extend: 'AM.controller.AbstractController',
     
-    stores: ['ReportsTree','DashboardData','AuthData'],
+    stores: ['DashboardData','ReportStore'],
     views: [
         'layout.MainApp',
-        'layout.Header',
-        'layout.Menu',
-        'layout.ApplicationsMenu',
-        'layout.ReportsMenu',
+        'layout.Head',
+        'layout.MainMenu',
+        'layout.Module',
+        'layout.Report',
         'layout.Dashboard'
     ],
+    
+    refs: [{
+        ref: 'mainapp',
+        selector: 'mainapp [id=mainContent]'
+    }],
 
     init: function() {
     	
@@ -26,10 +31,10 @@ Ext.define('AM.controller.Application', {
         	'head [action=upload]': {
         		click: this.onUpload
         	},
-            'applicationsmenu': {
+            'module': {
             	itemdblclick: this.runApp
             }, 
-            'reportsmenu': {
+            'report': {
                	itemdblclick: this.runReport
             
             }
@@ -38,11 +43,12 @@ Ext.define('AM.controller.Application', {
     
     onAfterRender: function() {
     	//console.log('The panel was rendered');
-    	Ext.getStore('AuthData').load({
+    	/*Ext.getStore('AuthData').load({
     		params: {
     			user : AM.user
     			}
-    	});
+    	});*/
+    	Ext.getStore('AuthData').load();
     	Ext.getStore('FileStore').load();
     },
     
@@ -65,6 +71,7 @@ Ext.define('AM.controller.Application', {
 
     onUpload: function() {
     	Ext.create('Ext.window.Window', {
+    		id: 'uploadWindow',
 		    title: 'Importar ficheiro...',
 		    height: 200,
 		    width: 400,
@@ -77,18 +84,19 @@ Ext.define('AM.controller.Application', {
 
     runApp: function(tree, record) {
     	var id = record.get('id');
-        var main = Ext.ComponentQuery.query('#mainContent')[0];
+        //var main = Ext.ComponentQuery.query('#mainContent')[0];
+        var main = this.getMainapp();
         if(this.getAccess(id,'E')) {
         	switch(id) {
-            case 'appBranch':
-            	if(main.child('panel[id="appbranch"]')==null) {
-            		Ext.getStore('Branches').load();
+            case 'moduleBranch':
+            	if(main.child('panel[id="module_branch"]')==null) {
+            		Ext.getStore('BranchStore').load();
             		main.add(Ext.widget('branchlist')).show();
             	}
             		
             	break;
-            case 'appBalance':
-            	if(main.child('panel[id="appbalance"]')==null) {
+            case 'moduleBalance':
+            	if(main.child('panel[id="module_balance"]')==null) {
             		main.add(Ext.widget('balancelist')).show();
             	}
             		
@@ -101,7 +109,8 @@ Ext.define('AM.controller.Application', {
     },
     
     runReport: function(tree, record) {
-    	var main = Ext.ComponentQuery.query('#mainContent')[0];
+    	//var main = Ext.ComponentQuery.query('#mainContent')[0];
+    	var main = this.getMainapp();
     	if(main.child('panel[id="'+record.get('text')+'"]')==null && record.get('cls')!=null) {
     		main.add(Ext.widget('panel',{
     			id: record.get('text'),

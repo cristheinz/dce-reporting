@@ -3,9 +3,10 @@ Ext.define('AM.view.branch.List' ,{
     //requires: ['Ext.ux.grid.FiltersFeature'],
 
     alias: 'widget.branchlist',
-    id: 'appbranch',
+    id: 'module_branch',
+    
     title: 'Sucursais',
-    store: 'Branches',
+    store: 'BranchStore',
     closable: true,
     
     features: [{

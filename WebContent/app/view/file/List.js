@@ -37,7 +37,7 @@ Ext.define('AM.view.file.List' ,{
             ],*/
             prepareData: function(data) {
                 Ext.apply(data, {
-                    shortName: Ext.util.Format.ellipsis(data.name, 15),
+                    shortName: Ext.util.Format.ellipsis(data.name, 15)//,
                     //sizeString: Ext.util.Format.fileSize(data.size),
                     //dateString: Ext.util.Format.date(data.lastmod, "m/d/Y g:i a")
                 });

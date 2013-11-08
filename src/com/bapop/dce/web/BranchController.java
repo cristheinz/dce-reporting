@@ -1,6 +1,5 @@
 package com.bapop.dce.web;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bapop.dce.bo.BranchWrapper;
 import com.bapop.dce.model.Branch;
-import com.bapop.dce.model.BranchWrapper;
 import com.bapop.dce.service.BranchService;
+import com.bapop.dce.util.ExtJSReturn;
 
 @Controller
 public class BranchController {
@@ -25,13 +24,12 @@ public class BranchController {
 
 		try{
 
-			List<Branch> Branchs = branchService.getBranchList();
+			List<Branch> result = branchService.getBranchList();
 
-			return getMap(Branchs);
+			return ExtJSReturn.mapOK(result,result.size());
 
 		} catch (Exception e) {
-
-			return getModelMapError("Error retrieving Branchs from database.");
+			return ExtJSReturn.mapError("Error retrieving Branchs from database.");
 		}
 	}
 
@@ -40,13 +38,12 @@ public class BranchController {
 
 		try{
 
-			List<Branch> Branchs = branchService.create(data);
+			List<Branch> result = branchService.create(data);
 
-			return getMap(Branchs);
+			return ExtJSReturn.mapOK(result,result.size());
 
 		} catch (Exception e) {
-
-			return getModelMapError("Error trying to create Branch.");
+			return ExtJSReturn.mapError("Error trying to create Branch.");
 		}
 	}
 
@@ -54,13 +51,12 @@ public class BranchController {
 	public @ResponseBody Map<String,? extends Object> update(@RequestBody BranchWrapper data) throws Exception {
 		try{
 			
-			List<Branch> Branchs = branchService.update(data.getData());
+			List<Branch> result = branchService.update(data.getData());
 
-			return getMap(Branchs);
+			return ExtJSReturn.mapOK(result,result.size());
 
 		} catch (Exception e) {
-
-			return getModelMapError("Error trying to update Branch.");
+			return ExtJSReturn.mapError("Error trying to update Branch.");
 		}
 	}
 
@@ -71,47 +67,17 @@ public class BranchController {
 
 			branchService.delete(data);
 
-			Map<String,Object> modelMap = new HashMap<String,Object>(3);
+			/*Map<String,Object> modelMap = new HashMap<String,Object>(3);
 			modelMap.put("success", true);
 
-			return modelMap;
+			return modelMap;*/
+			
+			return ExtJSReturn.mapOK();
 
 		} catch (Exception e) {
-
-			return getModelMapError("Error trying to delete Branch.");
+			return ExtJSReturn.mapError("Error trying to delete Branch.");
 		}
 	}
-
-	/**
-	 * Generates modelMap to return in the modelAndView
-	 * @param branches
-	 * @return
-	 */
-	private Map<String,Object> getMap(List<Branch> branches){
-
-		Map<String,Object> modelMap = new HashMap<String,Object>(3);
-		modelMap.put("total", branches.size());
-		modelMap.put("branches", branches);
-		modelMap.put("success", true);
-
-		return modelMap;
-	}
-
-	/**
-	 * Generates modelMap to return in the modelAndView in case
-	 * of exception
-	 * @param msg message
-	 * @return
-	 */
-	private Map<String,Object> getModelMapError(String msg){
-
-		Map<String,Object> modelMap = new HashMap<String,Object>(2);
-		modelMap.put("message", msg);
-		modelMap.put("success", false);
-
-		return modelMap;
-	} 
-
 
 	@Autowired
 	public void setBranchService(BranchService branchService) {

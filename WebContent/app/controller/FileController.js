@@ -1,12 +1,18 @@
 Ext.define('AM.controller.FileController', {
-    extend: 'AM.controller.AppController',
+    extend: 'AM.controller.AbstractController',
     
     models: ['File'],
     stores: ['FileStore'],
+    
     views: [
         'file.Upload',
         'file.List'
     ],
+    
+    refs: [{
+        ref: 'upload',
+        selector: 'upload'
+    }],
 
     init: function() {
         this.control({
@@ -20,24 +26,27 @@ Ext.define('AM.controller.FileController', {
     },
 
     uploadFile: function(button) {
-    	//console.log('The file was sent to upload');
-    	var form = button.up('form').getForm();
+    	//var form = button.up('form').getForm();
+    	var form = this.getUpload();
         if(form.isValid()){
             form.submit({
-                url: 'user/uploadfile.action?user='+AM.user,
+                url: 'file/upload.action',//?user='+AM.user,
                 waitMsg: 'Carregando ficheiro...',
                 success: function(fp, o) {
-                	Ext.Msg.alert('Success', 'Processed file "' + o.result.file + '" on the server');
+                	Ext.Msg.alert('Mensagem', 'Ficheiro importado com sucesso',function(btn){
+                		//Ext.ComponentQuery.query('#uploadWindow')[0].close();
+                		form.up('window').close();
+                	});
                 },
                 failure: function() {
-                	Ext.Msg.alert("Error", Ext.JSON.decode(this.response.responseText).message);
+                	Ext.Msg.alert("Importação Falhou!", Ext.JSON.decode(this.response.responseText).message);
                 }
             });
         }
     },
     
     resetForm: function(button) {
-    	//console.log('RESET!');
-    	button.up('form').getForm().reset();
+    	//button.up('form').getForm().reset();
+    	this.getUpload().getForm().reset();
     }
 });

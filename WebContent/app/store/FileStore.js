@@ -7,14 +7,14 @@ Ext.define('AM.store.FileStore', {
     proxy: {
         type: 'ajax',
         api: {
-        	read : 'user/files.action'//?user='+AM.user
+        	read : 'file/list.action'//?user='+AM.user
     	},
         reader: {
             type: 'json',
             totalProperty: 'total',
             successProperty: 'success',
             idProperty: 'id',
-            root: 'files',
+            root: 'data',
             messageProperty: 'message'  // <-- New "messageProperty" meta-data
         }/*,
     	writer: {

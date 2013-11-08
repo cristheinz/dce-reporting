@@ -12,11 +12,9 @@ import com.bapop.dce.model.User;
 @Service
 public class UserService {
 	private UserDAO userDAO;
-	//private Util util;
  
     @Transactional(readOnly=true)
     public List<User> signin(String pwd){
- 
         return userDAO.getUserByPwd(pwd);
     }
  

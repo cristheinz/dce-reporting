@@ -1,11 +1,11 @@
-package com.bapop.dce.model;
+package com.bapop.dce.bo;
 
 import java.math.BigDecimal;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 @JsonAutoDetect
-public class PosfmbTO {
+public class DashBoardWrapper {
 
 	private String name;
 	private BigDecimal data1;
@@ -14,7 +14,7 @@ public class PosfmbTO {
 	private BigDecimal data4;
 	private BigDecimal data5;
 	
-	public PosfmbTO(String name, BigDecimal data1, BigDecimal data2,
+	public DashBoardWrapper(String name, BigDecimal data1, BigDecimal data2,
 			BigDecimal data3, BigDecimal data4, BigDecimal data5) {
 		super();
 		this.name = name;

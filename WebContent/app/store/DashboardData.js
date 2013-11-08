@@ -18,7 +18,7 @@ Ext.define('AM.store.DashboardData', {
             totalProperty: 'total',
             successProperty: 'success',
             idProperty: 'name',
-            root: 'dash',
+            root: 'data',
             messageProperty: 'message'  // <-- New "messageProperty" meta-data
         }
     }

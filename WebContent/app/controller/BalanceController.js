@@ -1,5 +1,5 @@
 Ext.define('AM.controller.BalanceController', {
-    extend: 'AM.controller.AppController',
+    extend: 'AM.controller.AbstractController',
     
     stores: ['BalanceStore'],
     models: ['Balance'],

@@ -1,4 +1,4 @@
-Ext.define('AM.view.layout.Menu', {
+Ext.define('AM.view.layout.MainMenu', {
     extend: 'Ext.panel.Panel',
     
     alias: 'widget.mainmenu',
@@ -6,11 +6,11 @@ Ext.define('AM.view.layout.Menu', {
     layout: 'accordion',
 	items: [{
 		title: 'Aplicações',
-    	xtype: 'applicationsmenu',
+    	xtype: 'module',
     	layout: 'fit'
     },{
         title: 'Relatórios',
-        xtype: 'reportsmenu',
+        xtype: 'report',
     	layout: 'fit'
 	}]
 });

@@ -1,4 +1,6 @@
-package com.bapop.dce.model;
+package com.bapop.dce.bo;
+
+import com.bapop.dce.model.Branch;
 
 public class BranchWrapper {
 	private Branch data;

@@ -1,8 +1,8 @@
-Ext.define('AM.controller.Branches', {
+Ext.define('AM.controller.BranchController', {
     //extend: 'Ext.app.Controller',
-    extend: 'AM.controller.AppController',
+    extend: 'AM.controller.AbstractController',
     
-    stores: ['Branches'],
+    stores: ['BranchStore'],
     models: ['Branch'],
     views: [
         'branch.List',
@@ -29,7 +29,7 @@ Ext.define('AM.controller.Branches', {
     },*/
 
     editBranch: function(grid, record) {
-    	if(this.getAccess('appBranch','U')){
+    	if(this.getAccess('moduleBranch','U')){
             //console.log('Double clicked on ' + record.get('txt'));
             var view = Ext.widget('branchedit');
             view.down('form').loadRecord(record);

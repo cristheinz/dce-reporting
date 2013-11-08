@@ -1,6 +1,7 @@
 /build
+/database
 /WebContent/WEB-INF/spring/db-config.xml
-/WebContent/ext-4
+/WebContent/ext-4.2.1
 
 # Compiled source #
 ###################

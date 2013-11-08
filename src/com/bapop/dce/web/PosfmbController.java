@@ -1,6 +1,7 @@
 package com.bapop.dce.web;
 
-import java.util.HashMap;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bapop.dce.model.PosfmbTO;
+import com.bapop.dce.bo.DashBoardWrapper;
 import com.bapop.dce.service.PosfmbService;
+import com.bapop.dce.util.ExtJSReturn;
 
 @Controller
 public class PosfmbController {
@@ -19,42 +21,26 @@ public class PosfmbController {
 
 	@RequestMapping(value="/posfmb/view.action")
 	public @ResponseBody Map<String,? extends Object> view(@RequestParam("anomes") String anomes) throws Exception {
-		try{
-			return getMap(posfmbService.view(anomes));
+		try {
+			List<Object[]> l = posfmbService.view(anomes);
+			List<DashBoardWrapper> result=new ArrayList<DashBoardWrapper>();
+            
+            for(Object[] o:l) {
+            	String cta=o[0].toString();
+            	BigDecimal val=new BigDecimal(o[1].toString());
+            	BigDecimal val1=new BigDecimal(o[2].toString());
+            	BigDecimal val2=new BigDecimal(o[3].toString());
+            	BigDecimal val3=new BigDecimal(o[4].toString());
+            	BigDecimal valh=new BigDecimal(o[5].toString());
+            	result.add(new DashBoardWrapper(cta,val,val1,val2,val3,valh));
+            }
+			
+			return ExtJSReturn.mapOK(result,result.size());
 			
 		} catch (Exception e) {
-
-			return getModelMapError("Error retrieving DashBoard Data from database.");
+			return ExtJSReturn.mapError("Error retrieving DashBoard Data from database.");
 		}
 	}
-	/**
-	 * Generates modelMap to return in the modelAndView
-	 * @param branches
-	 * @return
-	 */
-	private Map<String,Object> getMap(List<PosfmbTO> to){
-
-		Map<String,Object> modelMap = new HashMap<String,Object>(1);
-		modelMap.put("total", to.size());
-		modelMap.put("dash", to);
-		modelMap.put("success", true);
-
-		return modelMap;
-	}
-	/**
-	 * Generates modelMap to return in the modelAndView in case
-	 * of exception
-	 * @param msg message
-	 * @return
-	 */
-	private Map<String,Object> getModelMapError(String msg){
-
-		Map<String,Object> modelMap = new HashMap<String,Object>(2);
-		modelMap.put("message", msg);
-		modelMap.put("success", false);
-
-		return modelMap;
-	} 
 
 	@Autowired
 	public void setPosfmbService(PosfmbService posfmbService) {

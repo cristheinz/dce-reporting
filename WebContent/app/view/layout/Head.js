@@ -1,4 +1,4 @@
-Ext.define('AM.view.layout.Header', {
+Ext.define('AM.view.layout.Head', {
     extend: 'Ext.container.Container',
     alias: 'widget.head',
     

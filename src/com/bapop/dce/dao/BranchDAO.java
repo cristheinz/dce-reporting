@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.bapop.dce.model.Branch;
 
 @Repository
-public class BranchDAO implements IBranchDAO {
+public class BranchDAO {
 	private HibernateTemplate hibernateTemplate;
 
 	@Autowired
@@ -23,7 +23,6 @@ public class BranchDAO implements IBranchDAO {
 	 * @return list of all Branchs
 	 */
 	@SuppressWarnings("unchecked")
-	@Override
 	public List<Branch> getBranchs() {
 		return hibernateTemplate.find("from Branch");
 	}
@@ -32,7 +31,6 @@ public class BranchDAO implements IBranchDAO {
 	 * Delete a Branch with the id passed as parameter
 	 * @param id
 	 */
-	@Override
 	public void deleteBranch(int id){
 		Object record = hibernateTemplate.load(Branch.class, id);
 		hibernateTemplate.delete(record);
@@ -44,7 +42,6 @@ public class BranchDAO implements IBranchDAO {
 	 * @param Branch
 	 * @return Branch added or updated in DB
 	 */
-	@Override
 	public Branch saveBranch(Branch branch){
 		hibernateTemplate.saveOrUpdate(branch);
 		return branch;

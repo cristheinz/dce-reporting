@@ -4,7 +4,7 @@ Ext.define('AM.view.authentication.Login', {
     
     title: 'Autenticação',
     labelWidth:80,
-    url:'user/signin.action', 
+    url:'signin.action', 
     frame:true, 
     defaultType:'textfield',
     monitorValid:true,

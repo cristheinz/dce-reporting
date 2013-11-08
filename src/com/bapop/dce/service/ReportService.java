@@ -12,11 +12,9 @@ import com.bapop.dce.model.Report;
 @Service
 public class ReportService {
 	private ReportDAO reportDAO;
-	//private Util util;
  
     @Transactional(readOnly=true)
     public List<Report> getReportList(int id){
- 
         return reportDAO.getReports(id);
     }
  
