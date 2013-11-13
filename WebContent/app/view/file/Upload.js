@@ -7,6 +7,7 @@ Ext.define('AM.view.file.Upload' ,{
     width: 500,
     frame: true,
     bodyPadding: '10 10 0',
+    //enctype : 'multipart/form-data', 
     
     defaults: {
         anchor: '100%',
@@ -30,8 +31,10 @@ Ext.define('AM.view.file.Upload' ,{
             iconCls: 'upload-icon'
         }*/
     	xtype: 'filefield',
+    	//xtype: 'fileuploadfield',
     	name: 'file',
         fieldLabel: 'Ficheiro',
+        emptyText: 'Selecionar um ficheiro',
         buttonText: '',
         buttonConfig: {
             iconCls: 'upload-icon'
@@ -39,11 +42,11 @@ Ext.define('AM.view.file.Upload' ,{
     }],
 
     buttons: [{
-        text: 'Save',
+        text: 'Importar',
         action: 'save'
-    },{
+    /*},{
         text: 'Reset',
-        action: 'reset'
+        action: 'reset'*/
     }]
     
 });

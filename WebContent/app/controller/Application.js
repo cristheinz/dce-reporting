@@ -49,7 +49,7 @@ Ext.define('AM.controller.Application', {
     			}
     	});*/
     	Ext.getStore('AuthData').load();
-    	Ext.getStore('FileStore').load();
+    	//Ext.getStore('FileStore').load();
     },
     
     onLogout: function() {
@@ -57,7 +57,7 @@ Ext.define('AM.controller.Application', {
     },
     
     onOpen: function() {
-    	//Ext.getStore('FileStore').load();
+    	Ext.getStore('FileStore').load();
     	Ext.create('Ext.window.Window', {
 		    title: 'Pasta pessoal',
 		    maximizable: true,

@@ -7,17 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bapop.dce.bo.FileBean;
 import com.bapop.dce.dao.FileIODAO;
 import com.bapop.dce.model.FileIO;
 
 @Service
 public class FileService {
-	private FileIODAO FileIODAO;
+	private FileIODAO fileIODAO;
  
     @Transactional(readOnly=true)
     public List<FileIO> getFileIOList(int userID){
  
-        return FileIODAO.getFiles(userID);
+        return fileIODAO.getFiles(userID);
+    }
+    
+    @Transactional(readOnly=true)
+    public List<FileIO> getFileIO(String id){
+        return fileIODAO.getFileIO(id);
     }
  
     @Transactional
@@ -26,15 +32,21 @@ public class FileService {
         List<FileIO> newFileIOs = new ArrayList<FileIO>();
  
         for (FileIO FileIO : list){
-            newFileIOs.add(FileIODAO.saveFile(FileIO));
+            newFileIOs.add(fileIODAO.saveFile(FileIO));
         }
  
         return newFileIOs;
     }
+    
+    @Transactional
+    public void delete(FileBean data){
+    	fileIODAO.deleteFile(data.getId());
+ 
+    }
  
     @Autowired
     public void setFileIODAO(FileIODAO FileIODAO) {
-        this.FileIODAO = FileIODAO;
+        this.fileIODAO = FileIODAO;
     }
  
 }

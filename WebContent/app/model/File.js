@@ -6,12 +6,12 @@ Ext.define('AM.model.File', {
     }, {
         name: 'name',
         type: 'string'
-    }, {
+    /*}, {
         name: 'data',
         type: 'string'
     }, {
         name: 'userId',
-        type: 'int'
+        type: 'int'*/
     }, {
         name: 'creationDate',
         type: 'date'
@@ -22,13 +22,16 @@ Ext.define('AM.model.File', {
         name: 'title',
         type: 'string'
     }, {
-        name: 'dta',
+        name: 'dts',
         type: 'date'
     }, {
         name: 'dtp',
         type: 'date'
-    }, {
+    /*}, {
         name: 'pdata',
+        type: 'string'*/
+    }, {
+        name: 'ext',
         type: 'string'
     }]
 });

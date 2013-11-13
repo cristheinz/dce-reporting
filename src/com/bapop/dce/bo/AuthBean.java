@@ -3,10 +3,10 @@ package com.bapop.dce.bo;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 @JsonAutoDetect
-public class Auth {
+public class AuthBean {
 	private String key;
 
-	public Auth(String key) {
+	public AuthBean(String key) {
 		this.key=key;
 	}
 

@@ -52,6 +52,12 @@ background-image: -webkit-gradient(
 .map-icon {
 	background-image: url(https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/location-24-16.png) !important;
 }
+.download-icon {
+	background-image: url(https://cdn2.iconfinder.com/data/icons/freecns-cumulus/16/519672-178_Download-16.png) !important;
+}
+.delete-icon {
+	background-image: url(https://cdn1.iconfinder.com/data/icons/iconza/iconza_16x16_eb3a05/trash.png) !important;
+}
 .upload-icon {
 	//background-image: url(https://cdn3.iconfinder.com/data/icons/wpzoom-developer-icon-set/500/66-16.png) !important;
 	background-image: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/folder_open.png) !important;
@@ -61,3 +67,87 @@ background-image: -webkit-gradient(
 	margin-top:20%;
 	margin-left:40%;
 }
+
+
+
+/* --------------------------------------------------------*/
+#img-chooser-dlg .details {
+    text-align: center;
+}
+
+#img-chooser-dlg .details-info {
+    border-top: 1px solid #cccccc;
+    font: 11px Arial, Helvetica, sans-serif;
+    margin-top: 5px;
+    padding-top: 5px;
+    text-align: left;
+}
+
+#img-chooser-dlg .details-info b {
+    color: #555555;
+    display: block;
+    margin-bottom: 4px;
+    margin-left: 5px;
+}
+
+#img-chooser-dlg .details-info span {
+    display: block;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+
+#img-chooser-view {
+    background: white;
+    font: 11px Arial, Helvetica, sans-serif;
+}
+
+#img-chooser-view .thumb {
+    padding: 3px;
+}
+
+#img-chooser-view .thumb-wrap {
+    float: left;
+    margin: 4px;
+    margin-right: 0;
+    padding: 5px;
+}
+
+#img-chooser-view .thumb-wrap span {
+    display: block;
+    overflow: hidden;
+    text-align: center;
+}
+
+#img-chooser-view .x-view-over {
+    border: 1px solid #dddddd;
+    background-color: #efefef;
+    padding: 4px;
+}
+
+#img-chooser-view .x-item-selected {
+    background: #DFEDFF;
+    border: 1px solid #6593cf;
+    padding: 4px;
+}
+
+#img-chooser-view .x-item-selected .thumb {
+    background: transparent;
+}
+
+#img-chooser-view .x-item-selected span {
+    color: #1A4D8F;
+}
+
+#img-chooser-view .loading-indicator {
+    font-size: 11px;
+    background-image: url('../../resources/images/grid/loading.gif');
+    background-repeat: no-repeat;
+    background-position: left;
+    padding-left: 20px;
+    margin: 10px;
+}
+
+#images img {
+    margin: 20px;
+}
+ 

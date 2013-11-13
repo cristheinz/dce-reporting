@@ -1,122 +1,112 @@
-package com.bapop.dce.model;
+package com.bapop.dce.bo;
 
 import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import com.bapop.dce.model.FileIO;
 import com.bapop.dce.util.JsonDateSerializer;
 
 @JsonAutoDetect
-@Entity
-@Table(name = "tbl_fileIO", schema = "dce_app", catalog = "DCE_REPORTING")
-public class FileIO {
+public class FileBean {
 	
 	private int id;
 	private String name;
-	private byte[] data;
-	private int userId;
 	private Date creationDate;
 	private String fid;
 	private String title;
 	private Date dts;
 	private Date dtp;
-	private byte[] pdata;
-
-	public FileIO() {
-	}
-
-	public FileIO(int id) {
-		this.id = id;
-	}
+	private String ext;
 	
-	@Id
-	@GeneratedValue
+	public FileBean() {
+		
+	}
+	public FileBean(FileIO file) {
+		super();
+		this.id = file.getId();
+		this.name = file.getName();
+		this.creationDate = file.getCreationDate();
+		this.fid = file.getFid();
+		this.title = file.getTitle();
+		this.dts = file.getDts();
+		this.dtp = file.getDtp();
+		String ext="none";
+		String name=file.getName();
+		if(name.endsWith(".csv") ||name.endsWith(".csv")|| 
+				name.endsWith(".TXT")||name.endsWith(".txt") ||
+				name.endsWith(".PDF")||name.endsWith(".pdf")) {
+			ext = name.substring(name.lastIndexOf(".")+1, name.length()).toLowerCase();
+		}
+		this.ext = ext;
+	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
-	@Column(name = "fname", length = 6)
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	@Column(name = "fdata")
-	public byte[] getData() {
-		return data;
-	}
-	public void setData(byte[] data) {
-		this.data = data;
-	}
-	
-	@Column(name = "user_id")
-	public int getUserId() {
-		return userId;
-	}
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-	
+
 	@JsonSerialize(using=JsonDateSerializer.class)
-	@Column(name = "up_date")
 	public Date getCreationDate() {
 		return creationDate;
 	}
+
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
-	
-	@Column(name = "fid")
+
 	public String getFid() {
 		return fid;
 	}
+
 	public void setFid(String fid) {
 		this.fid = fid;
 	}
-	
-	@Column(name = "title")
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	@JsonSerialize(using=JsonDateSerializer.class)
-	@Column(name = "dts")
 	public Date getDts() {
 		return dts;
 	}
+
 	public void setDts(Date dts) {
 		this.dts = dts;
 	}
-	
+
 	@JsonSerialize(using=JsonDateSerializer.class)
-	@Column(name = "dtp")
 	public Date getDtp() {
 		return dtp;
 	}
+
 	public void setDtp(Date dtp) {
 		this.dtp = dtp;
 	}
-	
-	@Column(name = "pdata")
-	public byte[] getPdata() {
-		return pdata;
+
+	public String getExt() {
+		return ext;
 	}
-	public void setPdata(byte[] pdata) {
-		this.pdata = pdata;
+
+	public void setExt(String ext) {
+		this.ext = ext;
 	}
+
 }

@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 @JsonAutoDetect
-public class DashBoardWrapper {
+public class DashBoardBean {
 
 	private String name;
 	private BigDecimal data1;
@@ -14,7 +14,7 @@ public class DashBoardWrapper {
 	private BigDecimal data4;
 	private BigDecimal data5;
 	
-	public DashBoardWrapper(String name, BigDecimal data1, BigDecimal data2,
+	public DashBoardBean(String name, BigDecimal data1, BigDecimal data2,
 			BigDecimal data3, BigDecimal data4, BigDecimal data5) {
 		super();
 		this.name = name;

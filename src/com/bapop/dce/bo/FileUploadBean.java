@@ -13,5 +13,15 @@ public class FileUploadBean {
 	public void setFile(CommonsMultipartFile file) {
 		this.file = file;
 	}
+	/*
+	private MultipartFile file;
+
+    public void setFile(MultipartFile file) {
+        this.file = file;
+    }
+
+    public MultipartFile getFile() {
+        return file;
+    }*/
 
 }

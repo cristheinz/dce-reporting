@@ -46,6 +46,6 @@ Ext.define('AM.controller.BranchController', {
         win.close();
         // synchronize the store after editing the record
         //this.getBranchesStore().save(record);
-        this.getBranchesStore().sync();
+        this.getBranchStoreStore().sync();
     }
 });

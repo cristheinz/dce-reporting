@@ -1,61 +1,118 @@
 Ext.define('AM.view.file.List' ,{
-    extend: 'Ext.Panel',
-    //requires: ['Ext.ux.grid.FiltersFeature'],
+    extend: 'Ext.grid.Panel',
 
     alias: 'widget.filelist',
-    id: 'appfile',
-    //frame: true,
+    //id: 'module_branch',
+    
     width: 535,
-    //title: 'Sucursais',
+    height: 400,
+    autoScroll: true,
     
-    //closable: true,
+    store: 'FileStore',
     
+    features: [{
+    	ftype: 'filters',
+    	autoReload: false, 
+    	local: true,
+		filters : [ {
+			type: 'string',
+			dataIndex: 'fid'
+		} 
+		]
+    }],
 
     initComponent: function() {
-    	var v =  Ext.create('Ext.view.View', {
-        	store: 'FileStore',
-        	frame: true,
-        	autoScroll: true,
-        	tpl: [
-                  '<tpl for=".">',
-                      '<div style="float:left" class="thumb-wrap" id="{name:stripTags}">',
-                          '<div class="thumb"><img src="https://cdn1.iconfinder.com/data/icons/CrystalClear/64x64/mimetypes/unknown.png" title="{name:htmlEncode}"></div>',
-                          '<span class="x-editable">{shortName:htmlEncode}</span>',
-                      '</div>',
-                  '</tpl>',
-                  '<div class="x-clear"></div>'
-            ],
-            //multiSelect: true,
-            height: 400,
-            trackOver: true,
-            overItemCls: 'x-item-over',
-            itemSelector: 'div.thumb-wrap',
-            emptyText: 'No images to display',
-            /*plugins: [
-                Ext.create('Ext.ux.DataView.DragSelector', {}),
-                Ext.create('Ext.ux.DataView.LabelEditor', {dataIndex: 'name'})
-            ],*/
-            prepareData: function(data) {
-                Ext.apply(data, {
-                    shortName: Ext.util.Format.ellipsis(data.name, 15)//,
-                    //sizeString: Ext.util.Format.fileSize(data.size),
-                    //dateString: Ext.util.Format.date(data.lastmod, "m/d/Y g:i a")
-                });
-                return data;
-            }/*,
-            listeners: {
-                selectionchange: function(dv, nodes ){
-                    var l = nodes.length,
-                        s = l !== 1 ? 's' : '';
-                    this.up('panel').setTitle('Simple DataView (' + l + ' item' + s + ' selected)');
+        this.columns = [{
+			menuDisabled: true,
+            sortable: false,
+            dataIndex : 'ext',
+            renderer: this.renderIcon,
+            width: 25
+		},{
+			text : 'Ficheiro',
+			dataIndex : 'name',
+			groupable : false,
+			width : 300,
+			renderer : function(v, cellValues, rec) {
+				return rec.get('name');
+			},
+			editor : {
+				xtype : 'textfield'
+			},
+			items : {
+				xtype : 'textfield',
+				flex : 1,
+				margin : 2,
+				enableKeyEvents : true,
+				listeners : {
+					keyup : function() {
+						var store = this.up('tablepanel').store;
+						store.clearFilter();
+						if (this.value) {
+							store.filter({
+								property : 'name',
+								value : this.value,
+								anyMatch : true,
+								caseSensitive : false
+							});
+						}
+					},
+					buffer : 500
+				}
+			}
+		},{
+			header : 'Tipo',
+			dataIndex : 'fid',
+			flex : 1
+		},{
+			header : 'Data de criação',
+			dataIndex : 'creationDate',
+			flex : 1,
+			xtype : 'datecolumn',
+			format : 'Y-m-d'
+		},{
+			menuDisabled: true,
+            sortable: false,
+            xtype: 'actioncolumn',
+            width: 35,
+            /*action: 'download',
+            iconCls: 'download-icon',
+            tooltip: 'Download'*/
+            
+            items: [{
+            	//action: 'download',
+                iconCls: 'download-icon',
+                tooltip: 'Download',
+                handler: function(grid, rowIndex, colIndex) {
+                	this.up('grid').fireEvent('itemdownloadbuttonclick', grid, rowIndex, colIndex);
                 }
-            }*/
-        });
-
-    	
-    	
-        this.items = [v];
+            },{
+            	iconCls: 'delete-icon',
+            	tooltip: 'Apagar',
+            	handler: function(grid, rowIndex, colIndex){
+            		this.up('grid').fireEvent('itemdeletebuttonclick', grid, rowIndex, colIndex);
+            	}
+            }]
+            
+    	}];
+        
+        this.addEvents(
+                'itemdownloadbuttonclick',
+                'itemdeletebuttonclick'
+        );
 
         this.callParent(arguments);
-    }
+    },
+
+    renderIcon: function(ext) {
+        return '<img src="icons/i_' + ext + '.ico">';
+    }/*,
+    
+    selectedItem: function(grid, rowIndex, colIndex) {
+    	alert('asdfsdfsdf');
+    	var rec = grid.getStore().getAt(rowIndex);
+    	if(rec) {
+    		this.fireEvent('deleteItem', this, rec);
+    	}
+    }*/
 });

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bapop.dce.bo.DashBoardWrapper;
+import com.bapop.dce.bo.DashBoardBean;
 import com.bapop.dce.service.PosfmbService;
 import com.bapop.dce.util.ExtJSReturn;
 
@@ -23,7 +23,7 @@ public class PosfmbController {
 	public @ResponseBody Map<String,? extends Object> view(@RequestParam("anomes") String anomes) throws Exception {
 		try {
 			List<Object[]> l = posfmbService.view(anomes);
-			List<DashBoardWrapper> result=new ArrayList<DashBoardWrapper>();
+			List<DashBoardBean> result=new ArrayList<DashBoardBean>();
             
             for(Object[] o:l) {
             	String cta=o[0].toString();
@@ -32,7 +32,7 @@ public class PosfmbController {
             	BigDecimal val2=new BigDecimal(o[3].toString());
             	BigDecimal val3=new BigDecimal(o[4].toString());
             	BigDecimal valh=new BigDecimal(o[5].toString());
-            	result.add(new DashBoardWrapper(cta,val,val1,val2,val3,valh));
+            	result.add(new DashBoardBean(cta,val,val1,val2,val3,valh));
             }
 			
 			return ExtJSReturn.mapOK(result,result.size());

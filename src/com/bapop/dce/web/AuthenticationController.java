@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.bapop.dce.bo.Auth;
+import com.bapop.dce.bo.AuthBean;
 import com.bapop.dce.model.User;
 import com.bapop.dce.service.UserService;
 import com.bapop.dce.util.ExtJSReturn;
@@ -59,11 +59,11 @@ public class AuthenticationController {
 	public @ResponseBody Map<String,? extends Object> auth(HttpSession session) throws Exception {
 		try{
 			int id=Integer.parseInt(session.getAttribute("userID").toString());
-			List<Auth> result=new ArrayList<Auth>();
-			result.add(new Auth("moduleBranch-E"));
-			result.add(new Auth("moduleBalance-E"));
+			List<AuthBean> result=new ArrayList<AuthBean>();
+			result.add(new AuthBean("moduleBranch-E"));
+			result.add(new AuthBean("moduleBalance-E"));
 			if(id==2) {
-				result.add(new Auth("moduleBranch-U"));	
+				result.add(new AuthBean("moduleBranch-U"));	
 			}
 			
 			return ExtJSReturn.mapOK(result,result.size());
