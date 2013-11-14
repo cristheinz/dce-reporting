@@ -57,7 +57,11 @@ Ext.define('AM.controller.Application', {
     },
     
     onOpen: function() {
-    	Ext.getStore('FileStore').load();
+    	Ext.getStore('FileStore').load({
+    	    callback: function() {
+    	    	Ext.getCmp('filelisttotalfiles').setText(this.count()+' Ficheiros');
+    	    }
+    	});
     	Ext.create('Ext.window.Window', {
 		    title: 'Pasta pessoal',
 		    maximizable: true,

@@ -7,6 +7,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.bapop.dce.model.FileIO;
 import com.bapop.dce.util.JsonDateSerializer;
+import com.bapop.dce.util.FileUtils;
 
 @JsonAutoDetect
 public class FileBean {
@@ -18,7 +19,7 @@ public class FileBean {
 	private String title;
 	private Date dts;
 	private Date dtp;
-	private String ext;
+	private int siz;
 	
 	public FileBean() {
 		
@@ -32,14 +33,8 @@ public class FileBean {
 		this.title = file.getTitle();
 		this.dts = file.getDts();
 		this.dtp = file.getDtp();
-		String ext="none";
-		String name=file.getName();
-		if(name.endsWith(".csv") ||name.endsWith(".csv")|| 
-				name.endsWith(".TXT")||name.endsWith(".txt") ||
-				name.endsWith(".PDF")||name.endsWith(".pdf")) {
-			ext = name.substring(name.lastIndexOf(".")+1, name.length()).toLowerCase();
-		}
-		this.ext = ext;
+		
+		this.siz = FileUtils.getFileSize(file.getData().length, FileUtils.KILOBYTES);
 	}
 
 	public int getId() {
@@ -101,12 +96,12 @@ public class FileBean {
 		this.dtp = dtp;
 	}
 
-	public String getExt() {
-		return ext;
+	public int getSiz() {
+		return siz;
 	}
 
-	public void setExt(String ext) {
-		this.ext = ext;
+	public void setSiz(int siz) {
+		this.siz = siz;
 	}
 
 }

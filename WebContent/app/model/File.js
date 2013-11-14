@@ -31,7 +31,7 @@ Ext.define('AM.model.File', {
         name: 'pdata',
         type: 'string'*/
     }, {
-        name: 'ext',
-        type: 'string'
+        name: 'siz',
+        type: 'int'
     }]
 });

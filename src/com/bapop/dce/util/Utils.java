@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class Function {
+public class Utils {
 	
 	public static String[] getDashboradPeriods(String anomes) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
@@ -40,7 +40,7 @@ public class Function {
 	}
 	
 	public static void main(String[] args) {
-		for(String s:Function.getDashboradPeriods("201309")) {
+		for(String s:Utils.getDashboradPeriods("201309")) {
 			System.out.println(s);
 		};
 	}

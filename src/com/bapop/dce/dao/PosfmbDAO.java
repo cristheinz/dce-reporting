@@ -12,7 +12,7 @@ import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.bapop.dce.util.Function;
+import com.bapop.dce.util.Utils;
 
 @Repository
 public class PosfmbDAO {
@@ -33,7 +33,7 @@ public class PosfmbDAO {
 
 			public List<Object[]> doInHibernate(Session s)
 	                throws HibernateException, SQLException {
-				String[] ym=Function.getDashboradPeriods(anomes);
+				String[] ym=Utils.getDashboradPeriods(anomes);
 				
 	        	String q ="select dce_batch.fn_getGRPtxt(grp) as ctab," +
 				" cast(round(abs(sum(case when anomes= "+anomes+" then val else 0 end)/1000000),3,1) as decimal(14,2)) as val,"+

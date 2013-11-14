@@ -8,7 +8,7 @@ import net.sf.json.JSONObject;
 
 import com.bapop.dce.model.Branch;
 
-public class Util {
+public class BranchUtil {
 	public List<Branch> getBranchsFromRequest(Object data){
 
 		List<Branch> list;

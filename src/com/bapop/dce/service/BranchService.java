@@ -9,12 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bapop.dce.dao.BranchDAO;
 import com.bapop.dce.model.Branch;
-import com.bapop.dce.util.Util;
+import com.bapop.dce.util.BranchUtil;
 
 @Service
 public class BranchService {
 	private BranchDAO branchDAO;
-	private Util util;
+	private BranchUtil util;
  
     @Transactional(readOnly=true)
     public List<Branch> getBranchList(){

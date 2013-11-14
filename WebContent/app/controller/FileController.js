@@ -25,16 +25,19 @@ Ext.define('AM.controller.FileController', {
                 click: this.resetUploadForm
             },
             'filelist': {
-            	itemdblclick: this.onEditFile,
-            	itemdownloadbuttonclick: this.onDownloadFile,
-            	itemdeletebuttonclick: this.onDeleteFile
-            }/*,
-            'filelist [action=download]': {
-                click: this.downloadFile
-            }*/
+            	itemclick: this.onSelectedFile,
+            	itemdblclick: this.onDownloadFile,
+            	itemdeletekeypress: this.onDeleteKeyPress
+            	//itemdblclick: this.onEditFile,
+            	//itemdownloadbuttonclick: this.onDownloadFile,
+            	//itemdeletebuttonclick: this.onDeleteFile
+            },
+            'filelist label[someMadeUpPropertyName=nameLabel]': {
+            	render: this.onLabelRendered,
+            }
         });
     },
-
+    
     uploadFile: function(button) {
     	//var form = button.up('form').getForm();
     	var form = this.getUpload();
@@ -61,16 +64,42 @@ Ext.define('AM.controller.FileController', {
     	this.getUpload().getForm().reset();
     }, 
 
-    onEditFile: function(grid, record) {
-    	//console.log('Edit file:'+record.getId());
-    	/*var view = Ext.widget('fileedit');
-        view.down('form').loadRecord(record);*/
+    onDeleteKeyPress: function(view, record, item, index, key) {
+    	Ext.MessageBox.confirm('Apagar', 'Vai apagar o ficheiro'+record.get('name')+
+    			'.<br/>Pretende continuar ?', function(btn){
+ 		   if(btn === 'yes'){
+ 			   store.remove(record);
+ 		   }
+ 		 });
     },
+    
+    onDownloadFile: function(grid, record) {
+    	window.open('file/download.action?id='+record.getId());
+    },
+    
+    onSelectedFile: function(grid, record){
+    	//console.log('in!');
+    	Ext.getCmp('filelisttotalfiles').setText(record.get('name')+' [Delete para apagar, duplo clique para baixar.]');
+    },
+    
+    onLabelRendered: function(label) {
+    	/*var store=label.up('grid').getStore();
+    	store.load();
+    	console.log('in!'+store.count());
+    	
+    	label.setText(store.count()+' Ficheiros');*/
+    }
 
+    /*onEditFile: function(grid, record) {
+		//console.log('Edit file:'+record.getId());
+		var view = Ext.widget('fileedit');
+    	view.down('form').loadRecord(record);
+	},
+	
     onDownloadFile: function(grid, rowIndex, colIndex) {
     	var rec = grid.getStore().getAt(rowIndex);
     	window.open('file/download.action?id='+rec.get('id'));
-    }, 
+    },
 
     onDeleteFile: function(grid, rowIndex, colIndex){
     	var rec = grid.getStore().getAt(rowIndex);
@@ -80,5 +109,5 @@ Ext.define('AM.controller.FileController', {
     			   store.remove(rec);
     		   }
     		 });
-    }
+    }*/ 
 });

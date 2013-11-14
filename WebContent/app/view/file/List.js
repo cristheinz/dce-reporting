@@ -20,22 +20,40 @@ Ext.define('AM.view.file.List' ,{
 		} 
 		]
     }],
+    
+    fbar: [{ 
+    	xtype: 'label', 
+    	id: 'filelisttotalfiles',
+    	flex: 1,
+    	//id: 'totalSum',
+    	someMadeUpPropertyName: 'nameLabel',
+    	text: 'Carregando ficheiros..'//Ext.getStore('FileStore').count
+    	/*renderer: function(store) {
+    		alert(store.getCount());
+			return store.getCount();
+		}*/
+    }],
+    
+    viewConfig : {
+        listeners : {
+            'itemkeydown' : function(view, record, item, index, key) {
+                if (key.getKey() == 46) {
+                	this.up('grid').fireEvent('itemdeletekeypress',view, record, item, index, key);
+                }  
+            }
+        }
+    },
 
     initComponent: function() {
         this.columns = [{
-			menuDisabled: true,
-            sortable: false,
-            dataIndex : 'ext',
-            renderer: this.renderIcon,
-            width: 25
-		},{
 			text : 'Ficheiro',
 			dataIndex : 'name',
 			groupable : false,
 			width : 300,
-			renderer : function(v, cellValues, rec) {
+			renderer: this.renderName,
+			/*renderer : function(v, cellValues, rec) {
 				return rec.get('name');
-			},
+			},*/
 			editor : {
 				xtype : 'textfield'
 			},
@@ -56,31 +74,35 @@ Ext.define('AM.view.file.List' ,{
 								caseSensitive : false
 							});
 						}
+						Ext.getCmp('filelisttotalfiles').setText(store.count()+' Ficheiros');
 					},
 					buffer : 500
 				}
 			}
 		},{
-			header : 'Tipo',
-			dataIndex : 'fid',
-			flex : 1
-		},{
-			header : 'Data de criação',
+			header : 'Data criação',
 			dataIndex : 'creationDate',
 			flex : 1,
 			xtype : 'datecolumn',
 			format : 'Y-m-d'
 		},{
+			header : 'Tipo',
+			dataIndex : 'fid',
+			flex : 1
+		},{
+			header : 'Tamanho',
+			dataIndex : 'siz',
+			flex : 1,
+			align: 'right',
+			renderer : function(v, cellValues, rec) {
+				return rec.get('siz')+' KB';
+			}
+		/*},{
 			menuDisabled: true,
             sortable: false,
             xtype: 'actioncolumn',
             width: 35,
-            /*action: 'download',
-            iconCls: 'download-icon',
-            tooltip: 'Download'*/
-            
             items: [{
-            	//action: 'download',
                 iconCls: 'download-icon',
                 tooltip: 'Download',
                 handler: function(grid, rowIndex, colIndex) {
@@ -92,27 +114,27 @@ Ext.define('AM.view.file.List' ,{
             	handler: function(grid, rowIndex, colIndex){
             		this.up('grid').fireEvent('itemdeletebuttonclick', grid, rowIndex, colIndex);
             	}
-            }]
+            }]*/
             
     	}];
         
         this.addEvents(
-                'itemdownloadbuttonclick',
-                'itemdeletebuttonclick'
+                /*'itemdownloadbuttonclick',
+                'itemdeletebuttonclick',*/
+                'itemdeletekeypress'
         );
 
         this.callParent(arguments);
     },
-
-    renderIcon: function(ext) {
-        return '<img src="icons/i_' + ext + '.ico">';
-    }/*,
     
-    selectedItem: function(grid, rowIndex, colIndex) {
-    	alert('asdfsdfsdf');
-    	var rec = grid.getStore().getAt(rowIndex);
-    	if(rec) {
-    		this.fireEvent('deleteItem', this, rec);
-    	}
-    }*/
+    renderName: function(name) {
+    	var ext="none";
+    	var last4 = name.substr(name.length - 4);
+		if(last4==".csv" || last4==".csv" || 
+				last4==".TXT" || last4==".txt" ||
+				last4==".PDF" || last4==".pdf") {
+			ext = name.substring(name.lastIndexOf(".")+1, name.length).toLowerCase();
+		}
+        return '<img src="icons/i_' + ext + '.ico"> '+name;
+    }
 });
