@@ -52,6 +52,9 @@ background-image: -webkit-gradient(
 .map-icon {
 	background-image: url(https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/location-24-16.png) !important;
 }
+.refresh-icon {
+	background-image: url(https://cdn4.iconfinder.com/data/icons/pictype-free-vector-icons/16/sync-16.png) !important;
+}
 .download-icon {
 	background-image: url(https://cdn2.iconfinder.com/data/icons/freecns-cumulus/16/519672-178_Download-16.png) !important;
 }

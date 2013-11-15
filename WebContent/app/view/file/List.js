@@ -17,68 +17,44 @@ Ext.define('AM.view.file.List' ,{
 		filters : [ {
 			type: 'string',
 			dataIndex: 'fid'
-		} 
-		]
+		}]
+    },{
+    	ftype: 'summary'
     }],
     
-    fbar: [{ 
+    tbar: ['->',{ 
+    	xtype: 'textfield', 
+    	name: 'filefilter',
+    	emptyText: 'Procurar',
+    	width: 200,
+    	enableKeyEvents : true
+    },{
+    	iconCls: 'refresh-icon',
+    	action: 'refresh',
+    	tooltip: 'Actualizar'
+    }],
+    
+    fbar: [{
     	xtype: 'label', 
-    	id: 'filelisttotalfiles',
-    	flex: 1,
-    	//id: 'totalSum',
-    	someMadeUpPropertyName: 'nameLabel',
-    	text: 'Carregando ficheiros..'//Ext.getStore('FileStore').count
-    	/*renderer: function(store) {
-    		alert(store.getCount());
-			return store.getCount();
-		}*/
+    	name: 'filecount',
+    	text: 'Carregando ficheiros..'
+    },'->',{
+    	xtype: 'label', 
+    	name: 'totalfilesize'
     }],
     
-    viewConfig : {
-        listeners : {
-            'itemkeydown' : function(view, record, item, index, key) {
-                if (key.getKey() == 46) {
-                	this.up('grid').fireEvent('itemdeletekeypress',view, record, item, index, key);
-                }  
-            }
-        }
-    },
-
     initComponent: function() {
         this.columns = [{
-			text : 'Ficheiro',
+			//text : 'Nome',
+			header : 'Nome',
 			dataIndex : 'name',
 			groupable : false,
 			width : 300,
 			renderer: this.renderName,
-			/*renderer : function(v, cellValues, rec) {
-				return rec.get('name');
-			},*/
-			editor : {
-				xtype : 'textfield'
-			},
-			items : {
-				xtype : 'textfield',
-				flex : 1,
-				margin : 2,
-				enableKeyEvents : true,
-				listeners : {
-					keyup : function() {
-						var store = this.up('tablepanel').store;
-						store.clearFilter();
-						if (this.value) {
-							store.filter({
-								property : 'name',
-								value : this.value,
-								anyMatch : true,
-								caseSensitive : false
-							});
-						}
-						Ext.getCmp('filelisttotalfiles').setText(store.count()+' Ficheiros');
-					},
-					buffer : 500
-				}
-			}
+			summaryType: 'count',
+	        summaryRenderer: function(value, summaryData, dataIndex) {
+	        	this.down('label[name=filecount]').setText(Ext.String.format('{0} ficheiro{1}', value, value !== '1' ? 's' : ''));
+	        }
 		},{
 			header : 'Data criação',
 			dataIndex : 'creationDate',
@@ -96,7 +72,11 @@ Ext.define('AM.view.file.List' ,{
 			align: 'right',
 			renderer : function(v, cellValues, rec) {
 				return rec.get('siz')+' KB';
-			}
+			},
+			summaryType: 'sum',
+	        summaryRenderer: function(value, summaryData, dataIndex) {
+	        	this.down('label[name=totalfilesize]').setText(value+' KB');
+	        }
 		/*},{
 			menuDisabled: true,
             sortable: false,
@@ -118,11 +98,11 @@ Ext.define('AM.view.file.List' ,{
             
     	}];
         
-        this.addEvents(
-                /*'itemdownloadbuttonclick',
-                'itemdeletebuttonclick',*/
+        /*this.addEvents(
+                'itemdownloadbuttonclick',
+                'itemdeletebuttonclick',
                 'itemdeletekeypress'
-        );
+        );*/
 
         this.callParent(arguments);
     },

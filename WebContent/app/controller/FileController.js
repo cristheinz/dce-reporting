@@ -14,6 +14,9 @@ Ext.define('AM.controller.FileController', {
     refs: [{
         ref: 'upload',
         selector: 'upload'
+    },{
+    	ref: 'filelist',
+    	selector: 'filelist'
     }],
 
     init: function() {
@@ -25,15 +28,19 @@ Ext.define('AM.controller.FileController', {
                 click: this.resetUploadForm
             },
             'filelist': {
-            	itemclick: this.onSelectedFile,
-            	itemdblclick: this.onDownloadFile,
-            	itemdeletekeypress: this.onDeleteKeyPress
-            	//itemdblclick: this.onEditFile,
-            	//itemdownloadbuttonclick: this.onDownloadFile,
-            	//itemdeletebuttonclick: this.onDeleteFile
+            	/*containerclick: function(grid, e, eOpts){
+            		console.log('click!');
+            		grid.getSelectionModel().deselectAll();
+            	},*/
+            	itemclick: this.onFileItemSelect,
+            	cellkeydown: this.onFileItemKeyDown,
+            	itemdblclick: this.onFileItemDownload
             },
-            'filelist label[someMadeUpPropertyName=nameLabel]': {
-            	render: this.onLabelRendered,
+            'filelist textfield[name=filefilter]': {
+            	keyup: this.onFileGridNameFilter
+            },
+            'filelist button[action=refresh]': {
+            	click: this.onFileRefresh
             }
         });
     },
@@ -64,32 +71,47 @@ Ext.define('AM.controller.FileController', {
     	this.getUpload().getForm().reset();
     }, 
 
-    onDeleteKeyPress: function(view, record, item, index, key) {
-    	Ext.MessageBox.confirm('Apagar', 'Vai apagar o ficheiro'+record.get('name')+
-    			'.<br/>Pretende continuar ?', function(btn){
- 		   if(btn === 'yes'){
- 			   store.remove(record);
- 		   }
- 		 });
+    onFileGridNameFilter: function(textfield, e, eOpts ){
+    	var store = this.getFilelist().getStore();
+		store.clearFilter();
+		if (textfield.value) {
+			store.filter({
+				property : 'name',
+				value : textfield.value,
+				anyMatch : true,
+				caseSensitive : false
+			});
+		}
+    },
+
+    onFileItemSelect: function(grid, record){
+    	this.getFilelist().down('label[name=filecount]').setText(record.get('name')+' [Delete para apagar, duplo clique para baixar.]');
+    	this.getFilelist().down('label[name=totalfilesize]').setText('');
+    },
+
+    onFileItemKeyDown: function(grid, td, cellIndex, record, tr, rowIndex, e, eOpts ) {
+    	var store = this.getFilelist().getStore();
+    	if(e.getKey()==46) {
+    		Ext.MessageBox.confirm('Apagar', 'Vai apagar o ficheiro:<br/><p>'+record.get('name')+
+        			'</p><br/>Pretende continuar ?', function(btn){
+     		   if(btn === 'yes'){
+     			  store.remove(record);
+     		   }
+     		 });
+    	}
     },
     
-    onDownloadFile: function(grid, record) {
+    onFileItemDownload: function(grid, record) {
     	window.open('file/download.action?id='+record.getId());
     },
     
-    onSelectedFile: function(grid, record){
-    	//console.log('in!');
-    	Ext.getCmp('filelisttotalfiles').setText(record.get('name')+' [Delete para apagar, duplo clique para baixar.]');
-    },
-    
-    onLabelRendered: function(label) {
-    	/*var store=label.up('grid').getStore();
-    	store.load();
-    	console.log('in!'+store.count());
-    	
-    	label.setText(store.count()+' Ficheiros');*/
+    onFileRefresh: function (button) {
+    	//console.log('refresh!');
+    	var store = this.getFilelist().getStore();
+    	store.reload();
     }
-
+    
+    
     /*onEditFile: function(grid, record) {
 		//console.log('Edit file:'+record.getId());
 		var view = Ext.widget('fileedit');
