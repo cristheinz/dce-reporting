@@ -11,7 +11,7 @@ Ext.define('AM.store.DashboardData', {
     proxy: {
         type: 'ajax',
         api: {
-        	read : 'posfmb/view.action?anomes=201309'
+        	read : 'posfmb/view.action?anomes='+Ext.Date.format(Ext.Date.add(new Date(), Ext.Date.MONTH, -1),'Ym')
     	},
         reader: {
             type: 'json',

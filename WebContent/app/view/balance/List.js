@@ -1,69 +1,97 @@
 Ext.define('AM.view.balance.List' ,{
     extend: 'Ext.tree.Panel',
 
+    xtype: 'tree-grid',
     alias: 'widget.balancelist',
     id: 'module_balance',
     
     title: 'Balancete',
+    iconCls: 'module-icon',
     closable: true,
+    
+    store: 'BalanceStore',
 
-    xtype: 'tree-grid',
+    dockedItems: [{
+        xtype: 'toolbar',
+        dock: 'bottom',
+        items: ['->',
+           {
+        	   iconCls: 'prev-icon', action: 'prev'/*, tooltip: 'Periodo anterior'*/
+           },{
+        	   name: 'anomes',
+           	   xtype: 'textfield',
+           	   width: 55,
+           	   value: Ext.Date.format(Ext.Date.add(new Date(), Ext.Date.MONTH, -1),'Ym')
+           },{
+        	   iconCls: 'next-icon', action: 'next'/*, tooltip: 'Próximo periodo'*/
+           }
+        ]
+    }],
+    tbar: [{
+    	iconCls: 'new-icon',
+    	action: 'new',
+    	tooltip: 'Novo'
+    /*},{
+    	iconCls: 'open-icon',
+    	action: 'open',
+    	tooltip: 'Abrir'*/
+    /*},'->',{
+    	iconCls: 'refresh-icon',
+    	action: 'refresh',
+    	tooltip: 'Actualizar'*/
+    }],
+    
     height: 300,
     useArrows: true,
     rootVisible: false,
-    multiSelect: true,
+    //multiSelect: true,
     singleExpand: true,
     
     initComponent: function() {
         this.width = 500;
         
         Ext.apply(this, {
-            store: 'BalanceStore',
-            columns: [{
-                xtype: 'treecolumn', //this is so we know which column will show the tree
-                text: 'Cta',
-                flex: 2,
-                sortable: true,
-                dataIndex: 'cta'
-            },{
-                text: 'Nome',
-                flex: 1,
-                dataIndex: 'nam',
-                sortable: true
-            },{
-                //we must use the templateheader component so we can use a custom tpl
-                //xtype: 'templatecolumn',
-                text: 'Débito',
-                flex: 1,
-                sortable: true,
-                dataIndex: 'deb'/*,
-                align: 'center',
-                //add in the custom tpl for the rows
-                tpl: Ext.create('Ext.XTemplate', '{duration:this.formatHours}', {
-                    formatHours: function(v) {
-                        if (v < 1) {
-                            return Math.round(v * 60) + ' mins';
-                        } else if (Math.floor(v) !== v) {
-                            var min = v - Math.floor(v);
-                            return Math.floor(v) + 'h ' + Math.round(min * 60) + 'm';
-                        } else {
-                            return v + ' hour' + (v === 1 ? '' : 's');
-                        }
+            
+            columns: {
+            	defaults: {
+            		menuDisabled: true,
+                    sortable: false
+                },
+            	items: [{xtype: 'treecolumn', //this is so we know which column will show the tree
+                    text: 'Conta contabilística',
+                    flex: 2,
+                    dataIndex: 'cta',
+                    renderer: function(value, p, r) {
+                    	//console.log(value);
+                    	return r.data['cta'] + ' ' + r.data['text'];
                     }
-                })*/
-            },{
-                text: 'Crédito',
-                flex: 1,
-                dataIndex: 'cre',
-                sortable: true
-            }, {
-                xtype: 'checkcolumn',
-                header: 'Done',
-                dataIndex: 'done',
-                width: 40,
-                stopSelection: false,
-                menuDisabled: true
-            }]
+                },{
+                    text: 'Débito',
+                    flex: 1,
+                    align: 'right',
+                    dataIndex: 'vald',
+                    renderer: function(v,p,r){
+                    	return Ext.util.Format.number(v, '0.000,00/i');
+                    }
+                },{
+                    text: 'Crédito',
+                    flex: 1,
+                    align: 'right',
+                    dataIndex: 'valc',
+                    renderer: function(v,p,r){
+                    	return Ext.util.Format.number(v, '0.000,00/i');
+                    }
+                    
+                }/*, {
+                    xtype: 'checkcolumn',
+                    header: 'Done',
+                    dataIndex: 'done',
+                    width: 40,
+                    stopSelection: false,
+                    menuDisabled: true
+                }*/
+      	        ]
+            }
         });
         this.callParent();
     }

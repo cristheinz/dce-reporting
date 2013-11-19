@@ -6,6 +6,7 @@ Ext.define('AM.view.branch.List' ,{
     id: 'module_branch',
     
     title: 'Sucursais',
+    iconCls: 'module-icon',
     store: 'BranchStore',
     closable: true,
     

@@ -2,6 +2,8 @@ Ext.define('AM.view.layout.Module' ,{
     extend: 'Ext.tree.Panel',
 
     alias: 'widget.module',
+    rootVisible: false,
+    useArrows: true,
 
     initComponent: function() {
     	Ext.apply(this, {
@@ -12,14 +14,17 @@ Ext.define('AM.view.layout.Module' ,{
     	        children: [{
     	        		id: 'moduleBalance',
     	                text: 'Balancete',
+    	                iconCls: 'module-icon',
     	                leaf: true
     	            },{
     	            	id: 'module2',
     	                text: 'Controlo de contas',
+    	                iconCls: 'module-icon',
     	                leaf: true
     	            },{
     	            	id: 'module3',
     	                text: 'Crédito Vencido',
+    	                iconCls: 'module-icon',
     	                leaf: true
     	            },{
     	                text: 'Papel comercial',
@@ -27,15 +32,18 @@ Ext.define('AM.view.layout.Module' ,{
     	                children: [{
     	                		id: 'module41',
     	                        text: 'Cliente e emissões',
+    	                        iconCls: 'module-icon',
     	                        leaf: true
     	                    },{
     	                    	id: 'module42',
     	                        text: 'Gerar ficheiro',
+    	                        iconCls: 'module-icon',
     	                        leaf: true
     	                    }]
     	            },{
     	            	id: 'moduleBranch',
     	                text: 'Sucursais',
+    	                iconCls: 'module-icon',
     	                leaf: true
     	            }]
     	    }

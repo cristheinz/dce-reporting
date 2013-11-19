@@ -20,7 +20,7 @@ Ext.define('AM.view.layout.MainApp', {
         region: 'center',     // center region is required, no width/height specified
         layout: 'fit',
         xtype: 'tabpanel',
-        id: 'mainContent',
+        name: 'mainContent',
     	items: [{xtype: 'dashboard'}],
         margins: '5 5 0 0'
     /*},{

@@ -42,7 +42,7 @@ Ext.define('AM.view.layout.Dashboard' ,{
        	        { data1: 0, anomes: 'periodo homólogo' },
     	        { data1: 0, anomes: '3 meses antes' },
     	        { data1: 0, anomes: '2 meses antes' },
-    	        { data1: 0, anomes: 'mes anterior' }
+    	        { data1: 0, anomes: 'mês anterior' }
     	    ]
     	});
     	
@@ -81,8 +81,19 @@ Ext.define('AM.view.layout.Dashboard' ,{
 
     	
     	var barChart = Ext.create('Ext.chart.Chart', {
+    		items: [{
+    		      type  : 'text',
+    		      text  : 'Posição '+Ext.Date.format(Ext.Date.add(new Date(), Ext.Date.MONTH, -1),'Ym'),
+    		      font  : '20px Arial',
+    		      width : 1000,
+    		      height: 50,
+    		      x:5, y: 15/*,
+    		      x : 50, //the sprite x position
+    		      y : 10  //the sprite y position
+    		      */
+    		   }],
     		width: 1000,
-    		height: 200,
+    		height: 300,
     		margin: '0 0 3 0',
             style: 'background:#fff',
             //theme: 'Base',// 'Base', 'Green', 'Sky', 'Red', 'Purple', 'Blue', 'Yellow' 
@@ -127,7 +138,8 @@ Ext.define('AM.view.layout.Dashboard' ,{
                     field: 'data1',
                     color: '#000',
                     orientation: 'horizontal',
-                    'text-anchor': 'middle'
+                    'text-anchor': 'middle',
+                    renderer: Ext.util.Format.numberRenderer('0')
                 },
                 listeners: {
                     itemmouseup: function(item) {
@@ -204,7 +216,11 @@ Ext.define('AM.view.layout.Dashboard' ,{
     			header : 'Valor (M€)',
     			type : 'numeric',
     			dataIndex : 'data1',
-    			flex : 1
+    			flex : 1,
+    			align: 'right',
+    			renderer: function(v,p,r){
+                	return Ext.util.Format.number(v, '0.000,00/i');
+                }
     		},{
     			header : 'data2',
     			type : 'numeric',

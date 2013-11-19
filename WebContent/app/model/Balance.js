@@ -1,19 +1,31 @@
 Ext.define('AM.model.Balance', {
-    extend: 'Ext.data.Model',
+    extend: 'Ext.data.TreeModel',
     fields: [{
         name: 'cta',
         type: 'string'
     }, {
-        name: 'nam',
+        name: 'text',
+        type: 'string'
+    /*}, {
+        name: 'iconCls',
         type: 'string'
     }, {
-        name: 'deb',
+        name: 'parent',
+        type: 'string'
+    }, {
+        name: 'id',
+        type: 'int'*/
+    }, {
+        name: 'anomes',
+        type: 'int'
+    }, {
+        name: 'vald',
         type: 'float'
     }, {
-        name: 'cre',
+        name: 'valc',
         type: 'float'
-    }, {
-        name: 'done',
-        type: 'boolean'
+    /*}, {
+        name: 'leaf',
+        type: 'boolean'*/
     }]
 });

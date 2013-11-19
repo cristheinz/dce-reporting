@@ -17,6 +17,7 @@ public class Report {
 	private String leaf = "false";
 	private String cls = null;
 	private int parent;
+	private String iconCls;
 
 	@Id
 	@GeneratedValue
@@ -51,6 +52,12 @@ public class Report {
 	}
 	public void setLeaf(String leaf) {
 		this.leaf = leaf;
+	}
+	public String getIconCls() {
+		return iconCls;
+	}
+	public void setIconCls(String iconCls) {
+		this.iconCls = iconCls;
 	}
 	
 }

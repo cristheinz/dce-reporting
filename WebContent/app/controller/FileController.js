@@ -32,6 +32,7 @@ Ext.define('AM.controller.FileController', {
             		console.log('click!');
             		grid.getSelectionModel().deselectAll();
             	},*/
+            	beforerender: this.onLoad,
             	itemclick: this.onFileItemSelect,
             	cellkeydown: this.onFileItemKeyDown,
             	itemdblclick: this.onFileItemDownload
@@ -70,6 +71,18 @@ Ext.define('AM.controller.FileController', {
     	//button.up('form').getForm().reset();
     	this.getUpload().getForm().reset();
     }, 
+    
+    onLoad: function( grid, eOpts){
+    	//console.log('click!'+this.getFilelist().getId());
+    	var store = this.getFilelist().getStore();
+    	/*store.on('load',function(){
+    		store.filter({
+				property : 'fid',
+				value : 'BALAN'
+			});
+    	});*/
+    	store.load();
+    },
 
     onFileGridNameFilter: function(textfield, e, eOpts ){
     	var store = this.getFilelist().getStore();

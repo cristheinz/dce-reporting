@@ -15,6 +15,8 @@ Ext.application({
         'FileController'
     ],
     launch: function() {
+    	Ext.util.Format.thousandSeparator = '.';
+    	Ext.util.Format.decimalSeparator = ',';
         Ext.create('Ext.container.Viewport', {
         	layout: 'fit',
             items: [

@@ -13,7 +13,7 @@ Ext.define('AM.controller.Application', {
     
     refs: [{
         ref: 'mainapp',
-        selector: 'mainapp [id=mainContent]'
+        selector: 'mainapp [name=mainContent]'
     }],
 
     init: function() {
@@ -57,7 +57,7 @@ Ext.define('AM.controller.Application', {
     },
     
     onOpen: function() {
-    	Ext.getStore('FileStore').load();
+    	//Ext.getStore('FileStore').load();
     	Ext.create('Ext.window.Window', {
 		    title: 'Pasta pessoal',
 		    maximizable: true,
@@ -114,7 +114,8 @@ Ext.define('AM.controller.Application', {
     	if(main.child('panel[id="'+record.get('text')+'"]')==null && record.get('cls')!=null) {
     		main.add(Ext.widget('panel',{
     			id: record.get('text'),
-        		title : 'Relatório: '+record.get('text'),
+        		title : record.get('text'),
+        		iconCls: 'report-icon',
         		closable: true,
         	    layout : 'fit',
         	    items : [{

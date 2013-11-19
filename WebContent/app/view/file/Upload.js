@@ -37,7 +37,7 @@ Ext.define('AM.view.file.Upload' ,{
         emptyText: 'Selecionar um ficheiro',
         buttonText: '',
         buttonConfig: {
-            iconCls: 'upload-icon'
+            iconCls: 'open-icon'
         }
     }],
 
