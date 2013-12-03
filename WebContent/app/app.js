@@ -6,12 +6,15 @@ Ext.Loader.setConfig({
 });
 Ext.require('Ext.ux.grid.FiltersFeature');
 Ext.require('Ext.ux.GMapPanel');
+Ext.require('AM.AssociatedWriter');
 Ext.application({
     name: 'AM',
     controllers: [
         'Application',
         'BalanceController',
         'BranchController',
+        'CtistController',
+        'FaqstController',
         'FileController'
     ],
     launch: function() {

@@ -27,6 +27,11 @@ Ext.define('AM.view.layout.Module' ,{
     	                iconCls: 'module-icon',
     	                leaf: true
     	            },{
+    	            	id: 'moduleFaqst',
+    	                text: 'FAQ Balcões',
+    	                iconCls: 'module-icon',
+    	                leaf: true
+    	            },{
     	                text: 'Papel comercial',
     	                expanded: true,
     	                children: [{

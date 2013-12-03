@@ -62,8 +62,10 @@ public class AuthenticationController {
 			List<AuthBean> result=new ArrayList<AuthBean>();
 			result.add(new AuthBean("moduleBranch-E"));
 			result.add(new AuthBean("moduleBalance-E"));
+			result.add(new AuthBean("moduleFaqst-E"));
 			if(id==2) {
 				result.add(new AuthBean("moduleBranch-U"));	
+				result.add(new AuthBean("moduleFaqst-U"));
 			}
 			
 			return ExtJSReturn.mapOK(result,result.size());

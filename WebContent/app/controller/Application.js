@@ -1,7 +1,7 @@
 Ext.define('AM.controller.Application', {
     extend: 'AM.controller.AbstractController',
     
-    stores: ['DashboardData','ReportStore'],
+    stores: ['DashboardData','ReportStore','FaqstStore'],
     views: [
         'layout.MainApp',
         'layout.Head',
@@ -98,6 +98,13 @@ Ext.define('AM.controller.Application', {
             case 'moduleBalance':
             	if(main.child('panel[id="module_balance"]')==null) {
             		main.add(Ext.widget('balancelist')).show();
+            	}
+            		
+            	break;
+            case 'moduleFaqst':
+            	if(main.child('panel[id="module_faqst"]')==null) {
+            		Ext.getStore('FaqstStore').load();
+            		main.add(Ext.widget('faqstlist')).show();
             	}
             		
             	break;
