@@ -49,48 +49,77 @@ background-image: -webkit-gradient(
 	font-weight: bold;
 	text-shadow: 0 1px 0 gray;
 }
+.user-icon {
+	//background-image: url(https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/man-24-20.png) !important;
+	background-image: url(icons/man-24-20.png) !important;
+}
+.upload-icon {
+	//background-image: url(https://cdn2.iconfinder.com/data/icons/freecns-cumulus/16/519673-179_Upload-16.png) !important;
+	background-image: url(icons/519673-179_Upload-16.png) !important;
+}
+.folder-icon {
+	//background-image: url(https://cdn2.iconfinder.com/data/icons/freecns-cumulus/16/519946-006_Folder-16.png) !important;
+	background-image: url(icons/519946-006_Folder-16.png) !important;
+}
+.signout-icon {
+	//background-image: url(https://cdn1.iconfinder.com/data/icons/duesseldorf/16/sign-out.png) !important;
+	background-image: url(icons/sign-out.png) !important;
+}
 .map-icon {
-	background-image: url(https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/location-24-16.png) !important;
+	//background-image: url(https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/location-24-16.png) !important;
+	background-image: url(icons/location-24-16.png) !important;
 }
 .add-icon {
-	background-image: url(https://cdn4.iconfinder.com/data/icons/wirecons-free-vector-icons/32/add-16.png) !important;
+	//background-image: url(https://cdn4.iconfinder.com/data/icons/wirecons-free-vector-icons/32/add-16.png) !important;
+	background-image: url(icons/add-16.png) !important;
 }
 .remove-icon {
-	background-image: url(https://cdn0.iconfinder.com/data/icons/typicons-2/24/minus-16.png) !important;
+	//background-image: url(https://cdn0.iconfinder.com/data/icons/typicons-2/24/minus-16.png) !important;
+	background-image: url(icons/minus-16.png) !important;
 }
 .new-icon {
-	background-image: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/doc_import.png) !important;
+	//background-image: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/doc_import.png) !important;
+	background-image: url(icons/doc_import.png) !important;
 }
 .refresh-icon {
-	background-image: url(https://cdn4.iconfinder.com/data/icons/pictype-free-vector-icons/16/sync-16.png) !important;
+	//background-image: url(https://cdn4.iconfinder.com/data/icons/pictype-free-vector-icons/16/sync-16.png) !important;
+	background-image: url(icons/sync-16.png) !important;
 }
 .download-icon {
-	background-image: url(https://cdn2.iconfinder.com/data/icons/freecns-cumulus/16/519672-178_Download-16.png) !important;
+	//background-image: url(https://cdn2.iconfinder.com/data/icons/freecns-cumulus/16/519672-178_Download-16.png) !important;
+	background-image: url(icons/519672-178_Download-16.png) !important;
 }
 .delete-icon {
-	background-image: url(https://cdn1.iconfinder.com/data/icons/iconza/iconza_16x16_eb3a05/trash.png) !important;
+	//background-image: url(https://cdn1.iconfinder.com/data/icons/iconza/iconza_16x16_eb3a05/trash.png) !important;
+	background-image: url(icons/trash.png) !important;
 }
 .moveleft-icon {
-	background-image: url(https://cdn2.iconfinder.com/data/icons/freecns-cumulus/16/519627-127_ArrowLeft-16.png) !important;
+	//background-image: url(https://cdn2.iconfinder.com/data/icons/freecns-cumulus/16/519627-127_ArrowLeft-16.png) !important;
+	background-image: url(icons/519627-127_ArrowLeft-16.png) !important;
 }
 .open-icon {
-	//background-image: url(https://cdn3.iconfinder.com/data/icons/wpzoom-developer-icon-set/500/66-16.png) !important;
-	background-image: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/folder_open.png) !important;
+	//background-image: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/folder_open.png) !important;
+	background-image: url(icons/folder_open.png) !important;
 }
 .cashbag-icon {
-	background-image: url(https://cdn1.iconfinder.com/data/icons/duesseldorf/16/bank.png) !important;
+	//background-image: url(https://cdn1.iconfinder.com/data/icons/duesseldorf/16/bank.png) !important;
+	background-image: url(icons/bank.png) !important;
 }
 .module-icon {
-	background-image: url(https://cdn1.iconfinder.com/data/icons/splashyIcons/application_windows.png) !important;
+	//background-image: url(https://cdn1.iconfinder.com/data/icons/splashyIcons/application_windows.png) !important;
+	background-image: url(icons/application_windows.png) !important;
 }
 .report-icon {
-	background-image: url(https://cdn1.iconfinder.com/data/icons/6x16-free-application-icons/16/Report.png) !important;
+	//background-image: url(https://cdn1.iconfinder.com/data/icons/6x16-free-application-icons/16/Report.png) !important;
+	background-image: url(icons/Report.png) !important;
 }
 .next-icon {
-	background-image: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_next.png) !important;
+	//background-image: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_next.png) !important;
+	background-image: url(icons/br_next.png) !important;
 }
 .prev-icon {
-	background-image: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_prev.png) !important;
+	//background-image: url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/br_prev.png) !important;
+	background-image: url(icons/br_prev.png) !important;
 }
 
 #loginTarget {

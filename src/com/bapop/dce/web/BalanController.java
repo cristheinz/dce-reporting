@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bapop.batch.dce.BatchDce;
 import com.bapop.dce.model.Balan;
 import com.bapop.dce.service.BalanService;
 import com.bapop.dce.util.ExtJSReturn;
@@ -34,6 +35,25 @@ public class BalanController {
 		} catch (Exception e) {
 			//System.out.println(e);
 			return ExtJSReturn.mapError("Error retrieving Balan from database.");
+		}
+	}
+	
+	@RequestMapping(value="/balan/load.action")
+	public @ResponseBody Map<String,? extends Object> load(@RequestParam("id") String id) throws Exception {
+		try {
+			int fileId=Integer.parseInt(id);
+			System.out.println(fileId);
+			
+			BatchDce b=new BatchDce();
+			b.runBalan(id);
+			
+			
+
+			return ExtJSReturn.mapOK();
+
+		} catch (Exception e) {
+			//System.out.println(e);
+			return ExtJSReturn.mapError("Error loading Balan into database.");
 		}
 	}
 

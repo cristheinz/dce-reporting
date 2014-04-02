@@ -29,9 +29,11 @@ Ext.define('AM.controller.FaqstController', {
             	keyup: this.searchOnList
             },
             'faqstlist button[action=add]': {
+            	beforerender: this.onRenderBtnAdd,
             	click: this.addOnList
             },
             'faqstlist button[action=remove]': {
+            	beforerender: this.onRenderBtnRemove,
             	click: this.removeOnList
             },
             'faqstlist button[action=refresh]': {
@@ -51,21 +53,36 @@ Ext.define('AM.controller.FaqstController', {
         });
     },
     
+    onRenderBtnAdd: function(btn,opts){
+    	if(!this.checkAccess('moduleFaqst','U')){
+    		btn.hide();
+    	}
+    },
+    onRenderBtnRemove: function(btn,opts){
+    	if(!this.checkAccess('moduleFaqst','U')){
+    		btn.hide();
+    	}
+    },
+    
     addOnList: function(button) {
     	var rec= Ext.create('AM.model.Faqst',{tag:'Nova FAQ'});
     	var store=this.getFaqstStoreStore();
-    	store.add(rec);
+    	//store.add(rec);
+    	store.insert(0,rec);
     	//store.sync();//está comment pq só grava se modificar o regito
     },
     removeOnList: function(button) {
     	var store=this.getFaqstStoreStore();
     	//console.log(this.getFaqstlist().getSelectionModel().getSelection());
     	var recs=this.getFaqstlist().getSelectionModel().getSelection();
-    	recs.forEach(function(rec){
-    		//console.log(rec);
+    	for(var i=0;i<recs.length;i++) {
+    		store.remove(recs[i]);
+    		store.sync();
+    	};
+    	/*recs.forEach(function(rec){
     		store.remove(rec);
         	store.sync();
-    	});
+    	});*/
     	//store.remove(recs);
     	//store.sync();
     },

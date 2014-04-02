@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>bapop|DCE App</title>
+    <title>DCE Reporting - Autenticação</title>
     <link rel="SHORTCUT ICON" type="image/vnd.microsoft.icon" href="favicon.ico" />
 
     <link rel="stylesheet" type="text/css" href="ext-4.2.1/resources/css/ext-all-gray.css">

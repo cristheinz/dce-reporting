@@ -26,7 +26,12 @@ public class FileIODAO {
 	public List<FileIO> getFiles(int userID) {
 		return hibernateTemplate.find("from FileIO where user_id="+userID);
 	}
-	
+
+	@SuppressWarnings("unchecked")
+	public List<FileIO> getFilesByFid(int userID, String fid) {
+		return hibernateTemplate.find("from FileIO where user_id="+userID+" and fid='"+fid+"'");
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<FileIO> getFileIO(String id) {
 		return hibernateTemplate.find("from FileIO as u where u.id="+id);

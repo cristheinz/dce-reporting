@@ -10,7 +10,16 @@ Ext.define('AM.controller.AbstractController', {
 			return true;
 		alert("Não autorizado.");
 		return false;
-	}/*,
+	},
+	
+    checkAccess: function(service, action) {
+    	var key = service+"-"+action;
+		if(Ext.getStore('AuthData').find('key',key)>=0)
+			return true;
+		return false;
+	}
+	
+	/*,
     
     init: function() {
     }*/

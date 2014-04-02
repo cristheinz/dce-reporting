@@ -7,9 +7,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/springframework"/>
-	<classpathentry kind="con" path="org.eclipse.datatools.connectivity.jdt.DRIVERLIBRARY/Microsoft SQL Server 2008 JDBC Driver"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/repository"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

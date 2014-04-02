@@ -37,7 +37,8 @@ Ext.define('AM.controller.CtistController', {
     addOnList: function(button) {
     	var rec= Ext.create('AM.model.Ctist');
     	var store=this.getCtistStoreStore();
-    	store.add(rec);
+    	//store.add(rec);
+    	store.insert(0,rec);
     	//store.sync();//está comment pq só grava se modificar o regito
     },
     

@@ -67,6 +67,9 @@ public class AuthenticationController {
 				result.add(new AuthBean("moduleBranch-U"));	
 				result.add(new AuthBean("moduleFaqst-U"));
 			}
+			if(id==3){
+				result.add(new AuthBean("moduleFaqst-U"));
+			}
 			
 			return ExtJSReturn.mapOK(result,result.size());
 			

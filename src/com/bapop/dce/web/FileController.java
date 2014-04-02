@@ -30,10 +30,17 @@ public class FileController {
 	private FileService fileService;
 	
 	@RequestMapping(value="/file/list.action")
-	public @ResponseBody Map<String,? extends Object> getFiles(HttpSession session) throws Exception {
+	public @ResponseBody Map<String,? extends Object> getFiles(HttpSession session,@RequestParam("fid") String fid) throws Exception {
 		try {
 			int id=Integer.parseInt(session.getAttribute("userID").toString());
-			List<FileIO> list=fileService.getFileIOList(id);
+			List<FileIO> list;
+
+			if(fid.isEmpty()) {
+				list=fileService.getFileIOList(id);
+			} else {
+				list=fileService.getFileIOByFid(id,fid);
+			}
+			
 			List<FileBean> result = new ArrayList<FileBean>();
 			for(FileIO f: list){
 				FileBean fb=new FileBean(f);

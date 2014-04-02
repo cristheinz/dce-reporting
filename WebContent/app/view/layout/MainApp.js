@@ -3,6 +3,7 @@ Ext.define('AM.view.layout.MainApp', {
 
     alias: 'widget.mainapp',
     layout:'border',
+    
     items: [{
         region:'north',
         height: 50,
@@ -23,15 +24,16 @@ Ext.define('AM.view.layout.MainApp', {
         name: 'mainContent',
     	items: [{xtype: 'dashboard'}],
         margins: '5 5 0 0'
-    /*},{
+    },{
         region: 'south',     // position for region
-        title: 'Atalhos',
-        html: 'Panel content!',
-        height: 150,
-        minHeight: 75,
-        maxHeight: 250,
-        collapsible: true,   // make collapsible
-        collapsed: true,
-        margins: '0 5 5 5'*/
+        //title: 'Atalhos',
+        xtype: 'label',
+        html: '<center style="color: gray;font-size:x-small">bapop dce v3.0</center>',
+        height: 25,
+        //minHeight: 75,
+        //maxHeight: 250,
+        //collapsible: true,   // make collapsible
+        //collapsed: true,
+        margins: '5 0 0 0'
     }]
 });

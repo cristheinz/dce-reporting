@@ -1,5 +1,5 @@
-Ext.define('AM.store.BalanceStore', {
-    extend: 'Ext.data.TreeStore',
+Ext.define('AM.store.AdjustStore', {
+    extend: 'Ext.data.Store',
 
     /*model: 'AM.model.Balance',
     proxy: {
@@ -9,19 +9,22 @@ Ext.define('AM.store.BalanceStore', {
     },
     folderSort: true*/
     
-    model: 'AM.model.Balance',
+    model: 'AM.model.Adjust',
     autoLoad: false,
+    
+    /*sortOnLoad: true,
+    sorters: { property: 'id', direction : 'DESC' },*/
 
     proxy: {
         type: 'ajax',
         api: {
-        	read : 'balan/tree.action'
+        	read : 'adjust/view.action'
     	},
         reader: {
             type: 'json',
             totalProperty: 'total',
             successProperty: 'success',
-            idProperty: 'cta',
+            idProperty: 'id',
             root: 'data',
             messageProperty: 'message'
         }
@@ -34,6 +37,7 @@ Ext.define('AM.store.BalanceStore', {
         //expanded: true
     },*/
     
+    /*
     listeners: {
     	beforeload: function (store, operation, eOpts) {
     		if(operation.node.data.id!='root'){
@@ -49,5 +53,5 @@ Ext.define('AM.store.BalanceStore', {
                 operation.params.node = "root";
             }
         }
-    }
+    }*/
 });

@@ -53,7 +53,7 @@ public class Balan {
 		this.text = text;
 	}
 
-	@Column (name="val_d", columnDefinition="decimal", precision=38, scale=2)
+	@Column (name="val_d", columnDefinition="decimal", precision=14, scale=2)
 	public Double getVald() {
 		return vald;
 	}
@@ -61,7 +61,7 @@ public class Balan {
 		this.vald = vald;
 	}
 
-	@Column (name="val_c", columnDefinition="decimal", precision=38, scale=2)
+	@Column (name="val_c", columnDefinition="decimal", precision=14, scale=2)
 	public Double getValc() {
 		return valc;
 	}

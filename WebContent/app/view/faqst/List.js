@@ -9,7 +9,8 @@ Ext.define('AM.view.faqst.List' ,{
     store: 'FaqstStore',
     closable: true,
     
-    selType: 'checkboxmodel',
+    multiSelect: true,
+    //selType: 'checkboxmodel',
     
     tbar: [{
     	iconCls: 'add-icon',

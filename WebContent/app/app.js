@@ -11,6 +11,7 @@ Ext.application({
     name: 'AM',
     controllers: [
         'Application',
+        'AdjustController',
         'BalanceController',
         'BranchController',
         'CtistController',

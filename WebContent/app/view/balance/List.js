@@ -3,52 +3,23 @@ Ext.define('AM.view.balance.List' ,{
 
     xtype: 'tree-grid',
     alias: 'widget.balancelist',
-    id: 'module_balance',
+    //id: 'module_balance',
     
-    title: 'Balancete',
-    iconCls: 'module-icon',
-    closable: true,
+    //title: 'Balancete',
+    //iconCls: 'module-icon',
+    //closable: true,
     
     store: 'BalanceStore',
 
-    dockedItems: [{
-        xtype: 'toolbar',
-        dock: 'bottom',
-        items: ['->',
-           {
-        	   iconCls: 'prev-icon', action: 'prev'/*, tooltip: 'Periodo anterior'*/
-           },{
-        	   name: 'anomes',
-           	   xtype: 'textfield',
-           	   width: 55,
-           	   value: Ext.Date.format(Ext.Date.add(new Date(), Ext.Date.MONTH, -1),'Ym')
-           },{
-        	   iconCls: 'next-icon', action: 'next'/*, tooltip: 'Próximo periodo'*/
-           }
-        ]
-    }],
-    tbar: [{
-    	iconCls: 'new-icon',
-    	action: 'new',
-    	tooltip: 'Novo'
-    /*},{
-    	iconCls: 'open-icon',
-    	action: 'open',
-    	tooltip: 'Abrir'*/
-    /*},'->',{
-    	iconCls: 'refresh-icon',
-    	action: 'refresh',
-    	tooltip: 'Actualizar'*/
-    }],
     
-    height: 300,
+    //height: 300,
     useArrows: true,
     rootVisible: false,
     //multiSelect: true,
     singleExpand: true,
     
     initComponent: function() {
-        this.width = 500;
+        //this.width = 500;
         
         Ext.apply(this, {
             

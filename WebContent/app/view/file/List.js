@@ -4,11 +4,16 @@ Ext.define('AM.view.file.List' ,{
     alias: 'widget.filelist',
     //id: 'module_branch',
     
-    width: 535,
+    /*width: 535,*/
     height: 400,
+    layout: 'fit',
     autoScroll: true,
     
     store: 'FileStore',
+    selType: 'checkboxmodel',
+    /*selModel: {
+        mode: 'SINGLE'
+    },*/
     
     features: [{
     	ftype: 'filters',
@@ -22,7 +27,12 @@ Ext.define('AM.view.file.List' ,{
     	ftype: 'summary'
     }],
     
-    tbar: ['->',{ 
+    tbar: [{
+    	iconCls: 'remove-icon',
+    	action: 'remove',
+    	hidden: true,
+    	tooltip: 'Apagar'
+    },'->',{ 
     	xtype: 'textfield', 
     	name: 'filefilter',
     	emptyText: 'Procurar',
@@ -77,7 +87,7 @@ Ext.define('AM.view.file.List' ,{
 	        summaryRenderer: function(value, summaryData, dataIndex) {
 	        	this.down('label[name=totalfilesize]').setText(value+' KB');
 	        }
-		/*},{
+		},{
 			menuDisabled: true,
             sortable: false,
             xtype: 'actioncolumn',
@@ -88,21 +98,21 @@ Ext.define('AM.view.file.List' ,{
                 handler: function(grid, rowIndex, colIndex) {
                 	this.up('grid').fireEvent('itemdownloadbuttonclick', grid, rowIndex, colIndex);
                 }
-            },{
+            /*},{
             	iconCls: 'delete-icon',
             	tooltip: 'Apagar',
             	handler: function(grid, rowIndex, colIndex){
             		this.up('grid').fireEvent('itemdeletebuttonclick', grid, rowIndex, colIndex);
-            	}
-            }]*/
+            	}*/
+            }]
             
     	}];
         
-        /*this.addEvents(
-                'itemdownloadbuttonclick',
+        this.addEvents(
+                'itemdownloadbuttonclick'/*,
                 'itemdeletebuttonclick',
-                'itemdeletekeypress'
-        );*/
+                'itemdeletekeypress'*/
+        );
 
         this.callParent(arguments);
     },

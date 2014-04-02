@@ -57,12 +57,17 @@ Ext.define('AM.controller.Application', {
     },
     
     onOpen: function() {
-    	//Ext.getStore('FileStore').load();
+    	Ext.getStore('FileStore').load({
+    		params: {
+    			fid: ''
+    			}
+    	});
     	Ext.create('Ext.window.Window', {
 		    title: 'Pasta pessoal',
 		    maximizable: true,
 		    width: 600,
 		    layout: 'fit',
+		    modal: true,
 		    items: {  
 		    	xtype: 'filelist'
 		    }
@@ -97,7 +102,7 @@ Ext.define('AM.controller.Application', {
             	break;
             case 'moduleBalance':
             	if(main.child('panel[id="module_balance"]')==null) {
-            		main.add(Ext.widget('balancelist')).show();
+            		main.add(Ext.widget('balancemain')).show();
             	}
             		
             	break;

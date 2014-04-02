@@ -27,7 +27,9 @@ Ext.define('AM.store.FileStore', {
     		type: 'json',
     		encode: false,
     		root: 'data',
+    		allowSingle: true,
             writeAllFields: true
     	}
     }
+    
 });

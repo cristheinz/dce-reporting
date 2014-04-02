@@ -2,13 +2,28 @@ Ext.define('AM.controller.BalanceController', {
     extend: 'AM.controller.AbstractController',
     
     models: ['Balance'],
-    stores: ['BalanceStore'],
+    stores: ['BalanceStore','CtvstStore'],
     views: [
-        'balance.List'
+        'balance.List',
+        'balance.Files',
+        'balance.Load',
+        'balance.Main'
     ],
     refs: [{
     	ref: 'balancelist',
     	selector: 'balancelist'
+    },{
+    	ref: 'balancefiles',
+    	selector: 'balancefiles'
+    },{
+    	ref: 'balanceload',
+    	selector: 'balanceload'
+    },{
+    	ref: 'balancemain',
+    	selector: 'balancemain'
+    /*},{
+    	ref: 'filelist',
+    	selector: 'balancefiles filelist'*/
     }],
 
     init: function() {
@@ -16,25 +31,71 @@ Ext.define('AM.controller.BalanceController', {
             /*'balancelist': {
                 beforerender: this.onPanelRendered
             },*/
-            'balancelist textfield[name=anomes]': {
-                render: this.onChange,
+            'balancemain textfield[name=anomes]': {
+                beforerender: this.onChange,
                 //blur: this.onPanelRendered,
                 //specialkey: this.onPanelRendered,
                 change: this.onChange
             },
-            'balancelist button[action=new]': {
+            'balancemain button[action=new]': {
             	click: this.onNew
             } ,
-            'balancelist button[action=next]': {
+            'balancemain button[action=next]': {
             	click: this.onNext
             },
-            'balancelist button[action=prev]': {
+            'balancemain button[action=prev]': {
             	click: this.onPrev
+            },
+            
+            /*'balancefiles button[action=select]': {
+            	click: this.onSelect
+            },*/
+            'balancefiles > filelist': {
+            	itemdblclick: this.onFileItemSelect
+            },
+            
+            'balanceload button[action=run]': {
+            	click: this.onLoad
+            },
+            'balanceload button[action=back]': {
+            	click: this.onBack
             }
         });
     },
     
+    onBack: function(button) {
+    	//console.log('aaaaa');
+    	var win=this.getBalancefiles();
+    	win.setTitle('Selecionar balancete');
+    	var fl=win.down('panel');
+    	var form=button.up('form');
+    	form.hide();
+    	fl.show();
+    	
+    	
+    },
+    
+    onLoad: function(button) {
+    	var form = this.getBalanceload();
+        if(form.isValid()){
+            form.getForm().submit({
+                url: 'balan/load.action',
+                waitMsg: 'Carregando balancete...',
+                success: function(fp, o) {
+                	//mudar isto. tem q ir para um novo card(step)
+                	Ext.Msg.alert('Mensagem', 'Balancete caregado com sucesso',function(btn){
+                		form.up('window').close();
+                	});
+                },
+                failure: function() {
+                	Ext.Msg.alert("Carregamento Falhou!", Ext.JSON.decode(this.response.responseText).message);
+                }
+            });
+        }
+    },
+    
     onChange: function( t, newValue, oldValue, eOpts ) {
+    	//console.log(t.value);
     	//console.log(t.value.length);
     	if(t.value.length==6) {
     		var store=Ext.getStore('BalanceStore');
@@ -49,19 +110,31 @@ Ext.define('AM.controller.BalanceController', {
         			expanded: true
         		}
     		});
-        	this.getBalancelist().setTitle('Balancete - '+t.value);
+        	var store2=Ext.getStore('AdjustStore');
+        	store2.load({
+        		params: {
+        			anomes : t.value
+        		}
+    		});
+        	var store3=Ext.getStore('CtvstStore');
+        	store3.load({
+        		params: {
+        			anomes : t.value
+        		}
+    		});
+        	//this.getBalancemain().setTitle('Balancete - '+t.value);
     	}
     },
     
     onNext: function(b){
-    	var t = this.getBalancelist().down('textfield[name=anomes]');
+    	var t = this.getBalancemain().down('textfield[name=anomes]');
     	var v = t.value;
     	var myDate = new Date(v.substr(0,4),v.substr(4,2)-1,1);
     	var d = Ext.Date.format(Ext.Date.add(myDate, Ext.Date.MONTH, 1),'Ym');
     	t.setValue(d);
     },
     onPrev: function(b){
-    	var t = this.getBalancelist().down('textfield[name=anomes]');
+    	var t = this.getBalancemain().down('textfield[name=anomes]');
     	var v = t.value;
     	var myDate = new Date(v.substr(0,4),v.substr(4,2)-1,1);
     	var d = Ext.Date.format(Ext.Date.add(myDate, Ext.Date.MONTH, -1),'Ym');
@@ -89,32 +162,44 @@ Ext.define('AM.controller.BalanceController', {
     onNew: function(button) {
     	//console.log('Click new!');
     	var store=Ext.getStore('FileStore');
-    	store.on('load',function(){
+    	store.load({
+    		params: {
+    			fid: 'BALAN'
+    			}
+    	});
+    	/*store.on('load',function(){
     		store.filter({
 				property : 'fid',
 				value : 'BALAN'
 			});
-    	});
-    	var panel=Ext.create('AM.view.file.List',{
+    	});*/
+    	/*var panel=Ext.create('AM.view.file.List',{
     		store: store,
-    		features: [],
-    		tbar: []
+    		//features: [],
+    		//tbar: []
     	});
     	panel.down('label[name=filecount]').hide();
-    	panel.down('label[name=totalfilesize]').hide();
+    	panel.down('label[name=totalfilesize]').hide();*/
     	
+    	Ext.widget('balancefiles');
+    	
+    	/*
     	Ext.create('Ext.window.Window', {
 		    title: 'Selecionar ficheiro',
 		    //maximizable: false,
 		    modal: true,
 		    width: 600,
 		    layout: 'fit',
-		    items: panel,
+		    //items: panel,
+		    items: [{
+		    	xtype: 'filelist'
+		    }],
 		    fbar:[{
 		          text: 'OK',
 		          handler: function(button, e){
 		        	  //console.log('click');
-		        	  var rec=panel.getSelectionModel().getSelection();
+		        	  var grid=button.up('window').down('grid');
+		        	  var rec=grid.getSelectionModel().getSelection();
 		        	  //console.log(rec.length);
 		        	  if(rec.length>0) {
 		        		  var id=rec[0].getId();
@@ -127,7 +212,70 @@ Ext.define('AM.controller.BalanceController', {
 		        	  
 		          }
 		    }]
-		}).show();
+		}).show();*/
+    },
+    
+    /*onSelect: function(button) {
+    	var grid=button.up('window').down('grid');
+	    var rec=grid.getSelectionModel().getSelection();
+	    if(rec.length>0) {
+	    	var id=rec[0].getId();
+	        console.log('id:'+id);
+	        //do stuff on server side: load BalanceStore w/param file=id
+	        button.up('window').close();
+	    } else {
+	    	alert('Favor selecionar um ficheiro');
+	    }
+    },*/
+    
+    onFileItemSelect: function(grid, record){
+    	//this.getFilelist().down('label[name=filecount]').setText(record.get('name')+' [Delete para apagar, duplo clique para baixar.]');
+    	//this.getFilelist().down('label[name=totalfilesize]').setText('');
+    	//console.log(record.get('name'));
+    	//alert('Selecionou o ficheiro: '+record.get('name'));
+    	//console.log(this.getFilelist());
+    	//console.log(grid.up('panel'));
+
+    	//this.getFilelist().suspendEvent('itemclick');
+    	//this.getFilelist().clearListeners();
+    	//Ext.EventManager().stopPropagation(?);
+    	//console.log(e);
+    	//e.stopPropagation();
+    	/*var win=grid.up('window');
+    	win.close();*/
+    	//this.getBalancefiles().suspendEvents(true);
+    	//var fl=this.getBalancefiles().down('panel');
+    	
+    	var fl=grid.up('panel');
+    	var win=this.getBalancefiles();
+    	var siz=win.getSize();
+    	
+    	//console.log(fl);
+    	fl.hide();
+    	//win.remove(fl);
+    	win.setSize(siz);
+    	win.setTitle('Iniciar carregamento do balancete');
+    	/*var form=Ext.create('Ext.form.Panel',{
+    		frame: true,
+    	    bodyPadding: '10 10 0',
+    	    items: [{
+    	    	xtype: 'label',
+    	    	text: record.get('name')
+    	    },{
+    	    	xtype: 'textfield',
+    	    	value: record.get('id')
+    	    }]
+    	});*/
+    	//var form=Ext.widget('balanceload');
+    	var form=this.getBalanceload();
+    	form.show();
+    	form.loadRecord(record);
+    	win.add(form);
+    	//win.down('button[action=select]').show();
+
+    	//this.getBalancefiles().close();
+    	
+    	
     }
     
 });

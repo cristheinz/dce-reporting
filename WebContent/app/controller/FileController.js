@@ -32,16 +32,20 @@ Ext.define('AM.controller.FileController', {
             		console.log('click!');
             		grid.getSelectionModel().deselectAll();
             	},*/
-            	beforerender: this.onLoad,
-            	itemclick: this.onFileItemSelect,
-            	cellkeydown: this.onFileItemKeyDown,
-            	itemdblclick: this.onFileItemDownload
+            	//itemclick: this.onFileItemSelect,
+            	//cellkeydown: this.onFileItemKeyDown,
+            	selectionchange: this.onSelect,
+            	itemdownloadbuttonclick: this.onFileItemDownload
+            	//itemdblclick: this.onFileItemDownload
             },
             'filelist textfield[name=filefilter]': {
             	keyup: this.onFileGridNameFilter
             },
             'filelist button[action=refresh]': {
             	click: this.onFileRefresh
+            },
+            'filelist button[action=remove]': {
+            	click: this.onFileDelete
             }
         });
     },
@@ -72,18 +76,6 @@ Ext.define('AM.controller.FileController', {
     	this.getUpload().getForm().reset();
     }, 
     
-    onLoad: function( grid, eOpts){
-    	//console.log('click!'+this.getFilelist().getId());
-    	var store = this.getFilelist().getStore();
-    	/*store.on('load',function(){
-    		store.filter({
-				property : 'fid',
-				value : 'BALAN'
-			});
-    	});*/
-    	store.load();
-    },
-
     onFileGridNameFilter: function(textfield, e, eOpts ){
     	var store = this.getFilelist().getStore();
 		store.clearFilter();
@@ -96,8 +88,26 @@ Ext.define('AM.controller.FileController', {
 			});
 		}
     },
+    
+    onSelect: function(smodel, selected, eOpts){
+    	//console.log(smodel.getSelection().length);
+    	var sbar=this.getFilelist().down('label[name=filecount]');
+    	var rbtn=this.getFilelist().down('button[action=remove]');
+    	if(selected[0]) {
+    		sbar.setText(selected[0].get('name'));
+    		if(selected.length>1) {
+        		sbar.setText(selected.length+' ficheiros selecionados');
+        	}
+    		rbtn.show();
+    	} else {
+    		rbtn.hide();
+    		sbar.setText('Nenhum ficheiro selecionado');
+    	}
+    	this.getFilelist().down('label[name=totalfilesize]').setText('');
+    	
+    },
 
-    onFileItemSelect: function(grid, record){
+    /*onFileItemSelect: function(grid, record){
     	this.getFilelist().down('label[name=filecount]').setText(record.get('name')+' [Delete para apagar, duplo clique para baixar.]');
     	this.getFilelist().down('label[name=totalfilesize]').setText('');
     },
@@ -111,6 +121,16 @@ Ext.define('AM.controller.FileController', {
      			  store.remove(record);
      		   }
      		 });
+    	}
+    },*/
+    
+    onFileDelete: function(button){
+    	var store = this.getFilelist().getStore();
+    	var sel=this.getFilelist().getSelectionModel().getSelection();
+    	for(var i=0;i<sel.length;i++) {
+    		//console.log(sel[i]);
+    		store.remove(sel[i]);
+    		store.commitChanges();
     	}
     },
     

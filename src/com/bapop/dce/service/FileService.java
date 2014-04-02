@@ -20,6 +20,11 @@ public class FileService {
  
         return fileIODAO.getFiles(userID);
     }
+    @Transactional(readOnly=true)
+    public List<FileIO> getFileIOByFid(int userID, String fid){
+ 
+        return fileIODAO.getFilesByFid(userID, fid);
+    }
     
     @Transactional(readOnly=true)
     public List<FileIO> getFileIO(String id){

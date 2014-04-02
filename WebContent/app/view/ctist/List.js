@@ -29,7 +29,7 @@ Ext.define('AM.view.ctist.List' ,{
     
     initComponent: function() {
     	this.cellEditing = new Ext.grid.plugin.CellEditing({
-            clicksToEdit: 1
+            clicksToEdit: 2
         });
     	
     	Ext.apply(this, {

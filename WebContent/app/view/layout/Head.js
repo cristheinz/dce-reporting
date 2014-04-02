@@ -13,21 +13,21 @@ Ext.define('AM.view.layout.Head', {
 		xtype: 'button',
 		name: 'account',
 		scale: 'medium',
-		icon: 'https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/man-24-20.png',
+		iconCls: 'user-icon',
 		text: Ext.state.Manager.get('username',''),
 		menu: [{
 			text:'Importar ficheiro...',
-			icon: 'https://cdn2.iconfinder.com/data/icons/freecns-cumulus/16/519673-179_Upload-16.png',
+			iconCls: 'upload-icon',
 			action:'upload'
 		},{
 			text:'Pasta pessoal',
-			icon: 'https://cdn2.iconfinder.com/data/icons/freecns-cumulus/16/519946-006_Folder-16.png',
+			iconCls: 'folder-icon',
 			action:'open'
 		}, {
             xtype: 'menuseparator'
         },{
             text:'Sair',
-            icon: 'https://cdn1.iconfinder.com/data/icons/duesseldorf/16/sign-out.png',
+            iconCls: 'signout-icon',
             action:'logout'
         }],
 	    margins: '0 15 0 0'
