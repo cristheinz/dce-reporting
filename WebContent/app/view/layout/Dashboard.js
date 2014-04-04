@@ -2,7 +2,7 @@ Ext.define('AM.view.layout.Dashboard' ,{
     extend: 'Ext.panel.Panel',
 
     alias: 'widget.dashboard',
-    title: 'Dashboard',
+    title: 'Posição '+Ext.Date.format(Ext.Date.add(new Date(), Ext.Date.MONTH, -1),'Ym'),//'Dashboard',
     //store: 'Branches',
     closable: false,
     //autoShow: true,
@@ -42,7 +42,8 @@ Ext.define('AM.view.layout.Dashboard' ,{
        	        { data1: 0, anomes: 'periodo homólogo' },
     	        { data1: 0, anomes: '3 meses antes' },
     	        { data1: 0, anomes: '2 meses antes' },
-    	        { data1: 0, anomes: 'mês anterior' }
+    	        { data1: 0, anomes: 'mês anterior' },
+    	        { data1: 0, anomes: 'actual' }
     	    ]
     	});
     	
@@ -74,8 +75,11 @@ Ext.define('AM.view.layout.Dashboard' ,{
                 'anomes': '2 meses antes',
                 'data1': rec.get('data3')
             }, {
-                'anomes': 'mes anterior',
+                'anomes': 'mês anterior',
                 'data1': rec.get('data2')
+            }, {
+                'anomes': 'actual',
+                'data1': rec.get('data1')
             }]);
         };
 
@@ -250,23 +254,149 @@ Ext.define('AM.view.layout.Dashboard' ,{
                 selectionchange: function(model, records) {
                     if (records[0]) {
                         selectedRec = records[0];
-                        highlightCompanyPriceBar(selectedRec);
+                        //highlightCompanyPriceBar(selectedRec);
                         updateChart2(selectedRec);
                     }
                 }
             }
     	});
     	
-    	Ext.apply(this, {
-    		items: [ barChart, {
+        
+        //*****************************************************************************************************
+        //*****************************************************************************************************
+        //*****************************************************************************************************
+        //*****************************************************************************************************
+        //*****************************************************************************************************
+        //NOVO GRAFICO RESUMO!!!!!!!!!!!!!!
+        
+        var storeX = Ext.create('Ext.data.Store', {
+        	fields: ['depositos','creditos','creditoVencido','provisoes','per'],
+            data: []
+        });
+        var updateStoreX = function(records){
+        	var x1=0,x2=0,x3=0,
+			y1=0,y2=0,y3=0,
+			z1=0,z2=0,z3=0,
+			a1=0,a2=0,a3=0;
+        	Ext.each(records, function(rec) {
+        		if(rec.get('name').substr(0,2)<4) {
+        			x1 += rec.get('data1');
+        			x2 += rec.get('data2');
+        			x3 += rec.get('data3');
+        		}
+        		if(rec.get('name').substr(0,2)>=4 && rec.get('name').substr(0,2)<11) {
+        			y1 += rec.get('data1');
+        			y2 += rec.get('data2');
+        			y3 += rec.get('data3');
+        		}
+        		if(rec.get('name').substr(0,2)==14 || rec.get('name').substr(0,2)==15) {
+        			z1 += rec.get('data1');
+        			z2 += rec.get('data2');
+        			z3 += rec.get('data3');
+        		}
+        		if(rec.get('name').substr(0,2)==12) {
+        			a1 += rec.get('data1');
+        			a2 += rec.get('data2');
+        			a3 += rec.get('data3');
+        		}
+        	});
+        	storeX.loadData([{ depositos: x1,creditos: y1,creditoVencido: a1,provisoes: z1, per: 'Actual' },
+        	                 { depositos: x2,creditos: y2,creditoVencido: a2,provisoes: z2, per: 'Anterior' },
+        	                 { depositos: x3,creditos: y3,creditoVencido: a3,provisoes: z3, per: 'Inicial' }]);
+        };
+        
+        Ext.getStore('DashboardData').load({
+        		callback: function(records) {
+        			updateStoreX(records);
+        			//console.log(this.sum('data1'));
+        			//console.log('name: \'depositos\', current: '+x1+', previous: '+x2);
+        			//console.log('name: \'creditos\', current: '+y1+', previous: '+y2);
+        			//console.log('name: \'provisoes\', current: '+z1+', previous: '+z2);
+        		}
+        });
+        
+        
+        var chart = Ext.create('Ext.chart.Chart',{
+        	flex: 5,
+            animate: true,
+            shadow: true,
+            store: storeX,
+            legend: {
+                position: 'right'
+            },
+            axes: [{
+                type: 'Numeric',
+                position: 'bottom',
+                fields: ['depositos', 'creditos','creditoVencido','provisoes'],
+                title: false,
+                grid: true
+                /*label: {
+                    renderer: function(v) {
+                        return String(v).replace(/(.)$/, '.$1M');
+                    }
+                }*/
+            }, {
+                type: 'Category',
+                position: 'left',
+                fields: ['per'],
+                title: false
+            }],
+            series: [{
+                type: 'bar',
+                axis: 'bottom',
+                gutter: 80,
+                xField: 'per',
+                yField: ['depositos', 'creditos','creditoVencido','provisoes'],
+                stacked: true,
+                tips: {
+                    trackMouse: true,
+                    width: 65,
+                    height: 28,
+                    renderer: function(storeItem, item) {
+                        //this.setTitle(String(item.value[1] ) + 'M');
+                        this.setTitle(item.yField);
+                    }
+                },
+                label: {
+                    display: 'insideEnd',
+                    'text-anchor': 'middle',
+                    field: ['depositos', 'creditos','creditoVencido','provisoes'],
+                    renderer: Ext.util.Format.numberRenderer('0'),
+                    orientation: 'vertical',
+                    color: '#fff'
+                  }
+            }]
+        });
+        
+        /*Ext.require(['Ext.chart.*', 'Ext.chart.axis.Gauge', 'Ext.chart.series.*', 'Ext.Window']);
+        Ext.create('Ext.Window', {
+            title: 'Global',
+            width: 800,
+            height: 600,
+            minWidth: 800,
+            minHeight: 600,
+            layout: 'fit',
+            items: chart
+        }).show();*/
+        
+        ////ATÈ AQUI!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+        
+        Ext.apply(this, {
+    		items: [ chart, {
                 xtype: 'container',
                 layout: {type: 'hbox', align: 'stretch'},
                 flex: 3,
                 items: [gridPanel, barChart2 ]
+    		/*},{
+    			xtype: 'container',
+    			layout: 'fit',
+                items: chart*/
     		}]
     	});
     	
 
         this.callParent(arguments);
+
 	}
 });

@@ -28,7 +28,7 @@ Ext.define('AM.store.AdjustStore', {
             root: 'data',
             messageProperty: 'message'
         }
-    },
+    }
     
     /*
     root: {

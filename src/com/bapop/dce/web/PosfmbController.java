@@ -24,7 +24,7 @@ public class PosfmbController {
 		try {
 			List<Object[]> l = posfmbService.view(anomes);
 			List<DashBoardBean> result=new ArrayList<DashBoardBean>();
-            
+
             for(Object[] o:l) {
             	String cta=o[0].toString();
             	BigDecimal val=new BigDecimal(o[1].toString());
@@ -32,6 +32,7 @@ public class PosfmbController {
             	BigDecimal val2=new BigDecimal(o[3].toString());
             	BigDecimal val3=new BigDecimal(o[4].toString());
             	BigDecimal valh=new BigDecimal(o[5].toString());
+            	
             	result.add(new DashBoardBean(cta,val,val1,val2,val3,valh));
             }
 			

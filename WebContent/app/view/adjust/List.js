@@ -92,7 +92,7 @@ Ext.define('AM.view.adjust.List' ,{
     			editor: {
                     allowBlank: false
                 }
-    		}],
+    		}]
     		//selType: 'checkboxmodel',
     		/*selModel: {
                 selType: 'cellmodel'

@@ -1,6 +1,6 @@
 Ext.define('AM.view.balance.Main' ,{
 	extend: 'Ext.panel.Panel',
-
+	
     alias: 'widget.balancemain',
     id: 'module_balance',
     closable: true,
