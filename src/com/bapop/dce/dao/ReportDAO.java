@@ -24,7 +24,7 @@ public class ReportDAO {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Report> getReports(int id) {
-		return hibernateTemplate.find("from Report as r where r.parent="+id);
+		return hibernateTemplate.find("from Report as r where r.parent="+id+" order by r.text");
 	}
 
 }
