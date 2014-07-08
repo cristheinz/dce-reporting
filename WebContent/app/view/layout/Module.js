@@ -18,7 +18,7 @@ Ext.define('AM.view.layout.Module' ,{
     	                leaf: true
     	            },{
     	            	id: 'module2',
-    	                text: 'Controlo de contas',
+    	                text: 'Controlo de Contas',
     	                iconCls: 'module-icon',
     	                leaf: true
     	            },{
@@ -32,6 +32,11 @@ Ext.define('AM.view.layout.Module' ,{
     	                iconCls: 'module-icon',
     	                leaf: true
     	            },{
+    	            	id: 'modulePapel',
+    	                text: 'Papel Comercial',
+    	                iconCls: 'module-icon',
+    	                leaf: true
+    	            /*},{
     	                text: 'Papel comercial',
     	                expanded: true,
     	                children: [{
@@ -44,7 +49,7 @@ Ext.define('AM.view.layout.Module' ,{
     	                        text: 'Gerar ficheiro',
     	                        iconCls: 'module-icon',
     	                        leaf: true
-    	                    }]
+    	                    }]*/
     	            },{
     	            	id: 'moduleBranch',
     	                text: 'Sucursais',

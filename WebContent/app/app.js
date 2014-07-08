@@ -16,7 +16,10 @@ Ext.application({
         'BranchController',
         'CtistController',
         'FaqstController',
-        'FileController'
+        'FileController',
+        'PapelController',
+        'PapelEmiController',
+        'NifstController'
     ],
     launch: function() {
     	Ext.util.Format.thousandSeparator = '.';

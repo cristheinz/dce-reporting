@@ -113,6 +113,13 @@ Ext.define('AM.controller.Application', {
             	}
             		
             	break;
+            case 'modulePapel':
+            	if(main.child('panel[id="module_papel"]')==null) {
+            		//Ext.getStore('PapelStore').load();
+            		main.add(Ext.widget('papelmain')).show();
+            	}
+            		
+            	break;
             default:
             	break;
             }

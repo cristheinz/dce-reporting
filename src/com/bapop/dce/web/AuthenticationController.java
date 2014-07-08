@@ -63,9 +63,13 @@ public class AuthenticationController {
 			result.add(new AuthBean("moduleBranch-E"));
 			result.add(new AuthBean("moduleBalance-E"));
 			result.add(new AuthBean("moduleFaqst-E"));
+			result.add(new AuthBean("modulePapel-E"));
+			result.add(new AuthBean("modulePapelEmi-E"));
 			if(id==2) {
 				result.add(new AuthBean("moduleBranch-U"));	
 				result.add(new AuthBean("moduleFaqst-U"));
+				result.add(new AuthBean("modulePapel-U"));
+				result.add(new AuthBean("modulePapelEmi-U"));
 			}
 			if(id==3){
 				result.add(new AuthBean("moduleFaqst-U"));
