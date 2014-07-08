@@ -49,6 +49,9 @@ background-image: -webkit-gradient(
 	font-weight: bold;
 	text-shadow: 0 1px 0 gray;
 }
+#app-header-title a{
+	color: white;
+}
 .user-icon {
 	//background-image: url(https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/man-24-20.png) !important;
 	background-image: url(icons/man-24-20.png) !important;

@@ -14,6 +14,9 @@ Ext.define('AM.controller.Application', {
     refs: [{
         ref: 'mainapp',
         selector: 'mainapp [name=mainContent]'
+    },{
+        ref: 'footer',
+        selector: 'mainapp [name=footer]'
     }],
 
     init: function() {
@@ -37,8 +40,19 @@ Ext.define('AM.controller.Application', {
             'report': {
                	itemdblclick: this.runReport
             
+            },
+            '[name=footer]':{
+            	beforerender: this.onRender,
             }
         });
+    },
+    onRender: function() {
+    	//console.log('aaaaaaaaaaaaaaaa');
+    	//console.log(this.getFooter());
+    	//this.getFooter().setText('aaaaaaaa');
+    	var dt=new Date().getFullYear();
+    	//console.log(dt);
+    	this.getFooter().html='<center style="color: gray;font-size:x-small">'+dt+' bapop dce v3.0</center>';
     },
     
     onAfterRender: function() {

@@ -28,7 +28,10 @@ Ext.define('AM.view.layout.MainApp', {
         region: 'south',     // position for region
         //title: 'Atalhos',
         xtype: 'label',
-        html: '<center style="color: gray;font-size:x-small">bapop dce v3.0</center>',
+        //xtype: 'component',
+        name: 'footer',
+        //renderer: Ext.util.Format.dateRenderer('m-d-Y g:i A'),
+        //html: '<center style="color: gray;font-size:x-small"><script>document.write(new Date().getFullYear())</script> bapop dce v3.0</center>',
         height: 25,
         //minHeight: 75,
         //maxHeight: 250,
