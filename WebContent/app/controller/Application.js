@@ -42,7 +42,7 @@ Ext.define('AM.controller.Application', {
             
             },
             '[name=footer]':{
-            	beforerender: this.onRender,
+            	beforerender: this.onRender
             }
         });
     },

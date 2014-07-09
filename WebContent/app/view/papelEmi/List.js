@@ -56,13 +56,17 @@ Ext.define('AM.view.papelEmi.List' ,{
     			dataIndex : 'dti',
     			menuDisabled: true,
     			flex : 1,
-    			renderer: Ext.util.Format.dateRenderer('Y-m-d')
+    			xtype : 'datecolumn',
+    			format : 'Y-m-d'
+    			//renderer: Ext.util.Format.dateRenderer('Y-m-d')
     		},{
     			header : 'Vencimento',
     			dataIndex : 'dtf',
     			menuDisabled: true,
     			flex : 1,
-    			renderer: Ext.util.Format.dateRenderer('Y-m-d')
+    			xtype : 'datecolumn',
+    			format : 'Y-m-d'
+    			//renderer: Ext.util.Format.dateRenderer('Y-m-d')
     		},{
     			header : 'Valor',
     			dataIndex : 'val',

@@ -8,7 +8,7 @@ Ext.define('AM.view.layout.Head', {
 		xtype: "component",
 		id: "app-header-title",
 		//html: "DCE Reporting",
-		html: "DCE Reporting :: developed by <a href='http://swpfa027.gbp.corp.com/portal/page/portal/Intranet/SERVICOS_ACESSO/LISTA_TELEFONICA_RESULTADO?p_depart=&p_depart_desc=&p_balcao=&p_balcao_desc=&p_balcao_cod=&p_nome=&p_funcao=&p_username=CRD76191&p_extensao=&p_ext_tlm=&Submit=Pesquisar' target='_blank'>Christiano Domingues</a>",
+		html: "DCE Reporting",//" :: developed by <a href='http://swpfa027.gbp.corp.com/portal/page/portal/Intranet/SERVICOS_ACESSO/LISTA_TELEFONICA_RESULTADO?p_depart=&p_depart_desc=&p_balcao=&p_balcao_desc=&p_balcao_cod=&p_nome=&p_funcao=&p_username=CRD76191&p_extensao=&p_ext_tlm=&Submit=Pesquisar' target='_blank'>Christiano Domingues</a>",
 		flex: 1
 	}, {
 		xtype: 'button',

@@ -14,10 +14,12 @@ Ext.define('AM.model.Papel', {
         type: 'string'
     }, {
         name: 'dti',
-        type: 'date'
+        type: 'date',
+        dateFormat:'Y-m-d'
     }, {
         name: 'dtf',
-        type: 'date'
+        type: 'date',
+        dateFormat:'Y-m-d'
     }, {
         name: 'moe',
         type: 'string'

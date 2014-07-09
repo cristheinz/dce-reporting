@@ -16,12 +16,15 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.bapop.dce.bo.AuthBean;
 import com.bapop.dce.model.User;
+import com.bapop.dce.model.UserAuth;
+import com.bapop.dce.service.UserAuthService;
 import com.bapop.dce.service.UserService;
 import com.bapop.dce.util.ExtJSReturn;
 
 @Controller
 public class AuthenticationController {
 	private UserService userService;
+	private UserAuthService userAuthService;
 	
 	@RequestMapping(value="/home.action")
     public ModelAndView home(HttpSession session) throws Exception {
@@ -60,6 +63,12 @@ public class AuthenticationController {
 		try{
 			int id=Integer.parseInt(session.getAttribute("userID").toString());
 			List<AuthBean> result=new ArrayList<AuthBean>();
+			List<UserAuth> list= userAuthService.getList(id);
+			for(UserAuth a:list){
+				//System.out.println(id+";"+a.getAuth());
+				result.add(new AuthBean(a.getAuth()));
+			}
+			/*
 			result.add(new AuthBean("moduleBranch-E"));
 			result.add(new AuthBean("moduleBalance-E"));
 			result.add(new AuthBean("moduleFaqst-E"));
@@ -73,7 +82,7 @@ public class AuthenticationController {
 			}
 			if(id==3){
 				result.add(new AuthBean("moduleFaqst-U"));
-			}
+			}*/
 			
 			return ExtJSReturn.mapOK(result,result.size());
 			
@@ -85,6 +94,10 @@ public class AuthenticationController {
 	@Autowired
 	public void setUserService(UserService userService) {
 		this.userService = userService;
+	}
+	@Autowired
+	public void setUserAuthService(UserAuthService userAuthService) {
+		this.userAuthService = userAuthService;
 	}
 
 }

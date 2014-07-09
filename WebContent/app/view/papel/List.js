@@ -39,7 +39,9 @@ Ext.define('AM.view.papel.List' ,{
     			dataIndex : 'dtf',
     			menuDisabled: true,
     			flex : 1,
-    			renderer: Ext.util.Format.dateRenderer('Y-m-d')
+    			xtype : 'datecolumn',
+    			format : 'Y-m-d'
+    			//renderer: Ext.util.Format.dateRenderer('Y-m-d')
     		},{
     			header : 'Moeda',
     			dataIndex : 'moe',

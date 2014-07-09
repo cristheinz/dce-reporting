@@ -14,7 +14,8 @@ Ext.define('AM.model.File', {
         type: 'int'*/
     }, {
         name: 'creationDate',
-        type: 'date'
+        type: 'date',
+        dateFormat:'Y-m-d'
     }, {
         name: 'fid',
         type: 'string'
@@ -23,10 +24,12 @@ Ext.define('AM.model.File', {
         type: 'string'
     }, {
         name: 'dts',
-        type: 'date'
+        type: 'date',
+        dateFormat:'Y-m-d'
     }, {
         name: 'dtp',
-        type: 'date'
+        type: 'date',
+        dateFormat:'Y-m-d'
     /*}, {
         name: 'pdata',
         type: 'string'*/

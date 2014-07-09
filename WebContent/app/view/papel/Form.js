@@ -3,11 +3,6 @@ Ext.define('AM.view.papel.Form', {
     alias: 'widget.papelform',
 
     items: [{
-    			/*xtype: 'textfield',
-    			name : 'prg',
-    			//disabled: 'true',
-    			fieldLabel: 'Programa'
-        	},{*/
     			xtype: 'textfield',
     			name : 'id',
     			disabled: 'true',

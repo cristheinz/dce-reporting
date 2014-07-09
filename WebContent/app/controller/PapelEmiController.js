@@ -47,7 +47,7 @@ Ext.define('AM.controller.PapelEmiController', {
     },
     
     onRender: function() {
-    	Ext.getStore('PapelEmiStore').load();
+    	//Ext.getStore('PapelEmiStore').load();
     },
    
     onEdit: function(grid, record) {
