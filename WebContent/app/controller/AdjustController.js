@@ -80,75 +80,78 @@ Ext.define('AM.controller.AdjustController', {
     },
     
     addOnList: function(button) {
-    	var anomes=button.up('balancemain').down('textfield[name=anomes]').value;
-    	var rec= Ext.create('AM.model.Adjust',{anomes: anomes});
-    	rec.setDirty();
-    	var store=this.getAdjustStoreStore();
-    	//store.add(rec);
-    	store.insert(0,rec);
+    	if(this.getAccess('moduleBalance','U')){
+    		var anomes=button.up('balancemain').down('textfield[name=anomes]').value;
+        	var rec= Ext.create('AM.model.Adjust',{anomes: anomes});
+        	rec.setDirty();
+        	var store=this.getAdjustStoreStore();
+        	//store.add(rec);
+        	store.insert(0,rec);
+    	}
     },
     
     onDelete: function(button){
-    	var store = this.getAdjustlist().getStore();
-    	var sel=this.getAdjustlist().getSelectionModel().getSelection();
-    	for(var i=0;i<sel.length;i++) {
-    		//console.log(sel[i]);
-    		store.remove(sel[i]);
-    		//store.commitChanges();
+    	if(this.getAccess('moduleBalance','U')){
+        	var store = this.getAdjustlist().getStore();
+        	var sel=this.getAdjustlist().getSelectionModel().getSelection();
+        	for(var i=0;i<sel.length;i++) {
+        		//console.log(sel[i]);
+        		store.remove(sel[i]);
+        		//store.commitChanges();
+        	}
     	}
     },
     
     onApply: function(button){
-    	var store = this.getAdjustlist().getStore();
-    	var panel=this.getAdjustlist().up('panel');
-    	var t = panel.down('textfield[name=anomes]').value;
-    	var anomes=panel.down('textfield[name=anomes]');
-    	
-    	//console.log(panel.down('textfield[name=anomes]'));
-    	
-    	if(!(store.getNewRecords().length > 0 || store.getUpdatedRecords().length > 0 || store.getRemovedRecords().length > 0)) {
-    		Ext.Msg.alert("Alerta!", "Não houve qualquer alteração nos ajustes.");
-    	} else {
-    	Ext.MessageBox.confirm('Aplicar ajustes para '+t, 'Os ajustes anteriores serão anulados e estes serão aplicados. Pretende continuar?', function(btn){
- 		   if(btn === 'yes'){
- 			  //faz sync da store 
- 			  store.save();
- 			  //e executa a procedure dos ajustes: aqui tem que criar um form manual c/anomes de parametro!!
- 			  var form = Ext.create('Ext.form.Panel');/*, {
- 				  items: [{
- 					  name: 'anomes',
- 					  value: t
- 			        }]
- 			  });*/
- 			  if(form.isValid()){
- 	            form.getForm().submit({
- 	                url: 'adjust/adjust.action?anomes='+t,
- 	                waitMsg: 'Aplicando ajustes ao balancete...',
- 	                success: function(fp, o) {
- 	                	anomes.fireEvent('change',anomes);
- 	                	Ext.Msg.alert('Mensagem', 'Balancete ajustado com sucesso',function(btn){
- 	                		//console.log(panel);
- 	                		/*
- 	                		Ext.getStore('BalanceStore').load({
- 	                			params: {
- 	                				anomes : t,
- 	                				node : 'root'
- 	                			},
- 	                			root: {
- 	                				text: 'CTAS',
- 	                				cls: null,
- 	                				expanded: true
- 	                			}
- 	                		});*/
- 	                	});
- 	                },
- 	                failure: function() {
- 	                	Ext.Msg.alert("O Ajuste Falhou!", Ext.JSON.decode(this.response.responseText).message);
- 	                }
- 	            });
- 			  }
- 		   }
- 		 });
+    	if(this.getAccess('moduleBalance','U')){
+        	var store = this.getAdjustlist().getStore();
+        	var panel=this.getAdjustlist().up('panel');
+        	var t = panel.down('textfield[name=anomes]').value;
+        	var anomes=panel.down('textfield[name=anomes]');
+        	
+        	if(!(store.getNewRecords().length > 0 || store.getUpdatedRecords().length > 0 || store.getRemovedRecords().length > 0)) {
+        		Ext.Msg.alert("Alerta!", "Não houve qualquer alteração nos ajustes.");
+        	} else {
+        	Ext.MessageBox.confirm('Aplicar ajustes para '+t, 'Os ajustes anteriores serão anulados e estes serão aplicados. Pretende continuar?', function(btn){
+     		   if(btn === 'yes'){
+     			  store.save();//faz sync da store
+     			  //e executa a procedure dos ajustes: aqui tem que criar um form manual c/anomes de parametro!!
+     			  var form = Ext.create('Ext.form.Panel');/*, {
+     				  items: [{
+     					  name: 'anomes',
+     					  value: t
+     			        }]
+     			  });*/
+     			  if(form.isValid()){
+     	            form.getForm().submit({
+     	                url: 'adjust/adjust.action?anomes='+t,
+     	                waitMsg: 'Aplicando ajustes ao balancete...',
+     	                success: function(fp, o) {
+     	                	anomes.fireEvent('change',anomes);
+     	                	Ext.Msg.alert('Mensagem', 'Balancete ajustado com sucesso',function(btn){
+     	                		//console.log(panel);
+     	                		/*
+     	                		Ext.getStore('BalanceStore').load({
+     	                			params: {
+     	                				anomes : t,
+     	                				node : 'root'
+     	                			},
+     	                			root: {
+     	                				text: 'CTAS',
+     	                				cls: null,
+     	                				expanded: true
+     	                			}
+     	                		});*/
+     	                	});
+     	                },
+     	                failure: function() {
+     	                	Ext.Msg.alert("O Ajuste Falhou!", Ext.JSON.decode(this.response.responseText).message);
+     	                }
+     	            });
+     			  }
+     		   }
+     		 });
+        	}
     	}
     }
     

@@ -177,12 +177,16 @@ Ext.define('AM.controller.BalanceController', {
     
     onNew: function(button) {
     	//console.log('Click new!');
-    	var store=Ext.getStore('FileStore');
-    	store.load({
-    		params: {
-    			fid: 'BALAN'
-    			}
-    	});
+    	if(this.getAccess('moduleBalance','U')){
+    		var store=Ext.getStore('FileStore');
+        	store.load({
+        		params: {
+        			fid: 'BALAN'
+        			}
+        	});
+        	Ext.widget('balancefiles');
+    	}
+    	
     	/*store.on('load',function(){
     		store.filter({
 				property : 'fid',
@@ -197,7 +201,7 @@ Ext.define('AM.controller.BalanceController', {
     	panel.down('label[name=filecount]').hide();
     	panel.down('label[name=totalfilesize]').hide();*/
     	
-    	Ext.widget('balancefiles');
+    	
     	
     	/*
     	Ext.create('Ext.window.Window', {
