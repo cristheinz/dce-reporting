@@ -23,7 +23,7 @@ Ext.define('AM.view.papelEmi.Form', {
                 disabled: 'true',
                 fieldLabel: 'Nome'
         	},{
-    			xtype: 'textfield',
+    			xtype: 'numberfield',
     			name : 'emi',
     			//disabled: 'true',
     			fieldLabel: 'Emissão (ID)'

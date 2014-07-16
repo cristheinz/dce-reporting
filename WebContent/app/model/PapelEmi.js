@@ -8,7 +8,7 @@ Ext.define('AM.model.PapelEmi', {
         type: 'int'
     }, {
         name: 'emi',
-        type: 'string'
+        type: 'int'
     }, {
         name: 'nif',
         type: 'string'
