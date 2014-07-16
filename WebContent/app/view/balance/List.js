@@ -10,6 +10,15 @@ Ext.define('AM.view.balance.List' ,{
     //closable: true,
     
     store: 'BalanceStore',
+    
+    fbar: [{ 
+    	xtype: 'textfield', 
+    	fieldLabel: 'Saldo balancete',
+    	fieldStyle: 'text-align: right;',
+    	name: 'saldo',
+    	//value: '999999,99',
+    	readOnly: true
+    }],
 
     
     //height: 300,
@@ -22,7 +31,6 @@ Ext.define('AM.view.balance.List' ,{
         //this.width = 500;
         
         Ext.apply(this, {
-            
             columns: {
             	defaults: {
             		menuDisabled: true,
@@ -61,6 +69,7 @@ Ext.define('AM.view.balance.List' ,{
                     stopSelection: false,
                     menuDisabled: true
                 }*/
+                
       	        ]
             }
         });

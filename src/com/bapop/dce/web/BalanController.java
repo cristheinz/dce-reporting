@@ -39,20 +39,29 @@ public class BalanController {
 	}
 	
 	@RequestMapping(value="/balan/load.action")
-	public @ResponseBody Map<String,? extends Object> load(@RequestParam("id") String id) throws Exception {
+	public @ResponseBody Map<String,? extends Object> load(@RequestParam("name") String name,@RequestParam("id") String id) throws Exception {
 		try {
-			int fileId=Integer.parseInt(id);
-			System.out.println(fileId);
+			//int fileId=Integer.parseInt(id);
+			//System.out.println(fileId);
 			
+			String anomes=name.split("_")[0];
+			if(anomes.length()!=6)
+				return ExtJSReturn.mapError("Error loading Balan into database. Invalid anomes length!");
+			try {  
+			    Integer.parseInt(anomes);  
+			} catch(Exception e) {  
+				return ExtJSReturn.mapError("Error loading Balan into database. Invalid anomes!");
+			}  
+
+			balanService.delete(anomes);
 			BatchDce b=new BatchDce();
-			b.runBalan(id);
-			
-			
+			b.bulkBalan(id);
+			balanService.recalculateTotals(anomes);
 
 			return ExtJSReturn.mapOK();
 
 		} catch (Exception e) {
-			//System.out.println(e);
+			System.out.println(e);
 			return ExtJSReturn.mapError("Error loading Balan into database.");
 		}
 	}

@@ -29,7 +29,7 @@ Ext.define('AM.view.adjust.List' ,{
     },'->',{
     	text: 'Aplicar ajustes',
     	action: 'apply',
-    	hidden: true
+    	hidden: false
     /*},'->',{
     	xtype: 'textfield', 
     	name: 'searchbox',

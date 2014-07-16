@@ -84,6 +84,7 @@ public class FileController {
 	@RequestMapping(value="/file/upload.action", method = RequestMethod.POST)
 	public void create(HttpSession session,FileUploadBean bean, BindingResult result,HttpServletResponse response){ 
 	//public @ResponseBody Map<String,? extends Object> upload(HttpSession session,FileUploadBean bean, BindingResult result) throws Exception {
+		String filenamePrefix="";
 		try {
 			int id=Integer.parseInt(session.getAttribute("userID").toString());
 			
@@ -111,6 +112,11 @@ public class FileController {
             	//String content=item.getBytes().toString();
             	String content=item.getFileItem().getString();
             	fid=verifyFile(content);
+            	if(fid.equals("BALAN")) {
+            		int i=content.indexOf(" DATA:");
+            		String[] dt=content.substring(i+6, i+16).split("-");
+            		filenamePrefix=dt[2]+dt[1]+"_";
+            	}
             	if(fid.equals(""))
             		response.getWriter().write("{\"success\": false, \"message\":\"O conteúdo do ficheiro não é válido. Ficheiro não carregado.\"}");
             		//return ExtJSReturn.mapError("O formato do ficheiro não é válido. Ficheiro não carregado.");
@@ -125,7 +131,7 @@ public class FileController {
                 file.setCreationDate(new Date());
                 file.setData(item.getBytes());
                 file.setFid(fid);
-                file.setName(fileName);
+                file.setName(filenamePrefix+fileName);
                 file.setUserId(id);
                 f.add(file);
                 fileService.create(f);

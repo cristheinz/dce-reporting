@@ -10,8 +10,8 @@ Ext.define('AM.view.balance.Load' ,{
     
     tbar: [{
     	xtype: 'label',
-       	html: 'O conteúdo de ficheiro seleccionado será carregado na base de dados.<br/>'
-       		+'Os totais das contas agrupadoras serão recalculados e os ajustes, caso existam, aplicados.<br/>'
+       	html: 'O conteúdo do ficheiro seleccionado será carregado na base de dados.<br/>'
+       		+'Os totais das contas agregadoras serão recalculados e os ajustes, caso existam, aplicados.<br/>'
     }],
 
     items: [{

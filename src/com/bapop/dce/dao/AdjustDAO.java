@@ -24,7 +24,22 @@ public class AdjustDAO {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Adjust> getAdjusts(int anomes) {
-		return hibernateTemplate.find("from Adjust as r where r.anomes="+anomes);
+		return hibernateTemplate.find("from Adjust as r where r.flg=0 and r.anomes="+anomes);
+	}
+	
+	public Adjust save(Adjust adjust){
+		hibernateTemplate.saveOrUpdate(adjust);
+		return adjust;
+	}
+	
+	public void delete(int id){
+		Object record = hibernateTemplate.load(Adjust.class, id);
+		hibernateTemplate.delete(record);
+	}
+	
+	public void adjustAfterAdjust(String anomes){
+		hibernateTemplate.getSessionFactory().openSession()
+			.createSQLQuery("exec dce_batch.usp_BL_AppAdjust "+anomes).executeUpdate();
 	}
 
 }

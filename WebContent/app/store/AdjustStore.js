@@ -11,6 +11,7 @@ Ext.define('AM.store.AdjustStore', {
     
     model: 'AM.model.Adjust',
     autoLoad: false,
+    autoSave: false,
     
     /*sortOnLoad: true,
     sorters: { property: 'id', direction : 'DESC' },*/
@@ -18,7 +19,10 @@ Ext.define('AM.store.AdjustStore', {
     proxy: {
         type: 'ajax',
         api: {
-        	read : 'adjust/view.action'
+        	read : 'adjust/view.action',
+        	create: 'adjust/create.action',
+        	update: 'adjust/update.action',
+            destroy: 'adjust/delete.action'
     	},
         reader: {
             type: 'json',
@@ -27,7 +31,13 @@ Ext.define('AM.store.AdjustStore', {
             idProperty: 'id',
             root: 'data',
             messageProperty: 'message'
-        }
+        },
+    	writer: {
+    		type: 'json',
+    		encode: false,
+    		root: 'data',
+            writeAllFields: true
+    	}
     }
     
     /*

@@ -26,5 +26,18 @@ public class BalanDAO {
 	public List<Balan> getNodes(int anomes, String id) {
 		return hibernateTemplate.find("from Balan as r where r.anomes="+anomes+" and r.parent='"+id+"'");
 	}
+	
+	public void delete(String anomes){
+		hibernateTemplate.deleteAll(hibernateTemplate.find("from Balan as r where r.anomes="+anomes));
+	}
+	
+	public void adjustAfterLoading(String anomes){
+		hibernateTemplate.getSessionFactory().openSession()
+			.createSQLQuery("exec dce_batch.usp_BL_adjust "+anomes+",1").executeUpdate();
+		hibernateTemplate.getSessionFactory().openSession()
+		.createSQLQuery("exec dce_batch.usp_BL_AppAdjust "+anomes).executeUpdate();
+	}
+	
+	
 
 }

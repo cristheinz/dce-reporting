@@ -28,6 +28,9 @@ Ext.define('AM.controller.AdjustController', {
             'adjustlist button[action=remove]': {
             	click: this.onDelete
             },
+            'adjustlist button[action=apply]': {
+            	click: this.onApply
+            },
             'adjustlist ctvstlist': {
             	select: this.setCtv
             }
@@ -92,6 +95,60 @@ Ext.define('AM.controller.AdjustController', {
     		//console.log(sel[i]);
     		store.remove(sel[i]);
     		//store.commitChanges();
+    	}
+    },
+    
+    onApply: function(button){
+    	var store = this.getAdjustlist().getStore();
+    	var panel=this.getAdjustlist().up('panel');
+    	var t = panel.down('textfield[name=anomes]').value;
+    	var anomes=panel.down('textfield[name=anomes]');
+    	
+    	//console.log(panel.down('textfield[name=anomes]'));
+    	
+    	if(!(store.getNewRecords().length > 0 || store.getUpdatedRecords().length > 0 || store.getRemovedRecords().length > 0)) {
+    		Ext.Msg.alert("Alerta!", "Não houve qualquer alteração nos ajustes.");
+    	} else {
+    	Ext.MessageBox.confirm('Aplicar ajustes para '+t, 'Os ajustes anteriores serão anulados e estes serão aplicados. Pretende continuar?', function(btn){
+ 		   if(btn === 'yes'){
+ 			  //faz sync da store 
+ 			  store.save();
+ 			  //e executa a procedure dos ajustes: aqui tem que criar um form manual c/anomes de parametro!!
+ 			  var form = Ext.create('Ext.form.Panel');/*, {
+ 				  items: [{
+ 					  name: 'anomes',
+ 					  value: t
+ 			        }]
+ 			  });*/
+ 			  if(form.isValid()){
+ 	            form.getForm().submit({
+ 	                url: 'adjust/adjust.action?anomes='+t,
+ 	                waitMsg: 'Aplicando ajustes ao balancete...',
+ 	                success: function(fp, o) {
+ 	                	anomes.fireEvent('change',anomes);
+ 	                	Ext.Msg.alert('Mensagem', 'Balancete ajustado com sucesso',function(btn){
+ 	                		//console.log(panel);
+ 	                		/*
+ 	                		Ext.getStore('BalanceStore').load({
+ 	                			params: {
+ 	                				anomes : t,
+ 	                				node : 'root'
+ 	                			},
+ 	                			root: {
+ 	                				text: 'CTAS',
+ 	                				cls: null,
+ 	                				expanded: true
+ 	                			}
+ 	                		});*/
+ 	                	});
+ 	                },
+ 	                failure: function() {
+ 	                	Ext.Msg.alert("O Ajuste Falhou!", Ext.JSON.decode(this.response.responseText).message);
+ 	                }
+ 	            });
+ 			  }
+ 		   }
+ 		 });
     	}
     }
     

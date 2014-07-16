@@ -17,6 +17,16 @@ public class BalanService {
     public List<Balan> getBalanNodes(int anomes, String id){
         return balanDAO.getNodes(anomes, id);
     }
+    
+    @Transactional
+	public void delete(String anomes){
+    	balanDAO.delete(anomes);
+	}
+    
+    public void recalculateTotals(String anomes){
+    	balanDAO.adjustAfterLoading(anomes);
+    }
+    
  
  
     @Autowired

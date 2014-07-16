@@ -40,9 +40,16 @@ public class Utils {
 	}
 	
 	public static void main(String[] args) {
-		for(String s:Utils.getDashboradPeriods("201309")) {
+		/*for(String s:Utils.getDashboradPeriods("201309")) {
 			System.out.println(s);
-		};
+		};*/
+		
+		System.out.println("aaaaaaa");
+		String content="0           BALANÇO RESERVADO DO PORTUGAL COM AJUSTES INCLUÍDOS                                              DATA:31-12-2011";
+		int i=content.indexOf(" DATA:");
+		String[] dt=content.substring(i+6, i+16).split("-");
+		String filenamePrefix=dt[2]+dt[1]+"_";
+		System.out.println(filenamePrefix);
 	}
 
 }

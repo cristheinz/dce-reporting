@@ -17,26 +17,37 @@ Ext.define('AM.view.balance.Main' ,{
         //bodyPadding: 15
     },
     
-    dockedItems: [{
+    /*dockedItems: [{
         xtype: 'toolbar',
         dock: 'bottom',
         items: ['->',
            {
-        	   iconCls: 'prev-icon', action: 'prev'/*, tooltip: 'Periodo anterior'*/
+        	   iconCls: 'prev-icon', action: 'prev'
            },{
         	   name: 'anomes',
            	   xtype: 'textfield',
            	   width: 55,
            	   value: Ext.Date.format(Ext.Date.add(new Date(), Ext.Date.MONTH, -1),'Ym')
            },{
-        	   iconCls: 'next-icon', action: 'next'/*, tooltip: 'Próximo periodo'*/
+        	   iconCls: 'next-icon', action: 'next'
            }
         ]
-    }],
+    }],*/
     tbar: [{
     	iconCls: 'new-icon',
     	action: 'new',
     	tooltip: 'Novo'
+    },'->',
+    {
+ 	   iconCls: 'prev-icon', action: 'prev'/*, tooltip: 'Periodo anterior'*/
+    },{
+ 	   name: 'anomes',
+    	   xtype: 'textfield',
+    	   width: 55,
+    	   value: Ext.Date.format(Ext.Date.add(new Date(), Ext.Date.MONTH, -1),'Ym')
+    },{
+ 	   iconCls: 'next-icon', action: 'next'/*, tooltip: 'Próximo periodo'*/
+    
     /*},{
     	iconCls: 'open-icon',
     	action: 'open',
@@ -58,7 +69,7 @@ Ext.define('AM.view.balance.Main' ,{
     	title: 'Ajustes',
     	xtype: 'adjustlist',
     	width: 400,
-    	collapsed: true
+    	collapsed: false
     }]
 
 });

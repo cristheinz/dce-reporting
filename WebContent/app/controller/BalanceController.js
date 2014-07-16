@@ -82,7 +82,6 @@ Ext.define('AM.controller.BalanceController', {
                 url: 'balan/load.action',
                 waitMsg: 'Carregando balancete...',
                 success: function(fp, o) {
-                	//mudar isto. tem q ir para um novo card(step)
                 	Ext.Msg.alert('Mensagem', 'Balancete caregado com sucesso',function(btn){
                 		form.up('window').close();
                 	});
@@ -98,6 +97,9 @@ Ext.define('AM.controller.BalanceController', {
     	//console.log(t.value);
     	//console.log(t.value.length);
     	if(t.value.length==6) {
+    		
+    		var total=this.getBalancelist().down('textfield[name=saldo]');
+    		
     		var store=Ext.getStore('BalanceStore');
         	store.load({
         		params: {
@@ -108,6 +110,18 @@ Ext.define('AM.controller.BalanceController', {
         			text: 'CTAS',
         			cls: null,
         			expanded: true
+        		},
+        		callback: function(records) {
+        			var tot=0;
+        			Ext.each(records, function(rec) {
+        				//console.log(rec.get('cta'));
+        				if(rec.get('cta')<90)
+        				tot+=rec.get('valc')-rec.get('vald');
+        				//console.log(tot);
+        				//console.log(rec.get('vald')+";"+rec.get('valc'));
+        			});
+                	total.setValue(tot.toFixed(2).replace(/(\d)(?=(\d{3})+\b)/g,'$1 ').replace('.',',').split(' ').join('.'));
+                	//                           .replace(/\d  (?=(\d{3})+\.)/g, '$&,').toLocaleString());
         		}
     		});
         	var store2=Ext.getStore('AdjustStore');
@@ -123,6 +137,8 @@ Ext.define('AM.controller.BalanceController', {
         		}
     		});
         	//this.getBalancemain().setTitle('Balancete - '+t.value);
+        	
+        	
     	}
     },
     
