@@ -16,6 +16,9 @@ Ext.define('AM.controller.BalanceController', {
     	ref: 'balancefiles',
     	selector: 'balancefiles'
     },{
+    	ref: 'filelist',
+    	selector: 'balancefiles > filelist'
+    },{
     	ref: 'balanceload',
     	selector: 'balanceload'
     },{
@@ -51,7 +54,8 @@ Ext.define('AM.controller.BalanceController', {
             	click: this.onSelect
             },*/
             'balancefiles > filelist': {
-            	itemdblclick: this.onFileItemSelect
+            	itemdblclick: this.onFileItemSelect,
+            	afterrender: this.onMainRendered
             },
             
             'balanceload button[action=run]': {
@@ -61,6 +65,15 @@ Ext.define('AM.controller.BalanceController', {
             	click: this.onBack
             }
         });
+    },
+    
+    onMainRendered: function() {
+        //console.log('The panel was rendered');
+    	this.getFilelist().columns[2].setVisible(false);
+    	this.getFilelist().columns[3].setVisible(false);
+    	this.getFilelist().columns[4].setVisible(false);
+    	this.getFilelist().columns[5].setVisible(false);
+    	this.getFilelist().columns[6].setVisible(false);
     },
     
     onBack: function(button) {

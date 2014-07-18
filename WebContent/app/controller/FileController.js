@@ -8,15 +8,26 @@ Ext.define('AM.controller.FileController', {
         'file.Browser',
         'file.Upload',
         'file.Grid',
-        'file.List'
+        'file.Main',
+        'file.List',
+        'file.Folder'
     ],
     
     refs: [{
         ref: 'upload',
         selector: 'upload'
     },{
+    	ref: 'filemain',
+    	selector: 'filemain'
+    },{
     	ref: 'filelist',
     	selector: 'filelist'
+    },{
+    	ref: 'filefolder',
+    	selector: 'filefolder'
+    },{
+    	ref: 'filefregulist',
+    	selector: 'filefregulist'
     }],
 
     init: function() {
@@ -34,8 +45,8 @@ Ext.define('AM.controller.FileController', {
             	},*/
             	//itemclick: this.onFileItemSelect,
             	//cellkeydown: this.onFileItemKeyDown,
-            	selectionchange: this.onSelect,
-            	itemdownloadbuttonclick: this.onFileItemDownload
+            	selectionchange: this.onSelect
+            	//itemdownloadbuttonclick: this.onFileItemDownload
             	//itemdblclick: this.onFileItemDownload
             },
             'filelist textfield[name=filefilter]': {
@@ -46,8 +57,90 @@ Ext.define('AM.controller.FileController', {
             },
             'filelist button[action=remove]': {
             	click: this.onFileDelete
+            },
+            'filelist button[action=newfregu]': {
+            	click: this.newFREGU
+            },
+            'filelist button[action=newseis]': {
+            	click: this.newSEIS
+            },
+            'filelist button[action=download]': {
+            	click: this.onFileItemDownload
+            },
+            'filemain': {
+            	afterrender: this.onMainRendered
+            },
+            'filefolder': {
+            	//itemexpand: this.openFolder
+            	beforeitemdblclick: this.openFolder
+            /*},
+            'filefolder item[id=listall]': {
+            	click: this.onListAll
+            },
+            'filefolder item[id=listfregu]': {
+            	click: this.onListFregu*/
             }
         });
+    },
+    
+    openFolder: function(tree, record) {
+    	record.expand();
+    	var id = record.get('id');
+    	var folder=this.getFilefolder();
+    	var list=this.getFilelist();
+    	var store = this.getFilelist().getStore();
+    	switch(id) {
+        case 'listall':
+        	list.columns[2].setVisible(true);
+        	list.columns[3].setVisible(true);
+        	list.columns[4].setVisible(false);
+        	list.columns[5].setVisible(false);
+        	list.columns[6].setVisible(false);
+        	store.load({
+        		params: {
+        			fid: ''
+        			}
+        	});
+        	break;
+        case 'listfregu':
+        	//console.log(main.layout.centerRegion);
+        	folder.collapse();
+        	//main.west.collapsed(true);
+        	list.columns[2].setVisible(false);
+        	list.columns[3].setVisible(false);
+        	list.columns[4].setVisible(true);
+        	list.columns[5].setVisible(true);
+        	list.columns[6].setVisible(true);
+        	store.load({
+        		params: {
+        			fid: 'OREGU'
+        			}
+        	});
+        	break;
+        case 'listseis':
+        	list.columns[2].setVisible(false);
+        	list.columns[3].setVisible(false);
+        	list.columns[4].setVisible(false);
+        	list.columns[5].setVisible(false);
+        	list.columns[6].setVisible(true);
+        	store.load({
+        		params: {
+        			fid: 'OSEIS'
+        			}
+        	});
+        	break;
+        default:
+        	break;
+        }
+        
+    },
+    
+    onMainRendered: function() {
+    	this.getFilelist().columns[2].setVisible(true);
+    	this.getFilelist().columns[3].setVisible(true);
+    	this.getFilelist().columns[4].setVisible(false);
+    	this.getFilelist().columns[5].setVisible(false);
+    	this.getFilelist().columns[6].setVisible(false);
     },
     
     uploadFile: function(button) {
@@ -93,10 +186,24 @@ Ext.define('AM.controller.FileController', {
     	//console.log(smodel.getSelection().length);
     	var sbar=this.getFilelist().down('label[name=filecount]');
     	var rbtn=this.getFilelist().down('button[action=remove]');
+    	var newf=this.getFilelist().down('button[action=newfregu]');
+    	var news=this.getFilelist().down('button[action=newseis]');
+    	var down=this.getFilelist().down('button[action=download]');
+    	newf.hide();
+    	news.hide();
+    	down.hide();
     	if(selected[0]) {
     		sbar.setText(selected[0].get('name'));
     		if(selected.length>1) {
         		sbar.setText(selected.length+' ficheiros selecionados');
+        	} else {
+        		down.show();
+        		if(selected[0].get('fid')=='FREGU') {
+        			newf.show();
+        		}
+        		if(selected[0].get('fid')=='FSEIS') {
+        			news.show();
+        		}
         	}
     		rbtn.show();
     	} else {
@@ -134,15 +241,44 @@ Ext.define('AM.controller.FileController', {
     	}
     },
     
-    onFileItemDownload: function(grid, record) {
-    	window.open('file/download.action?id='+record.getId());
+    onFileItemDownload: function(button) {
+    //onFileItemDownload: function(grid, record) {
+    	var sel=this.getFilelist().getSelectionModel().getSelection();
+    	var id=sel[0].data.id;
+    	window.open('file/download.action?id='+id);
     },
     
     onFileRefresh: function (button) {
     	//console.log('refresh!');
     	var store = this.getFilelist().getStore();
     	store.reload();
+    },
+    
+    newFREGU: function (button) {
+    	var sel=this.getFilelist().getSelectionModel().getSelection();
+    	var id=sel[0].data.id;
+    	//console.log(sel[0].data.id);
+    	//vai ao servidor e gera novo ficheiro!
+    	var form = Ext.create('Ext.form.Panel');
+    	if(form.isValid()){
+    		form.getForm().submit({
+    			url: 'file/fregu/new.action?id='+id,
+    			waitMsg: 'Gerando ficheiro de regularização...',
+    			success: function(fp, o) {
+    				Ext.Msg.alert('Mensagem', 'Ficheiro de regularização gerado com sucesso.',function(btn){
+    				});
+    			},
+    			failure: function() {
+    				Ext.Msg.alert("Erro ao gerar ficheiro!", Ext.JSON.decode(this.response.responseText).message);
+    			}
+    		});
+    	}
+    },
+    
+    newSEIS: function (button) {
+    	//console.log('newSEIS!');
     }
+
     
     
     /*onEditFile: function(grid, record) {

@@ -21,7 +21,7 @@ Ext.define('AM.view.layout.Head', {
 			iconCls: 'upload-icon',
 			action:'upload'
 		},{
-			text:'Pasta pessoal',
+			text:'Drive pessoal',
 			iconCls: 'folder-icon',
 			action:'open'
 		}, {

@@ -48,6 +48,21 @@ public class FileService {
     	fileIODAO.deleteFile(data.getId());
  
     }
+    
+    @Transactional
+    public List<FileBean> update(FileBean data){
+ 
+        List<FileBean> returnFile = new ArrayList<FileBean>();
+ 
+        returnFile.add(fileIODAO.save(data));
+ 
+        return returnFile;
+    }
+    
+    @Transactional(readOnly=true)
+    public String getLastFreguFileName(){
+        return fileIODAO.getLastFreguFileName();
+    }
  
     @Autowired
     public void setFileIODAO(FileIODAO FileIODAO) {

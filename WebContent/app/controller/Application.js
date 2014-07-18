@@ -77,13 +77,13 @@ Ext.define('AM.controller.Application', {
     			}
     	});
     	Ext.create('Ext.window.Window', {
-		    title: 'Pasta pessoal',
+		    title: 'Drive pessoal',
 		    maximizable: true,
-		    width: 600,
+		    width: 800,
 		    layout: 'fit',
 		    modal: true,
 		    items: {  
-		    	xtype: 'filelist'
+		    	xtype: 'filemain'
 		    }
 		}).show();
     },

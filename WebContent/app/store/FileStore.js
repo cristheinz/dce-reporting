@@ -13,6 +13,7 @@ Ext.define('AM.store.FileStore', {
         type: 'ajax',
         api: {
         	read : 'file/list.action',
+        	update: 'file/update.action',
         	destroy: 'file/delete.action'
     	},
         reader: {

@@ -1,11 +1,21 @@
 package com.bapop.dce.util;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 
 public class Utils {
+	public static String generateFreguFileName(String maxName){
+		String name="";
+		DateFormat df1 = new SimpleDateFormat("yyyyMMddHHmm");
+		name="KNCTOMA_00460600_"+df1.format(new Date())+".TXT";
+		while (maxName.equals(name)) {
+			name="KNCTOMA_00460600_"+df1.format(new Date())+".TXT";
+		}
+		return name;
+	}
 	
 	public static String[] getDashboradPeriods(String anomes) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");

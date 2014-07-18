@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.bapop.batch.dce.BatchDce;
 import com.bapop.dce.bo.FileBean;
 import com.bapop.dce.bo.FileBeanWrapper;
 import com.bapop.dce.bo.FileUploadBean;
 import com.bapop.dce.model.FileIO;
 import com.bapop.dce.service.FileService;
 import com.bapop.dce.util.ExtJSReturn;
+import com.bapop.dce.util.Utils;
 
 @Controller
 public class FileController {
@@ -65,6 +67,39 @@ public class FileController {
 			return ExtJSReturn.mapError("Error trying to delete File.");
 		}
 	}
+	
+	@RequestMapping(value="/file/update.action")
+	public @ResponseBody Map<String,? extends Object> update(@RequestBody FileBeanWrapper data) throws Exception {
+		try{
+			
+			List<FileBean> result = fileService.update(data.getData());
+
+			return ExtJSReturn.mapOK(result,result.size());
+
+		} catch (Exception e) {
+			return ExtJSReturn.mapError("Error trying to update File.");
+		}
+	}
+
+	@RequestMapping(value="/file/fregu/new.action")
+	public @ResponseBody Map<String,? extends Object> newFregu(HttpSession session,@RequestParam("id") String id) throws Exception {
+		try{
+			//fileService.delete(data.getData());
+			String user_id=session.getAttribute("userID").toString();
+			String maxName=fileService.getLastFreguFileName();
+			String fname=Utils.generateFreguFileName(maxName);
+			
+			//System.out.println("user_id: "+user_id+"; file_id: "+id+"; file_name: "+fname);
+			BatchDce b=new BatchDce();
+			b.bulkFregu(id,user_id,fname);
+
+			return ExtJSReturn.mapOK();
+
+		} catch (Exception e) {
+			return ExtJSReturn.mapError("Error trying to create FREGU File.");
+		}
+	}
+
 	
 	@RequestMapping(value="/file/download.action")
 	public void getFile(HttpSession session,@RequestParam String id,HttpServletResponse response){
