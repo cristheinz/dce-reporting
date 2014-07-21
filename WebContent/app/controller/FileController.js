@@ -9,6 +9,7 @@ Ext.define('AM.controller.FileController', {
         'file.Upload',
         'file.Grid',
         'file.Main',
+        'file.Seis',
         'file.List',
         'file.Folder'
     ],
@@ -19,6 +20,9 @@ Ext.define('AM.controller.FileController', {
     },{
     	ref: 'filemain',
     	selector: 'filemain'
+    },{
+    	ref: 'fileseis',
+    	selector: 'fileseis'
     },{
     	ref: 'filelist',
     	selector: 'filelist'
@@ -79,6 +83,12 @@ Ext.define('AM.controller.FileController', {
             },
             'filefolder item[id=listfregu]': {
             	click: this.onListFregu*/
+            },
+            'fileseis button[action=cancel]': {
+            	click: this.newSEIScancel
+            },
+            'fileseis button[action=create]': {
+            	click: this.newSEIScreate
             }
         });
     },
@@ -277,6 +287,51 @@ Ext.define('AM.controller.FileController', {
     
     newSEIS: function (button) {
     	//console.log('newSEIS!');
+    	var sel=this.getFilelist().getSelectionModel().getSelection();
+    	//var id=sel[0].data.id;
+    	
+    	//isto poderia estar numa region tipo south ou fbar da filelist....
+    	var win=Ext.create('Ext.window.Window', {
+    		id: 'newseisWindow',
+		    title: 'Posição analitica...',
+		    modal: true,
+		    //height: 200,
+		    width: 400,
+		    layout: 'fit'/*,
+		    items: {
+		    	xtype: 'filenewseis'
+		    }*/
+		    
+		})/*.show()*/;
+    	
+    	var form=Ext.widget('fileseis');
+    	//var form=this.getFileseis();
+    	form.show();
+    	form.loadRecord(sel[0]);
+    	win.add(form);
+    	win.show();
+
+    },
+    newSEIScancel: function (button) {
+    	//console.log('newSEIS cancel!');
+    	button.up('window').close();
+    },
+    newSEIScreate: function (button) {
+    	var form = this.getFileseis();
+        if(form.isValid()){
+            form.getForm().submit({
+                url: 'file/fseis/new.action',
+                waitMsg: 'Gerando ficheiro posição analitica...',
+                success: function(fp, o) {
+                	Ext.Msg.alert('Mensagem', 'Ficheiro gerado com sucesso.',function(btn){
+                		form.up('window').close();
+                	});
+                },
+                failure: function() {
+                	Ext.Msg.alert("Erro ao gerar ficheiro!", Ext.JSON.decode(this.response.responseText).message);
+                }
+            });
+        }
     }
 
     

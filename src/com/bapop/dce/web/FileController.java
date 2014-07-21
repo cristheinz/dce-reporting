@@ -99,6 +99,40 @@ public class FileController {
 			return ExtJSReturn.mapError("Error trying to create FREGU File.");
 		}
 	}
+	@RequestMapping(value="/file/fseis/new.action")
+	public @ResponseBody Map<String,? extends Object> newFseis(HttpSession session,
+										@RequestParam("name") String name,
+										@RequestParam("id") String id,
+										@RequestParam("nemp") String nemp,
+										@RequestParam("nsuc") String nsuc,
+										@RequestParam("bco") String bco,
+										@RequestParam("mer") String mer,
+										@RequestParam("tip") String tip,
+										@RequestParam("dtr") String dtr) throws Exception {
+		try{
+			//fileService.delete(data.getData());
+			String user_id=session.getAttribute("userID").toString();
+			String fname=Utils.generateFseisFileName();
+			
+			/*System.out.println("user_id: "+user_id+
+					"; file_id: "+id+
+					"; file_name: "+fname+
+					"; nemp: "+nemp+
+					"; nsuc: "+nsuc+
+					"; bco: "+bco+
+					"; mer: "+mer+
+					"; tip: "+tip+
+					"; dtr: "+dtr);*/
+			
+			BatchDce b=new BatchDce();
+			b.bulkFseis(id,user_id,fname,nsuc,nemp,bco,mer,tip,dtr);
+
+			return ExtJSReturn.mapOK();
+
+		} catch (Exception e) {
+			return ExtJSReturn.mapError("Error trying to create FSEIS File.");
+		}
+	}
 
 	
 	@RequestMapping(value="/file/download.action")

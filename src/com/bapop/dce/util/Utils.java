@@ -7,6 +7,13 @@ import java.util.Date;
 
 
 public class Utils {
+	public static String generateFseisFileName() {
+		DateFormat yyMMdd = new SimpleDateFormat("yyMMdd");
+		DateFormat HHmmss = new SimpleDateFormat("HHmmss");
+		Date now = new Date();
+		return "RDCIAS.D" + yyMMdd.format(now) + ".H" + HHmmss.format(now);
+	}
+	
 	public static String generateFreguFileName(String maxName){
 		String name="";
 		DateFormat df1 = new SimpleDateFormat("yyyyMMddHHmm");
