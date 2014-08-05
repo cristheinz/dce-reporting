@@ -7,6 +7,7 @@ Ext.define('AM.view.balance.Load' ,{
     layout: 'form',
     frame: false,
     height: 400,
+    timeout: 300,//tempo em segundos, isto dá 5min é o tempo de espera da waitMsg
     
     tbar: [{
     	xtype: 'label',

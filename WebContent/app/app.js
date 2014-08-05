@@ -13,6 +13,7 @@ Ext.application({
         'Application',
         'AdjustController',
         'BalanceController',
+        'BatchController',
         'BranchController',
         'CtistController',
         'FaqstController',

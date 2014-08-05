@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bapop.batch.dce.balan.BatchBalan;
 import com.bapop.dce.bo.AdjustWrapper;
 import com.bapop.dce.model.Adjust;
 import com.bapop.dce.service.AdjustService;
@@ -75,7 +76,20 @@ public class AdjustController {
 	public @ResponseBody Map<String,? extends Object> load(@RequestParam("anomes") String anomes) throws Exception {
 		try {
 			//System.out.println("-->"+anomes);
-			adjustService.runAdjusts(anomes);
+			//adjustService.runAdjusts(anomes);
+			
+			if(anomes.length()!=6)
+				return ExtJSReturn.mapError("Error applying Adjusts:<br/> Invalid anomes length!");
+			try {  
+			    Integer.parseInt(anomes);  
+			} catch(Exception e) {  
+				return ExtJSReturn.mapError("Error applying Adjusts:<br/> Invalid anomes!");
+			}  
+			
+			BatchBalan b=new BatchBalan();
+			if(b.adjBalan(anomes)>0)
+				return ExtJSReturn.mapError("Error applying Adjusts:<br/> Procedure error!");
+			
 			
 			return ExtJSReturn.mapOK();
 

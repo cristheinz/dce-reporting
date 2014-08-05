@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bapop.batch.dce.BatchDce;
+import com.bapop.batch.dce.balan.BatchBalan;
 import com.bapop.dce.model.Balan;
 import com.bapop.dce.service.BalanService;
 import com.bapop.dce.util.ExtJSReturn;
@@ -46,22 +46,27 @@ public class BalanController {
 			
 			String anomes=name.split("_")[0];
 			if(anomes.length()!=6)
-				return ExtJSReturn.mapError("Error loading Balan into database. Invalid anomes length!");
+				return ExtJSReturn.mapError("Error loading Balan into database:<br/> Invalid anomes length!");
 			try {  
 			    Integer.parseInt(anomes);  
 			} catch(Exception e) {  
-				return ExtJSReturn.mapError("Error loading Balan into database. Invalid anomes!");
+				return ExtJSReturn.mapError("Error loading Balan into database:<br/> Invalid anomes!");
 			}  
 
-			balanService.delete(anomes);
-			BatchDce b=new BatchDce();
-			b.bulkBalan(id);
-			balanService.recalculateTotals(anomes);
+			//balanService.delete(anomes);
+			BatchBalan b=new BatchBalan();
+			if(b.bulkBalan(anomes, id)>0)
+				return ExtJSReturn.mapError("Error loading Balan into database:<br/> Bulk error!");
+			if(b.adjBalan(anomes)>0)
+				return ExtJSReturn.mapError("Error loading Balan into database:<br/> Adjust error!");
+			
+			//balanService.recalculateTotals(anomes);
 
 			return ExtJSReturn.mapOK();
 
 		} catch (Exception e) {
-			System.out.println(e);
+			e.printStackTrace();
+			//System.out.println(e);
 			return ExtJSReturn.mapError("Error loading Balan into database.");
 		}
 	}

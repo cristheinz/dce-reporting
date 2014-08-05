@@ -116,12 +116,9 @@ Ext.define('AM.controller.AdjustController', {
      		   if(btn === 'yes'){
      			  store.save();//faz sync da store
      			  //e executa a procedure dos ajustes: aqui tem que criar um form manual c/anomes de parametro!!
-     			  var form = Ext.create('Ext.form.Panel');/*, {
-     				  items: [{
-     					  name: 'anomes',
-     					  value: t
-     			        }]
-     			  });*/
+     			  var form = Ext.create('Ext.form.Panel',{
+     				 timeout: 300//tempo em segundos, isto dá 5min é o tempo de espera da waitMsg
+     			  });
      			  if(form.isValid()){
      	            form.getForm().submit({
      	                url: 'adjust/adjust.action?anomes='+t,

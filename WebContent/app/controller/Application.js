@@ -43,8 +43,47 @@ Ext.define('AM.controller.Application', {
             },
             '[name=footer]':{
             	beforerender: this.onRender
+            },
+            'head':{
+            	beforerender: this.onRenderNotifications
             }
         });
+    },
+    
+    onRenderNotifications: function() {
+    	if (!!window.EventSource) {
+    		var source = new EventSource('admin/systemalert.action');
+    		/*var source = new EventSource('admin/systemalert.action?id=0');
+        	var onMessageHandler=function(e) {
+        		var data = JSON.parse(e.data);
+        		//console.log(data.msg);
+        		var x=Ext.MessageBox.show({
+        			title: 'Notificação!',
+        	        msg: data.msg
+        	    });
+        		//setTimeout(function () { x.close(); }, 3000);
+        		source.close();
+        		source = new EventSource('admin/systemalert.action?id='+e.lastEventId);
+        		source.addEventListener('message', onMessageHandler, false);
+        	};
+    		source.addEventListener('message', onMessageHandler, false);*/
+    		
+    		source.addEventListener('message', function(e) {
+        		var data = JSON.parse(e.data);
+        		Ext.MessageBox.show({
+        			title: 'Notificação!',
+        	        msg: data.msg
+        	    });
+        	}, false);
+
+    /*} else {
+   			Ext.MessageBox.show({
+    			title: 'Notificação!',
+    	        msg: 'No SSE available.\n Notifications are off!'
+    	    });
+	        //console.log("No SSE available");*/
+  		}
+    	
     },
     onRender: function() {
     	//console.log('aaaaaaaaaaaaaaaa');
@@ -53,6 +92,7 @@ Ext.define('AM.controller.Application', {
     	var dt=new Date().getFullYear();
     	//console.log(dt);
     	this.getFooter().html='<center style="color: gray;font-size:x-small">'+dt+' bapop dce v3.0</center>';
+    	
     },
     
     onAfterRender: function() {
@@ -117,6 +157,12 @@ Ext.define('AM.controller.Application', {
             case 'moduleBalance':
             	if(main.child('panel[id="module_balance"]')==null) {
             		main.add(Ext.widget('balancemain')).show();
+            	}
+            		
+            	break;
+            case 'moduleBatch':
+            	if(main.child('panel[id="module_batch"]')==null) {
+            		main.add(Ext.widget('batchmain')).show();
             	}
             		
             	break;

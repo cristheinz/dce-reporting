@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import com.bapop.batch.dce.BatchDce;
+import com.bapop.batch.dce.files.BatchFiles;
 import com.bapop.dce.bo.FileBean;
 import com.bapop.dce.bo.FileBeanWrapper;
 import com.bapop.dce.bo.FileUploadBean;
@@ -80,7 +80,7 @@ public class FileController {
 			return ExtJSReturn.mapError("Error trying to update File.");
 		}
 	}
-
+	
 	@RequestMapping(value="/file/fregu/new.action")
 	public @ResponseBody Map<String,? extends Object> newFregu(HttpSession session,@RequestParam("id") String id) throws Exception {
 		try{
@@ -90,8 +90,11 @@ public class FileController {
 			String fname=Utils.generateFreguFileName(maxName);
 			
 			//System.out.println("user_id: "+user_id+"; file_id: "+id+"; file_name: "+fname);
-			BatchDce b=new BatchDce();
-			b.bulkFregu(id,user_id,fname);
+			BatchFiles b=new BatchFiles();
+			int x=b.bulkFregu(id,user_id,fname);
+			if(x!=0) {
+				return ExtJSReturn.mapError("Error trying to bulk FREGU File.");
+			}
 
 			return ExtJSReturn.mapOK();
 
@@ -124,8 +127,11 @@ public class FileController {
 					"; tip: "+tip+
 					"; dtr: "+dtr);*/
 			
-			BatchDce b=new BatchDce();
-			b.bulkFseis(id,user_id,fname,nsuc,nemp,bco,mer,tip,dtr);
+			BatchFiles b=new BatchFiles();
+			int x=b.bulkFseis(id,user_id,fname,nsuc,nemp,bco,mer,tip,dtr);
+			if(x!=0) {
+				return ExtJSReturn.mapError("Error trying to bulk FSEIS File.");
+			}
 
 			return ExtJSReturn.mapOK();
 

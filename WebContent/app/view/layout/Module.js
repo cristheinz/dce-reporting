@@ -17,6 +17,11 @@ Ext.define('AM.view.layout.Module' ,{
     	                iconCls: 'module-icon',
     	                leaf: true
     	            },{
+    	        		id: 'moduleBatch',
+    	                text: 'Execuções BATCH',
+    	                iconCls: 'module-icon',
+    	                leaf: true
+    	            },{
     	            	id: 'module2',
     	                text: 'Controlo de Contas',
     	                iconCls: 'module-icon',

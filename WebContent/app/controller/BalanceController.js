@@ -89,6 +89,7 @@ Ext.define('AM.controller.BalanceController', {
     },
     
     onLoad: function(button) {
+    	var anomes = this.getBalancemain().down('textfield[name=anomes]');
     	var form = this.getBalanceload();
         if(form.isValid()){
             form.getForm().submit({
@@ -97,6 +98,7 @@ Ext.define('AM.controller.BalanceController', {
                 success: function(fp, o) {
                 	Ext.Msg.alert('Mensagem', 'Balancete caregado com sucesso',function(btn){
                 		form.up('window').close();
+                		anomes.fireEvent('change',anomes);
                 	});
                 },
                 failure: function() {
@@ -128,8 +130,8 @@ Ext.define('AM.controller.BalanceController', {
         			var tot=0;
         			Ext.each(records, function(rec) {
         				//console.log(rec.get('cta'));
-        				if(rec.get('cta')<90)
-        				tot+=rec.get('valc')-rec.get('vald');
+        				if(rec.get('cta')<90 && rec.get('leaf')==0)
+        					tot+=rec.get('valc')-rec.get('vald');
         				//console.log(tot);
         				//console.log(rec.get('vald')+";"+rec.get('valc'));
         			});
