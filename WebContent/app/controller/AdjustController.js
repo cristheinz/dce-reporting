@@ -85,8 +85,8 @@ Ext.define('AM.controller.AdjustController', {
         	var rec= Ext.create('AM.model.Adjust',{anomes: anomes});
         	rec.setDirty();
         	var store=this.getAdjustStoreStore();
-        	//store.add(rec);
-        	store.insert(0,rec);
+        	store.add(rec);
+        	//store.insert(0,rec);
     	}
     },
     

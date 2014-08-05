@@ -5,8 +5,10 @@ Ext.define('AM.view.ctvst.List' ,{
     
     store: 'CtvstStore',
     
+    
     initComponent: function() {
     	Ext.apply(this, {
+    	    autoSelect: 'true',
             displayField:'ctv',
             valueField:'ctv',
             queryMode:'local',

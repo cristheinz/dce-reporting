@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.bapop.dce.dao.AdjustDAO;
 import com.bapop.dce.model.Adjust;
-import com.bapop.dce.model.PapelEmi;
 
 @Service
 public class AdjustService {

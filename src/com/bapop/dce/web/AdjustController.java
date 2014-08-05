@@ -1,5 +1,6 @@
 package com.bapop.dce.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bapop.batch.dce.balan.BatchBalan;
-import com.bapop.dce.bo.AdjustWrapper;
+import com.bapop.dce.bo.AdjustListWrapper;
 import com.bapop.dce.model.Adjust;
 import com.bapop.dce.service.AdjustService;
 import com.bapop.dce.util.ExtJSReturn;
@@ -35,10 +36,13 @@ public class AdjustController {
 	}
 	
 	@RequestMapping(value="/adjust/create.action")
-	public @ResponseBody Map<String,? extends Object> create(@RequestBody AdjustWrapper data) throws Exception {
+	public @ResponseBody Map<String,? extends Object> create(@RequestBody AdjustListWrapper data) throws Exception {
 		try{
-			
-			List<Adjust> result = adjustService.create(data.getData());
+			List<Adjust> result= new ArrayList<Adjust>(0);
+			for(Adjust a:data.getData()) {
+				result.addAll(adjustService.create(a));
+			}
+			//List<Adjust> result = adjustService.create(data.getData());
 
 			return ExtJSReturn.mapOK(result,result.size());
 
@@ -48,10 +52,13 @@ public class AdjustController {
 	}
 
 	@RequestMapping(value="/adjust/update.action")
-	public @ResponseBody Map<String,? extends Object> update(@RequestBody AdjustWrapper data) throws Exception {
+	public @ResponseBody Map<String,? extends Object> update(@RequestBody AdjustListWrapper data) throws Exception {
 		try{
-			
-			List<Adjust> result = adjustService.update(data.getData());
+			List<Adjust> result= new ArrayList<Adjust>(0);
+			for(Adjust a:data.getData()) {
+				result.addAll(adjustService.update(a));
+			}
+			//List<Adjust> result = adjustService.update(data.getData());
 
 			return ExtJSReturn.mapOK(result,result.size());
 
@@ -61,9 +68,12 @@ public class AdjustController {
 	}
 
 	@RequestMapping(value="/adjust/delete.action")
-	public @ResponseBody Map<String,? extends Object> delete(@RequestBody AdjustWrapper data) throws Exception {
+	public @ResponseBody Map<String,? extends Object> delete(@RequestBody AdjustListWrapper data) throws Exception {
 		try{
-			adjustService.delete(data.getData());
+			for(Adjust a:data.getData()) {
+				adjustService.delete(a);
+			}
+			//adjustService.delete(data.getData());
 
 			return ExtJSReturn.mapOK();
 

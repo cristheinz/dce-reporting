@@ -54,7 +54,7 @@ Ext.define('AM.view.adjust.List' ,{
     				//console.log(rec.dirty);
     				if(rec.dirty)
     					cellValues.css+=' x-grid-dirty-cell';
-    				return rec.get('ct2')=='1' ? rec.get('cta')+'.'+rec.get('ct2') : rec.get('ct2');
+    				return rec.get('ct2')=='1' ? rec.get('cta')+'.'+rec.get('ct2') : rec.get('ct2')=='0' ? '' : rec.get('ct2');
     			},
     			editor: {
     				xtype: 'ctvstlist'
