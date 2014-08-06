@@ -39,9 +39,9 @@ Ext.define('AM.view.layout.Dashboard' ,{
     	    //model: 'WeatherPoint',
     		fields: ['data1', 'anomes'],
     	    data: [
-       	        { data1: 0, anomes: 'periodo homólogo' },
-    	        { data1: 0, anomes: '3 meses antes' },
-    	        { data1: 0, anomes: '2 meses antes' },
+       	        { data1: 0, anomes: 'homólogo' },
+    	        { data1: 0, anomes: '-3 meses' },
+    	        { data1: 0, anomes: '-2 meses' },
     	        { data1: 0, anomes: 'mês anterior' },
     	        { data1: 0, anomes: 'actual' }
     	    ]
@@ -66,13 +66,13 @@ Ext.define('AM.view.layout.Dashboard' ,{
             series.highlight = false;
         }, updateChart2 = function(rec) {
             store2.loadData([{
-                'anomes': 'periodo homólogo',
+                'anomes': 'homólogo',
                 'data1': rec.get('data5')
             }, {
-                'anomes': '3 meses antes',
+                'anomes': '-3 meses',
                 'data1': rec.get('data4')
             }, {
-                'anomes': '2 meses antes',
+                'anomes': '-2 meses',
                 'data1': rec.get('data3')
             }, {
                 'anomes': 'mês anterior',
@@ -100,7 +100,7 @@ Ext.define('AM.view.layout.Dashboard' ,{
     		height: 300,
     		margin: '0 0 3 0',
             style: 'background:#fff',
-            //theme: 'Base',// 'Base', 'Green', 'Sky', 'Red', 'Purple', 'Blue', 'Yellow' 
+            //theme: 'Purple',// 'Base', 'Green', 'Sky', 'Red', 'Purple', 'Blue', 'Yellow' 
             animate: true,
             //cls: 'x-panel-body-default',
             shadow: true,
@@ -160,13 +160,13 @@ Ext.define('AM.view.layout.Dashboard' ,{
     		margin: '0 0 0 0',
             insetPadding: 20,
             flex: 5,
-            //theme: 'Base',// 'Base', 'Green', 'Sky', 'Red', 'Purple', 'Blue', 'Yellow' 
+            theme: 'Sky',// 'Base', 'Green', 'Sky', 'Red', 'Purple', 'Blue', 'Yellow' 
     		animate: true,
             shadow: true,
             store: store2,
             axes: [{
                 type: 'Numeric',
-                position: 'bottom',
+                position: 'left',//position: 'bottom',
                 fields: ['data1'],
                 label: {
                     renderer: Ext.util.Format.numberRenderer('0,0')
@@ -176,14 +176,14 @@ Ext.define('AM.view.layout.Dashboard' ,{
                 minimum: 0
             }, {
                 type: 'Category',
-                position: 'left',
+                position: 'bottom',//position: 'left',
                 fields: ['anomes']
                 //title: 'Month of the Year',
                 //hidden: true
             }],
             series: [{
-                type: 'bar',
-                axis: 'bottom',
+            	type: 'column',//type: 'bar',
+                axis: 'left',//axis: 'bottom',
                 highlight: true,
                 /*tips: {
                     trackMouse: true,
@@ -194,10 +194,11 @@ Ext.define('AM.view.layout.Dashboard' ,{
                 label: {
                   display: 'insideEnd',
                       field: 'data1',
+                      'text-anchor': 'middle',
                       renderer: Ext.util.Format.numberRenderer('0'),
                       orientation: 'horizontal',
-                      color: '#333',
-                    'text-anchor': 'middle'
+                      color: '#fff'//color: '#333',
+                    
                 },
                 xField: 'anomes',
                 yField: ['data1']
@@ -215,11 +216,13 @@ Ext.define('AM.view.layout.Dashboard' ,{
     		columns: [{
     			header : 'Rubrica',
     			dataIndex : 'name',
+    			menuDisabled: true,
     			flex : 1
     		},{
     			header : 'Valor (M€)',
     			type : 'numeric',
     			dataIndex : 'data1',
+    			menuDisabled: true,
     			flex : 1,
     			align: 'right',
     			renderer: function(v,p,r){
@@ -282,27 +285,34 @@ Ext.define('AM.view.layout.Dashboard' ,{
         		if(rec.get('name').substr(0,2)<4) {
         			x1 += rec.get('data1');
         			x2 += rec.get('data2');
-        			x3 += rec.get('data3');
+        			//x3 += rec.get('data3');
+        			x3 += rec.get('data5');
         		}
         		if(rec.get('name').substr(0,2)>=4 && rec.get('name').substr(0,2)<11) {
         			y1 += rec.get('data1');
         			y2 += rec.get('data2');
-        			y3 += rec.get('data3');
+        			//y3 += rec.get('data3');
+        			y3 += rec.get('data5');
         		}
         		if(rec.get('name').substr(0,2)==14 || rec.get('name').substr(0,2)==15) {
         			z1 += rec.get('data1');
         			z2 += rec.get('data2');
-        			z3 += rec.get('data3');
+        			//z3 += rec.get('data3');
+        			z3 += rec.get('data5');
         		}
         		if(rec.get('name').substr(0,2)==12) {
         			a1 += rec.get('data1');
         			a2 += rec.get('data2');
-        			a3 += rec.get('data3');
+        			//a3 += rec.get('data3');
+        			a3 += rec.get('data5');
         		}
         	});
-        	storeX.loadData([{ depositos: x1,creditos: y1,creditoVencido: a1,provisoes: z1, per: 'Actual' },
+        	storeX.loadData([
+        	                 { depositos: x3,creditos: y3,creditoVencido: a3,provisoes: z3, per: 'Homólogo' },
         	                 { depositos: x2,creditos: y2,creditoVencido: a2,provisoes: z2, per: 'Anterior' },
-        	                 { depositos: x3,creditos: y3,creditoVencido: a3,provisoes: z3, per: 'Inicial' }]);
+        	                 { depositos: x1,creditos: y1,creditoVencido: a1,provisoes: z1, per: 'Actual' }
+        	                 //{ depositos: x3,creditos: y3,creditoVencido: a3,provisoes: z3, per: 'Inicial' }]);
+        					 ]);
         };
         
         Ext.getStore('DashboardData').load({
@@ -339,7 +349,13 @@ Ext.define('AM.view.layout.Dashboard' ,{
                 type: 'Category',
                 position: 'left',
                 fields: ['per'],
-                title: false
+                title: false,
+                label: {
+                	display: 'outside',
+                    rotate: {
+                        degrees: -45
+                    }
+                }
             }],
             series: [{
                 type: 'bar',
