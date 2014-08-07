@@ -28,8 +28,12 @@ public class NifstDAO {
 		//return hibernateTemplate.find("from Nifst where name!=''");
 	}
 	@SuppressWarnings("unchecked")
-	public List<Nifst> list(String node){
+	public List<Nifst> searchByName(String node){
 		return hibernateTemplate.find("from Nifst where nam like '%"+node+"%'");
+	}
+	@SuppressWarnings("unchecked")
+	public List<Nifst> searchByNif(String nif){
+		return hibernateTemplate.find("from Nifst where nif like '%"+nif+"%'");
 	}
 
 	public Nifst save(Nifst nifst){

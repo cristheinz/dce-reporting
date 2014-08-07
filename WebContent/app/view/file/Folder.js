@@ -15,33 +15,28 @@ Ext.define('AM.view.file.Folder' ,{
     	        children: [{
     	        		id: 'listall',
     	        		expanded: true,
+    	        		expandable: false,
     	                text: 'Ficheiros Importados'//,
     	                //iconCls: 'module-icon',
     	                //leaf: true
     	            },{
     	            	id: 'listfregu',
+    	            	expandable: false,
     	                text: 'Ficheiros Regularização'//,
     	                //iconCls: 'module-icon',
     	                //leaf: true
     	            },{
     	            	id: 'listseis',
+    	            	expandable: false,
     	                text: 'Posição Analitica'//,
     	                //iconCls: 'module-icon',
     	                //leaf: true
-    	            /*},{
-    	                text: 'Papel comercial',
-    	                expanded: true,
-    	                children: [{
-    	                		id: 'module41',
-    	                        text: 'Cliente e emissões',
-    	                        iconCls: 'module-icon',
-    	                        leaf: true
-    	                    },{
-    	                    	id: 'module42',
-    	                        text: 'Gerar ficheiro',
-    	                        iconCls: 'module-icon',
-    	                        leaf: true
-    	                    }]*/
+    	            },{
+    	            	id: 'listoths',
+    	            	expandable: false,
+    	                text: 'Outros ficheiros gerados'//,
+    	                //iconCls: 'module-icon',
+    	                //leaf: true
     	            }]
     	    }
     	});

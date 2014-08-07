@@ -14,6 +14,10 @@ Ext.define('AM.view.papel.List' ,{
     	iconCls: 'add-icon',
     	action: 'add',
     	tooltip: 'Adicionar'
+    },{
+    	iconCls: 'new-icon',
+    	action: 'run',
+    	tooltip: 'Gerar ficheiro'
     },'->',{
     	xtype: 'textfield', 
     	name: 'searchbox',

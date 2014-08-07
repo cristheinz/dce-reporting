@@ -1,5 +1,12 @@
 Ext.define('AM.view.nifst.List' ,{
     extend: 'Ext.grid.Panel',
+    requires: [
+               'Ext.selection.CellModel',
+               'Ext.grid.*',
+               'Ext.data.*',
+               'Ext.util.*',
+               'Ext.form.*'
+           ],
     
     alias: 'widget.nifstlist',
     id: 'module_nifst',
@@ -25,7 +32,11 @@ Ext.define('AM.view.nifst.List' ,{
     }],
     
     initComponent: function() {
+    	this.cellEditing = new Ext.grid.plugin.CellEditing({
+            clicksToEdit: 2
+        });
     	Ext.apply(this, {
+    		plugins: [this.cellEditing],
     		columns: [{
     			header : 'NIF',
     			dataIndex : 'nif',
@@ -35,7 +46,10 @@ Ext.define('AM.view.nifst.List' ,{
     			header : 'Titular',
     			dataIndex : 'nam',
     			menuDisabled: true,
-    			flex : 1
+    			editor: {
+                    allowBlank: true
+                },
+    			flex : 2
     		}]/*,
     		selModel: {
                 selType: 'cellmodel'

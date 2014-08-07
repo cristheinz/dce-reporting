@@ -24,6 +24,10 @@ public class Utils {
 		return name;
 	}
 	
+	public static String generateFpapeFileName(String anomes){
+		return "SLDT10_BPP."+anomes;
+	}
+	
 	public static String[] getDashboradPeriods(String anomes) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 		

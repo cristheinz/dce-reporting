@@ -7,12 +7,13 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bapop.dce.bo.NifstWrapper;
 import com.bapop.dce.model.Nifst;
-import com.bapop.dce.model.Report;
 import com.bapop.dce.service.NifstService;
 import com.bapop.dce.util.ExtJSReturn;
 
@@ -27,7 +28,13 @@ public class NifstController {
 	@RequestMapping(value="/nifst/search.action")
 	public @ResponseBody Map<String,? extends Object> view(@RequestParam("node") String node) throws Exception {
 		try {
-			List<Nifst> result = nifstService.getList(node);
+			List<Nifst> result = null;
+			try {
+				Long.parseLong(node);
+				result = nifstService.findNIF(node);
+			} catch(Exception e) {
+				result = nifstService.findName(node);
+			}
 
 			return ExtJSReturn.mapOK(result,result.size());
 
@@ -62,13 +69,14 @@ public class NifstController {
 		} catch (Exception e) {
 			return ExtJSReturn.mapError("Error trying to create Nifst.");
 		}
-	}
+	}*/
 
 	@RequestMapping(value="/nifst/update.action")
 	public @ResponseBody Map<String,? extends Object> update(@RequestBody NifstWrapper data) throws Exception {
 		try{
 			
 			List<Nifst> result = nifstService.update(data.getData());
+			
 
 			return ExtJSReturn.mapOK(result,result.size());
 
@@ -77,7 +85,7 @@ public class NifstController {
 		}
 	}
 
-
+/*
 	@RequestMapping(value="/nifst/delete.action")
 	public @ResponseBody Map<String,? extends Object> delete(@RequestBody NifstWrapper data) throws Exception {
 		try{

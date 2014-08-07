@@ -139,6 +139,26 @@ public class FileController {
 			return ExtJSReturn.mapError("Error trying to create FSEIS File.");
 		}
 	}
+	@RequestMapping(value="/file/fpape/new.action")
+	public @ResponseBody Map<String,? extends Object> newFpape(HttpSession session,@RequestParam("anomes") String anomes) throws Exception {
+		try{
+			//fileService.delete(data.getData());
+			String user_id=session.getAttribute("userID").toString();
+			String fname=Utils.generateFpapeFileName(anomes);
+			
+			System.out.println("user_id: "+user_id+"; anomes: "+anomes+"; file_name: "+fname);
+			BatchFiles b=new BatchFiles();
+			int x=b.bulkFpape(anomes,user_id, fname);
+			if(x!=0) {
+				return ExtJSReturn.mapError("Error trying to bulk FPAPE File.");
+			}
+
+			return ExtJSReturn.mapOK();
+
+		} catch (Exception e) {
+			return ExtJSReturn.mapError("Error trying to create FPAPE File.");
+		}
+	}
 
 	
 	@RequestMapping(value="/file/download.action")

@@ -14,6 +14,10 @@ Ext.define('AM.view.papel.New', {
         this.buttons = [{
                 text: 'Gravar',
                 action: 'save'
+        	},{
+        		text: 'Avançar',
+        		hidden: true,
+                action: 'next'
             },{
                 text: 'Cancelar',
                 scope: this,

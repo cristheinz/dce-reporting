@@ -25,8 +25,12 @@ public class NifstService {
     }
 	
 	@Transactional(readOnly=true)
-    public List<Nifst> getList(String node){
-        return nifstDAO.list(node);
+    public List<Nifst> findName(String name){
+        return nifstDAO.searchByName(name);
+    }
+	@Transactional(readOnly=true)
+    public List<Nifst> findNIF(String nif){
+        return nifstDAO.searchByNif(nif);
     }
 	
 	@Transactional

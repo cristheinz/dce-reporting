@@ -5,6 +5,7 @@ Ext.define('AM.controller.PapelController', {
     models: ['Papel'],
     views: [
         'papel.Main',
+        'papel.Run',
         'papel.List',
         'papel.Form',
         'papel.New',
@@ -14,6 +15,12 @@ Ext.define('AM.controller.PapelController', {
     refs: [{
     	ref: 'papelmain',
     	selector: 'papelmain'
+    },{
+    	ref: 'papelrun',
+    	selector: 'papelrun'
+    },{
+    	ref: 'papelnew',
+    	selector: 'papelnew'
     },{
     	ref: 'papellist',
     	selector: 'papellist'
@@ -38,6 +45,12 @@ Ext.define('AM.controller.PapelController', {
             'papellist button[action=add]': {
             	click: this.addOnList
             },
+            'papellist button[action=run]': {
+            	click: this.onRunBtn
+            },
+            'papelrun button[action=run]': {
+            	click: this.newFPAPE
+            },
             'papeledit button[action=save]': {
                 click: this.onUpdate
             },
@@ -45,13 +58,42 @@ Ext.define('AM.controller.PapelController', {
                 click: this.onDelete
             },
             'papelnew > nifstlist': {
-            	itemdblclick: this.onSelect
+            	//itemclick: this.onSelect,
+            	selectionchange: this.selectionchange
+            	//itemdblclick: this.onSelect
+            },
+            'papelnew button[action=next]': {
+                click: this.onNext
             },
             'papelnew button[action=save]': {
                 click: this.onCreate
             }
             
         });
+    },
+    
+    onRunBtn: function(button) {
+    	if(this.getAccess('modulePapel','U')){
+    		Ext.widget('papelrun').show();
+    	}
+    	
+    },
+    newFPAPE: function(button) {
+    	var form=this.getPapelrun().down('form');
+    	if(form.isValid()){
+    		form.getForm().submit({
+    			url: 'file/fpape/new.action',
+    			waitMsg: 'Gerando ficheiro...',
+    			success: function(fp, o) {
+    				Ext.Msg.alert('Mensagem', 'Ficheiro gerado com sucesso.',function(btn){
+        				form.up('window').close();
+    				});
+    			},
+    			failure: function() {
+    				Ext.Msg.alert("Erro ao gerar ficheiro!", Ext.JSON.decode(this.response.responseText).message);
+    			}
+    		});
+    	}
     },
     
     onMainRender: function() {
@@ -165,9 +207,19 @@ Ext.define('AM.controller.PapelController', {
     	//var store=this.getPapelStoreStore();
     	//store.insert(0,rec);
     },
-    onSelect: function(grid, rec) {
-    	//console.log(rec.get('nif'));
-    	//console.log(rec.get('nam'));
+    
+    selectionchange: function( grid, selected, eOpts ) {
+    	var view=this.getPapelnew();
+    	//console.log(selected.length);
+    	if(selected.length>0) {
+    		//console.log('true');
+    		view.down('button[action=next]').show();
+    	} else {
+    		//console.log('false');
+    		view.down('button[action=next]').hide();
+    	}
+    },
+    /*onSelect: function(grid, rec) {
     	if(this.getAccess('modulePapel','U')){
         	//var record= Ext.create('AM.model.Papel',{prg: rec.get('nif'),nif: rec.get('nif'), nam: rec.get('nam')});
         	var record= Ext.create('AM.model.Papel',{nif: rec.get('nif'), nam: rec.get('nam')});
@@ -179,6 +231,24 @@ Ext.define('AM.controller.PapelController', {
             view.down('form').loadRecord(record);
             view.down('form').down('textfield[name=id]').hide();
             //view.down('form').down('textfield[name=nif]').disable();
+            view.down('button[action=save]').show();
+            view.show();
+    	}
+    },*/
+    onNext: function(button) {
+    	var view=button.up('window');
+    	button.hide();
+    	
+    	var grid=view.down('nifstlist');
+    	var rec=grid.getSelectionModel().getSelection()[0];
+    	
+    	if(this.getAccess('modulePapel','U')){
+        	var record= Ext.create('AM.model.Papel',{nif: rec.get('nif'), nam: rec.get('nam')});
+        	//var view=grid.up('window');
+        	grid.hide();
+            view.add(Ext.widget('papelform'));
+            view.down('form').loadRecord(record);
+            view.down('form').down('textfield[name=id]').hide();
             view.down('button[action=save]').show();
             view.show();
     	}

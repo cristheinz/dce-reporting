@@ -139,6 +139,18 @@ Ext.define('AM.controller.FileController', {
         			}
         	});
         	break;
+        case 'listoths':
+        	list.columns[2].setVisible(false);
+        	list.columns[3].setVisible(false);
+        	list.columns[4].setVisible(false);
+        	list.columns[5].setVisible(false);
+        	list.columns[6].setVisible(true);
+        	store.load({
+        		params: {
+        			fid: 'OPAPE'
+        			}
+        	});
+        	break;
         default:
         	break;
         }

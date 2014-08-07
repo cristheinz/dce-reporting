@@ -34,7 +34,7 @@ Ext.define('AM.view.balance.Main' ,{
         ]
     }],*/
     tbar: [{
-    	iconCls: 'new-icon',
+    	iconCls: 'add-icon',
     	action: 'new',
     	tooltip: 'Novo'
     },'->',

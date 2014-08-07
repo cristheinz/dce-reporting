@@ -1,5 +1,6 @@
 /build
 /database
+/reports
 /WebContent/WEB-INF/spring/db-config.xml
 /WebContent/ext-4.2.1
 /WebContent/icons

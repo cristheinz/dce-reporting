@@ -9,7 +9,7 @@ Ext.define('AM.store.NifstStore', {
         type: 'ajax',
         api: {
         	//create: 'nifst/create.action',
-        	//update: 'nifst/update.action',
+        	update: 'nifst/update.action',
         	//destroy: 'nifst/delete.action',
         	read : 'nifst/search.action'
     	},
