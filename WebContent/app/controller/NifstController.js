@@ -32,7 +32,7 @@ Ext.define('AM.controller.NifstController', {
     },
     
     onRender: function() {
-    	Ext.getStore('NifstStore').load();
+    	//Ext.getStore('NifstStore').load();
     },
 /*    
     onEdit: function(grid, record) {
@@ -68,18 +68,29 @@ Ext.define('AM.controller.NifstController', {
     
     searchOnList: function(textfield, e, eOpts ){
     	var store = this.getNifstlist().getStore();
-		//store.clearFilter();
-		if (textfield.value.length > 2) {
-			/*store.filter({
-				property : 'name',
-				value : textfield.value,
-				anyMatch : true,
-				caseSensitive : false
-			});*/
-			store.load({
-				params: {node: textfield.value}
-			});
-		}
+    	//console.log(textfield.value.length);
+    	if(textfield.value.length == 0) {
+    		store.load({
+    			params: {node: 'Aut'}
+    		});
+    	} else {
+        	var intValue = parseInt(textfield.value);
+        	//console.log(textfield.value.length%3);
+        	//console.log(intValue == Number.NaN);
+            if (intValue%1 === 0) {
+            	if (textfield.value.length == 9) {
+        			store.load({
+        				params: {node: textfield.value}
+        			});
+        		}
+            } else {
+            	if (textfield.value.length%3 == 0) {
+        			store.load({
+        				params: {node: textfield.value}
+        			});
+        		}
+            }
+    	}
     }
 
 });

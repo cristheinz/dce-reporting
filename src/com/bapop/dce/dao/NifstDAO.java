@@ -33,7 +33,7 @@ public class NifstDAO {
 	}
 	@SuppressWarnings("unchecked")
 	public List<Nifst> searchByNif(String nif){
-		return hibernateTemplate.find("from Nifst where nif like '%"+nif+"%'");
+		return hibernateTemplate.find("from Nifst where nif = ?", nif);
 	}
 
 	public Nifst save(Nifst nifst){
