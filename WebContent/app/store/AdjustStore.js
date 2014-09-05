@@ -36,7 +36,14 @@ Ext.define('AM.store.AdjustStore', {
     		type: 'json',
     		encode: false,
     		root: 'data',
-            writeAllFields: true
+            writeAllFields: true,
+            allowSingle: false/*isto faz com que no json seja sempre enviado um array para o server 
+            						{data:[{id:0},{id:99}]} 
+            					mesmo se for só um registo vai assim:
+            						{data:[{id:99}]} 
+            					caso contrario ficaria:
+            						{data:{id:99}}
+            					*/ 
     	}
     }
     

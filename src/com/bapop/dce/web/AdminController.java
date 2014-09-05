@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bapop.batch.dce.corep.BatchCorep;
+import com.bapop.batch.dce.fgd.BatchFgd;
+import com.bapop.batch.dce.posfm2.BatchPosfm2;
 import com.bapop.dce.bo.BatchJobExecutionWrapper;
 import com.bapop.dce.model.BatchJobExecution;
 import com.bapop.dce.model.BatchStepExecution;
@@ -104,7 +106,64 @@ public class AdminController {
 			return ExtJSReturn.mapError("Error trying to run COREP Batch.");
 		}
 	}
-	
+
+	@RequestMapping(value="runposfm.action")
+	public @ResponseBody Map<String,? extends Object> runPosfm(HttpSession session,@RequestParam("anomes") String anomes) throws Exception {
+		try {
+			int id=Integer.parseInt(session.getAttribute("userID").toString());
+			if(id!=admin)
+				return ExtJSReturn.mapError("Not authorized.");
+			
+			//System.out.println(anomes);
+			BatchPosfm2 b=new BatchPosfm2();
+			b.bulkPosfm(anomes);
+
+			return ExtJSReturn.mapOK();
+
+		} catch (Exception e) {
+			//e.printStackTrace();
+			return ExtJSReturn.mapError("Error trying to run POSFM Batch.");
+		}
+	}
+
+	@RequestMapping(value="runcapital.action")
+	public @ResponseBody Map<String,? extends Object> runCapital(HttpSession session,@RequestParam("anomes") String anomes) throws Exception {
+		try {
+			int id=Integer.parseInt(session.getAttribute("userID").toString());
+			if(id!=admin)
+				return ExtJSReturn.mapError("Not authorized.");
+			
+			//System.out.println(anomes);
+			BatchPosfm2 b=new BatchPosfm2();
+			b.bulkCapital(anomes);
+
+			return ExtJSReturn.mapOK();
+
+		} catch (Exception e) {
+			//e.printStackTrace();
+			return ExtJSReturn.mapError("Error trying to run POSFM Batch.");
+		}
+	}
+
+	@RequestMapping(value="runfgd.action")
+	public @ResponseBody Map<String,? extends Object> runFgd(HttpSession session,@RequestParam("anomes") String anomes) throws Exception {
+		try {
+			int id=Integer.parseInt(session.getAttribute("userID").toString());
+			if(id!=admin)
+				return ExtJSReturn.mapError("Not authorized.");
+			
+			//System.out.println(anomes);
+			BatchFgd b=new BatchFgd();
+			b.bulkFgd(anomes);
+
+			return ExtJSReturn.mapOK();
+
+		} catch (Exception e) {
+			//e.printStackTrace();
+			return ExtJSReturn.mapError("Error trying to run POSFM Batch.");
+		}
+	}
+
 	@RequestMapping(value="/deleteJobExecutionEntry.action")
 	public @ResponseBody Map<String,? extends Object> deleteJobs(HttpSession session,@RequestBody BatchJobExecutionWrapper data) throws Exception {
 		try{

@@ -6,7 +6,7 @@ Ext.define('AM.store.BatchStepExecutionStore', {
     //autoSync: true,
     
     sortOnLoad: true,
-    sorters: { property: 'dtf', direction : 'DESC' },
+    sorters: { property: 'dti', direction : 'DESC' },
     
     proxy: {
         type: 'ajax',
