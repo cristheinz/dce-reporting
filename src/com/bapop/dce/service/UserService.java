@@ -1,5 +1,6 @@
 package com.bapop.dce.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,16 @@ public class UserService {
     @Transactional(readOnly=true)
     public List<User> signin(String pwd){
         return userDAO.getUserByPwd(pwd);
+    }
+    
+    @Transactional
+    public List<User> update(User user){
+ 
+        List<User> r = new ArrayList<User>();
+ 
+        r.add(userDAO.save(user));
+ 
+        return r;
     }
  
  

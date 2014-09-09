@@ -15,7 +15,7 @@ Ext.define('AM.view.layout.Head', {
 		name: 'account',
 		scale: 'medium',
 		iconCls: 'user-icon',
-		text: Ext.state.Manager.get('username',''),
+		//text: Ext.state.Manager.get('username'),
 		menu: [{
 			text:'Importar ficheiro...',
 			iconCls: 'upload-icon',

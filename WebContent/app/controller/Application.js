@@ -15,6 +15,9 @@ Ext.define('AM.controller.Application', {
         ref: 'mainapp',
         selector: 'mainapp [name=mainContent]'
     },{
+        ref: 'header',
+        selector: 'head [name=account]'
+    },{
         ref: 'footer',
         selector: 'mainapp [name=footer]'
     }],
@@ -34,6 +37,9 @@ Ext.define('AM.controller.Application', {
         	'head [action=upload]': {
         		click: this.onUpload
         	},
+        	'head [name=account]': {
+        		beforerender: this.onUserRender
+        	},
             'module': {
             	itemdblclick: this.runApp
             }, 
@@ -50,6 +56,15 @@ Ext.define('AM.controller.Application', {
         });
     },
     
+    onUserRender: function() {
+    	var username = Ext.String.format(document.getElementById("userId").value);
+    	if(username!='0') {
+        	Ext.state.Manager.set('username',username);
+        	this.getHeader().text=Ext.state.Manager.get('username');
+    	} else {
+    		window.location.href="signout.action";
+    	}
+    },
     onRenderNotifications: function() {
     	if (!!window.EventSource) {
     		var source = new EventSource('admin/systemalert.action');
@@ -191,6 +206,35 @@ Ext.define('AM.controller.Application', {
     	//var main = Ext.ComponentQuery.query('#mainContent')[0];
     	var main = this.getMainapp();
     	if(main.child('panel[id="'+record.get('text')+'"]')==null && record.get('cls')!=null) {
+    		//fazer log de quem pede relatorios:
+    		var form = Ext.create('Ext.form.Panel');
+			if(form.isValid()){
+				form.getForm().submit({
+					url: 'admin/log.action?action='+2+'&msg='+record.get('id'),
+	                success: function(fp, o) {
+	            		main.add(Ext.widget('panel',{
+	            			id: record.get('text'),
+	                		title : record.get('text'),
+	                		iconCls: 'report-icon',
+	                		closable: true,
+	                	    layout : 'fit',
+	                	    items : [{
+	                	        xtype : 'component',
+	                	        autoEl : {
+	                	            tag : 'iframe',
+	                	            src : record.get('cls')
+	                	        }
+	                	    }]
+	                	})).show();
+	                },
+	                failure: function() {
+	                	Ext.Msg.alert("Alerta", "Não autorizado!");
+	                }
+	            });
+			  }
+    		
+
+			/*
     		main.add(Ext.widget('panel',{
     			id: record.get('text'),
         		title : record.get('text'),
@@ -204,7 +248,7 @@ Ext.define('AM.controller.Application', {
         	            src : record.get('cls')
         	        }
         	    }]
-        	})).show();
+        	})).show();*/
     		//main.setActiveTab(1);
     	}
     	

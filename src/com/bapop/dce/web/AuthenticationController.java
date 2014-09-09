@@ -1,6 +1,7 @@
 package com.bapop.dce.web;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +18,9 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.bapop.dce.bo.AuthBean;
 import com.bapop.dce.model.User;
 import com.bapop.dce.model.UserAuth;
+import com.bapop.dce.model.UserLog;
 import com.bapop.dce.service.UserAuthService;
+import com.bapop.dce.service.UserLogService;
 import com.bapop.dce.service.UserService;
 import com.bapop.dce.util.ExtJSReturn;
 
@@ -25,6 +28,7 @@ import com.bapop.dce.util.ExtJSReturn;
 public class AuthenticationController {
 	private UserService userService;
 	private UserAuthService userAuthService;
+	private UserLogService userLogService;
 	
 	@RequestMapping(value="/home.action")
     public ModelAndView home(HttpSession session) throws Exception {
@@ -43,7 +47,12 @@ public class AuthenticationController {
 			List<User> l=userService.signin(password);
 			if(l.size()==0) 
 				return ExtJSReturn.mapError("ID de acesso incorreto.");
-			session.setAttribute("userID", l.get(0).getId());
+			User user = l.get(0);
+			session.setAttribute("userID", user.getId());
+			session.setAttribute("userName", user.getName());
+			user.setLastAccess(new Date());
+			userService.update(user);
+			userLogService.save(new UserLog(user.getId(),0,session.getId()));
 			return ExtJSReturn.mapOK();
 			
 		} catch (Exception e) {
@@ -53,7 +62,11 @@ public class AuthenticationController {
 	
 	@RequestMapping(value="/signout.action")
 	public ModelAndView logout(HttpSession session) {
+		userLogService.save(new UserLog((int)session.getAttribute("userID"),1,session.getId()));
+		
         session.setAttribute("userID", null);
+        session.removeAttribute("userName");
+        
         return new ModelAndView(new RedirectView(""));
         //return new ModelAndView("login");
 	}
@@ -98,6 +111,10 @@ public class AuthenticationController {
 	@Autowired
 	public void setUserAuthService(UserAuthService userAuthService) {
 		this.userAuthService = userAuthService;
+	}
+	@Autowired
+	public void setUserLogService(UserLogService service) {
+		this.userLogService = service;
 	}
 
 }

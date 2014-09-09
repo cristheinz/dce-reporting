@@ -21,5 +21,7 @@
     <link rel="stylesheet" type="text/css" href="app.css">
     <script type="text/javascript" src="app/app.js"></script>
 </head>
-<body></body>
+<body>
+	<input type="hidden" value="<%=session.getAttribute("userName")==null ? '0' : session.getAttribute("userName")%>" id="userId">
+</body>
 </html>

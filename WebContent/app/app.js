@@ -22,9 +22,17 @@ Ext.application({
         'PapelEmiController',
         'NifstController'
     ],
+    init : function() {
+    	Ext.state.Manager.setProvider(new Ext.state.CookieProvider());
+    	//Ext.state.Manager.setProvider(new Ext.state.LocalStorageProvider());
+    	Ext.state.Manager.clear('username');
+    	//Ext.state.Manager.set('username','bbb');
+    	
+    },
     launch: function() {
     	Ext.util.Format.thousandSeparator = '.';
     	Ext.util.Format.decimalSeparator = ',';
+    	
         Ext.create('Ext.container.Viewport', {
         	layout: 'fit',
             items: [

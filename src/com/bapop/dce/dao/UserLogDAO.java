@@ -1,35 +1,24 @@
 package com.bapop.dce.dao;
 
-import java.util.List;
-
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.bapop.dce.model.User;
+import com.bapop.dce.model.UserLog;
 
 @Repository
-public class UserDAO {
+public class UserLogDAO {
 	private HibernateTemplate hibernateTemplate;
 
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		hibernateTemplate = new HibernateTemplate(sessionFactory);
 	}
-
-	/**
-	 * Get List of Reports from database
-	 * @return list of all Reports
-	 */
-	@SuppressWarnings("unchecked")
-	public List<User> getUserByPwd(String pwd) {
-		return hibernateTemplate.find("from User as u where u.pwd='"+pwd+"'");
-	}
 	
-	public User save(User user){
-		hibernateTemplate.saveOrUpdate(user);
-		return user;
+	public UserLog save(UserLog log){
+		hibernateTemplate.saveOrUpdate(log);
+		return log;
 	}
 
 }

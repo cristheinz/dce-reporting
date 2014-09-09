@@ -20,8 +20,10 @@ import com.bapop.dce.bo.BatchJobExecutionWrapper;
 import com.bapop.dce.model.BatchJobExecution;
 import com.bapop.dce.model.BatchStepExecution;
 import com.bapop.dce.model.Note;
+import com.bapop.dce.model.UserLog;
 import com.bapop.dce.service.BatchExecutionService;
 import com.bapop.dce.service.NoteService;
+import com.bapop.dce.service.UserLogService;
 import com.bapop.dce.util.ExtJSReturn;
 
 @Controller
@@ -31,11 +33,16 @@ public class AdminController {
 	private final static int pinginterval=60000;//nenhum job assincrono vai demorar menos q 1min
 	
 	private NoteService noteService;
+	private UserLogService userLogService;
 	private BatchExecutionService batchExecutionService;
 	
 	@Autowired
 	public void setNotesService(NoteService service) {
 		this.noteService = service;
+	}
+	@Autowired
+	public void setUserLogService(UserLogService service) {
+		this.userLogService = service;
 	}
 	@Autowired
 	public void setBatchExecutionService(BatchExecutionService service) {
@@ -86,6 +93,22 @@ public class AdminController {
 		}
 		
     }
+	
+	@RequestMapping(value="log.action")
+	public @ResponseBody Map<String,? extends Object> log(HttpSession session,@RequestParam("action") int action,@RequestParam("msg") String msg) throws Exception {
+		try {
+			int id=Integer.parseInt(session.getAttribute("userID").toString());
+			//System.out.println("user:"+id+";action:"+action+";msg:"+msg+";dt:"+new Date());
+			UserLog log = new UserLog(id,action,msg);
+			userLogService.save(log);
+
+			return ExtJSReturn.mapOK();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ExtJSReturn.mapError("Error trying to LOG user action.");
+		}
+	}
 	
 	
 	@RequestMapping(value="runcorep.action")
