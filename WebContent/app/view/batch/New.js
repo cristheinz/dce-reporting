@@ -26,7 +26,7 @@ Ext.define('AM.view.batch.New', {
                         fieldLabel:'Procedure',
                         name:'job',
                         queryMode:'local',
-                        store:['capital','corep','fgd','posfm'],
+                        store:['cambi','crvcd','capital','corep','fgd','posfm'],
                         displayField:'job',
                         autoSelect:true,
                         forceSelection:true,

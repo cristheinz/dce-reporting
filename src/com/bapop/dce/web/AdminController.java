@@ -168,6 +168,44 @@ public class AdminController {
 		}
 	}
 
+	@RequestMapping(value="runcambi.action")
+	public @ResponseBody Map<String,? extends Object> runCambi(HttpSession session,@RequestParam("anomes") String anomes) throws Exception {
+		try {
+			int id=Integer.parseInt(session.getAttribute("userID").toString());
+			if(id!=admin)
+				return ExtJSReturn.mapError("Not authorized.");
+			
+			//System.out.println(anomes);
+			BatchPosfm2 b=new BatchPosfm2();
+			b.bulkCambi(anomes);
+
+			return ExtJSReturn.mapOK();
+
+		} catch (Exception e) {
+			//e.printStackTrace();
+			return ExtJSReturn.mapError("Error trying to run POSFM Batch.");
+		}
+	}
+
+	@RequestMapping(value="runcrvcd.action")
+	public @ResponseBody Map<String,? extends Object> runCrvcd(HttpSession session,@RequestParam("anomes") String anomes) throws Exception {
+		try {
+			int id=Integer.parseInt(session.getAttribute("userID").toString());
+			if(id!=admin)
+				return ExtJSReturn.mapError("Not authorized.");
+			
+			//System.out.println(anomes);
+			BatchPosfm2 b=new BatchPosfm2();
+			b.bulkCrvcd(anomes);
+
+			return ExtJSReturn.mapOK();
+
+		} catch (Exception e) {
+			//e.printStackTrace();
+			return ExtJSReturn.mapError("Error trying to run POSFM Batch.");
+		}
+	}
+
 	@RequestMapping(value="runfgd.action")
 	public @ResponseBody Map<String,? extends Object> runFgd(HttpSession session,@RequestParam("anomes") String anomes) throws Exception {
 		try {
