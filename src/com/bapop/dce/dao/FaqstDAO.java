@@ -3,7 +3,6 @@ package com.bapop.dce.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,16 +23,15 @@ public class FaqstDAO {
 	
 	@SuppressWarnings("unchecked")
 	public List<Faqst> list(){
-		Session session = hibernateTemplate.getSessionFactory().openSession();
-		Criteria criteria = session.createCriteria(Faqst.class);
-		return criteria.list();
-		//return hibernateTemplate.find("from Faqst");
+		return hibernateTemplate.getSessionFactory().getCurrentSession()
+				.createCriteria(Faqst.class)
+				.list();
 	}
 
 	
 	private List<Faqst> test(){
-		System.out.println("Hibernate many to many (Annotation)");
-		Session session = hibernateTemplate.getSessionFactory().openSession();
+		//System.out.println("Hibernate many to many (Annotation)");
+		Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		
 		Faqst f= new Faqst();

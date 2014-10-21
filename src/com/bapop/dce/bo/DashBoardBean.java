@@ -14,9 +14,11 @@ public class DashBoardBean {
 	private BigDecimal data4;
 	private BigDecimal data5;
 	
+	public DashBoardBean(){}
+	
 	public DashBoardBean(String name, BigDecimal data1, BigDecimal data2,
 			BigDecimal data3, BigDecimal data4, BigDecimal data5) {
-		super();
+		//super();
 		this.name = name;
 		this.data1 = data1;
 		this.data2 = data2;

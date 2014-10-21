@@ -38,8 +38,9 @@ public class AdjustDAO {
 	}
 	
 	public void adjustAfterAdjust(String anomes){
-		hibernateTemplate.getSessionFactory().openSession()
-			.createSQLQuery("exec dce_batch.usp_BL_AppAdjust "+anomes).executeUpdate();
+		hibernateTemplate.getSessionFactory().getCurrentSession()
+			.createSQLQuery("exec dce_batch.usp_BL_adj "+anomes)
+			.executeUpdate();
 	}
 
 }

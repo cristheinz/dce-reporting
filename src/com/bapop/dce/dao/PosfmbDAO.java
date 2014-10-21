@@ -1,17 +1,14 @@
 package com.bapop.dce.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
-import org.hibernate.HibernateException;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.bapop.dce.bo.DashBoardBean;
 import com.bapop.dce.util.Utils;
 
 @Repository
@@ -28,15 +25,25 @@ public class PosfmbDAO {
 	 * @return list of all Reports
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Object[]> getPosfmb(final String anomes) {
-		return hibernateTemplate.execute(new HibernateCallback<List<Object[]>>() {
+	public List<DashBoardBean> getPosfmb(final String anomes) {
+	//public List<Object[]> getPosfmb(final String anomes) {
+		String[] ym=Utils.getDashboradPeriods(anomes);
+		String s="EXEC dce_batch.usp_DCE_dashboard "+anomes+","+ym[0]+","+ym[1]+","+ym[2]+","+ym[3];
+		return hibernateTemplate.getSessionFactory().getCurrentSession()
+			.createSQLQuery(s)
+			//.addEntity(DashBoardBean.class)
+			.setResultTransformer(Transformers.aliasToBean(DashBoardBean.class))
+			.list();
 
+/*			
+		return hibernateTemplate.execute(new HibernateCallback<List<Object[]>>() {
 			public List<Object[]> doInHibernate(Session s)
 	                throws HibernateException, SQLException {
 				String[] ym=Utils.getDashboradPeriods(anomes);
 				
+				String q="EXEC dce_batch.usp_DCE_dashboard "+anomes+","+ym[0]+","+ym[1]+","+ym[2]+","+ym[3];
 				
-				String q="begin "+
+				String q1="begin "+
 "	declare @p0 int,@p1 int,@p2 int,@p3 int,@ph int"+
 "	declare "+
 "	@adj_emp decimal(14,2),@adj_emp1 decimal(14,2),@adj_emp2 decimal(14,2),@adj_emp3 decimal(14,2),@adj_emph decimal(14,2),"+
@@ -107,7 +114,16 @@ public class PosfmbDAO {
 "	where (anomes >= @p3 or anomes = @ph)"+
 "	group by grp "+
 "end";
-				
+	            SQLQuery sql=s.createSQLQuery(q);
+	            sql.addScalar("ctab");
+	            sql.addScalar("val");
+	            sql.addScalar("val1");
+	            sql.addScalar("val2");
+	            sql.addScalar("val3");
+	            sql.addScalar("valh");
+	            return sql.list();
+	        }
+*/				
 				/*
 	        	String q ="select dce_batch.fn_getGRPtxt(grp) as ctab," +
 				" cast(round(abs(sum(case when anomes= "+anomes+" then val else 0 end)/1000000),3,1) as decimal(14,2)) as val,"+
@@ -143,7 +159,6 @@ public class PosfmbDAO {
 	        	
 	        	//System.out.println(q);
 
-	            SQLQuery sql=s.createSQLQuery(q);
 	            /*sql.setParameter(0, anomes);
 	            sql.setParameter(1, ym[0]);
 	            sql.setParameter(2, ym[1]);
@@ -151,12 +166,6 @@ public class PosfmbDAO {
 	            sql.setParameter(4, ym[3]);*/
 	            /*sql.setParameter(0, ym[2]);
 	            sql.setParameter(1, ym[3]);*/
-	            sql.addScalar("ctab");
-	            sql.addScalar("val");
-	            sql.addScalar("val1");
-	            sql.addScalar("val2");
-	            sql.addScalar("val3");
-	            sql.addScalar("valh");
 	            
 	            /*
 	            List<DashBoardWrapper> tos=new ArrayList<DashBoardWrapper>();
@@ -170,10 +179,8 @@ public class PosfmbDAO {
 	            	BigDecimal valh=new BigDecimal(o[5].toString());
 	            	tos.add(new DashBoardWrapper(cta,val,val1,val2,val3,valh));
 	            }
-	            return tos;*/
-	            return sql.list();
-	        }
-	    });
+	            return tos;
+	    });*/
 	}
 	
 	

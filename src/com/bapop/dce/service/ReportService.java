@@ -6,18 +6,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.bapop.dce.bo.ReportTreeItem;
 import com.bapop.dce.dao.ReportDAO;
-import com.bapop.dce.model.Report;
 
 @Service
 public class ReportService {
 	private ReportDAO reportDAO;
  
     @Transactional(readOnly=true)
-    public List<Report> getReportList(int id){
-        return reportDAO.getReports(id);
+    public List<ReportTreeItem> getReportList(int id, String val){
+        return reportDAO.getReports(id,val);
     }
  
+    /*
+    @Transactional(readOnly=true)
+    public void alterReportList(String val){
+        reportDAO.changeReportTree(val);
+    }*/
  
     @Autowired
     public void setReportDAO(ReportDAO reportDAO) {

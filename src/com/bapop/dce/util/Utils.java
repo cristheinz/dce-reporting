@@ -45,15 +45,15 @@ public class Utils {
 		d1 = cal.getTime();
 		//System.out.println(d1.toString());
 		
-		cal.add(Calendar.MONTH, -1);
+		cal.add(Calendar.MONTH, -2);
 		Date d2 = cal.getTime();
 		//System.out.println(d2.toString());
 
-		cal.add(Calendar.MONTH, -1);
+		cal.add(Calendar.MONTH, -3);
 		Date d3 = cal.getTime();
 		//System.out.println(d3.toString());
 
-		cal.add(Calendar.MONTH, -9);
+		cal.add(Calendar.MONTH, -6);
 		Date dh = cal.getTime();
 		//System.out.println(dh.toString());
 

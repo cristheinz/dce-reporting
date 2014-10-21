@@ -2,8 +2,6 @@ package com.bapop.dce.dao;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -22,16 +20,12 @@ public class NoteDAO {
 	
 	@SuppressWarnings("unchecked")
 	public List<Note> list(){
-		Session session = hibernateTemplate.getSessionFactory().openSession();
-		Criteria criteria = session.createCriteria(Note.class);
-		return criteria.list();
-		//return hibernateTemplate.find("from Faqst");
+		return hibernateTemplate.getSessionFactory().getCurrentSession()
+				.createCriteria(Note.class)
+				.list();
 	}
 	@SuppressWarnings("unchecked")
 	public List<Note> listByUser(int userid){
-		//Session session = hibernateTemplate.getSessionFactory().openSession();
-		//Criteria criteria = session.createCriteria(Notes.class);
-		//return criteria.list();
 		return hibernateTemplate.find("from Note where status = 0 and userid = ?", userid);
 	}
 	

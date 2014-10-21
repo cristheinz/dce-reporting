@@ -3,7 +3,7 @@ package com.bapop.dce.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-@Embeddable
+//@Embeddable
 public class PosfmbID implements java.io.Serializable {
 	private int anomes;
 	private int grp;

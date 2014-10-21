@@ -19,7 +19,7 @@ public class Nifst {
 	private String nif;
 	private Integer sbp;
 	private Integer sec;
-	private Integer cae;
+	private String cae;
 	private Integer big;
 	private String nam;
 
@@ -60,12 +60,11 @@ public class Nifst {
 		this.sec = sec;
 	}
 
-	@Column (name="cae", columnDefinition="numeric")
-	public Integer getCae() {
+	public String getCae() {
 		return this.cae;
 	}
 
-	public void setCae(Integer cae) {
+	public void setCae(String cae) {
 		this.cae = cae;
 	}
 

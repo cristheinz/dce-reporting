@@ -14,7 +14,7 @@ Ext.define('AM.model.Nifst', {
         type: 'int'
     }, {
         name: 'cae',
-        type: 'int'
+        type: 'string'
     }, {
         name: 'big',
         type: 'int'

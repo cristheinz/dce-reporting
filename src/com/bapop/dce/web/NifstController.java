@@ -39,6 +39,7 @@ public class NifstController {
 			return ExtJSReturn.mapOK(result,result.size());
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			return ExtJSReturn.mapError("Error retrieving Nifst from database.");
 		}
 	}

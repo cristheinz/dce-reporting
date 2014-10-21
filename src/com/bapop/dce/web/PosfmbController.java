@@ -1,7 +1,5 @@
 package com.bapop.dce.web;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +20,9 @@ public class PosfmbController {
 	@RequestMapping(value="/posfmb/view.action")
 	public @ResponseBody Map<String,? extends Object> view(@RequestParam("anomes") String anomes) throws Exception {
 		try {
+			List<DashBoardBean> result = posfmbService.view(anomes);
+			//System.out.println(result.size());
+			/*
 			List<Object[]> l = posfmbService.view(anomes);
 			List<DashBoardBean> result=new ArrayList<DashBoardBean>();
 
@@ -33,12 +34,15 @@ public class PosfmbController {
             	BigDecimal val3=new BigDecimal(o[4].toString());
             	BigDecimal valh=new BigDecimal(o[5].toString());
             	
+            	//System.out.println(cta+';'+val+';'+val1+';'+val2+';'+val3+';'+valh);
+            	
             	result.add(new DashBoardBean(cta,val,val1,val2,val3,valh));
-            }
+            }*/
 			
 			return ExtJSReturn.mapOK(result,result.size());
 			
 		} catch (Exception e) {
+			e.printStackTrace();
 			return ExtJSReturn.mapError("Error retrieving DashBoard Data from database.");
 		}
 	}

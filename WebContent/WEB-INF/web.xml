@@ -4,14 +4,32 @@
 
   <welcome-file-list>
   	<welcome-file>home.action</welcome-file>
-  </welcome-file-list>  
+  </welcome-file-list>
+  
+  <session-config>
+    <session-timeout>-1</session-timeout><!-- session never expires -->
+  </session-config>  
+
+  <!--<filter>
+     <filter-name>monitoring</filter-name>
+     <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
+        <init-param>
+           <param-name>allowed-addr-pattern</param-name>
+           <param-value>10\.84\.4\.26|localhost|127\.0\..*</param-value>
+           <param-name>authorized-users</param-name>
+           <param-value>admin:pass, root:pass</param-value>
+        </init-param>
+  </filter>-->
 
   <servlet>
   	<servlet-name>dceReporting</servlet-name>
 	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 	<init-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:app-config.xml</param-value>
+		<param-value>
+			classpath:net/bull/javamelody/monitoring-spring.xml
+            classpath:app-config.xml
+		</param-value>
 		<!-- 
 		<param-value>
 			/WEB-INF/spring/app-config.xml
@@ -23,6 +41,5 @@
   <servlet-mapping>
 	<servlet-name>dceReporting</servlet-name>
 	<url-pattern>*.action</url-pattern>
-  </servlet-mapping>
-
+  </servlet-mapping>  
 </web-app>

@@ -20,9 +20,6 @@ public class UserAuthDAO {
 	
 	@SuppressWarnings("unchecked")
 	public List<UserAuth> list(int userid){
-		//Session session = hibernateTemplate.getSessionFactory().openSession();
-		//Criteria criteria = session.createCriteria(UserAuth.class);
-		//return criteria.list();
 		return hibernateTemplate.find("from UserAuth where userid = 0 or userid = ?",userid);
 	}
 }

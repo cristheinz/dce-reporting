@@ -5,8 +5,9 @@
 
     <link rel="stylesheet" type="text/css" href="ext-4.2.1/resources/css/ext-all-gray.css">
     <!-- <link rel="stylesheet" type="text/css" href="ext-4.2.1/resources/ext-theme-access/ext-theme-access-all.css"> -->
+    
     <script type="text/javascript" src="ext-4.2.1/ext-all-dev.js"></script>
-    <!-- <script type="text/javascript" src="ext-4.2.1/ext-all.js"></script> -->
+    <!-- <script type="text/javascript" src="ext-4.2.1/ext-all.js"></script>-->
     
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
     <!-- 
@@ -23,5 +24,6 @@
 </head>
 <body>
 	<input type="hidden" value="<%=session.getAttribute("userName")==null ? '0' : session.getAttribute("userName")%>" id="userId">
+	<input type="hidden" value="<%=session.getAttribute("userID")==null ? '0' : session.getAttribute("userID")%>" id="user">
 </body>
 </html>

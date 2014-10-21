@@ -56,7 +56,8 @@ public class Faqst {
 	}
 	
 	//@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@ManyToMany(fetch = FetchType.LAZY, 
+	@ManyToMany(//fetch = FetchType.LAZY, 
+			fetch = FetchType.EAGER,
 			cascade ={CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	@JoinTable(name = "faq_cti", schema = "dce_app", joinColumns = { 
 			@JoinColumn(name = "cti_id", nullable = false, updatable = false) }, 

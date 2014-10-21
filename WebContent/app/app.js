@@ -20,7 +20,8 @@ Ext.application({
         'FileController',
         'PapelController',
         'PapelEmiController',
-        'NifstController'
+        'NifstController',
+        'ReportController'
     ],
     init : function() {
     	Ext.state.Manager.setProvider(new Ext.state.CookieProvider());

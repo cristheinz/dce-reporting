@@ -9,18 +9,18 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
-@JsonAutoDetect
-@Entity
-@Table(schema="dce_batch", name="vie_posfm2b", catalog = "DCE_REPORTING")
+//@JsonAutoDetect
+//@Entity
+//@Table(schema="dce_batch", name="vie_posfm2b", catalog = "DCE_REPORTING")
 public class Posfmb {
 
 	private PosfmbID id;
 	private double val;
 
-	@EmbeddedId
+	/*@EmbeddedId
 	@AttributeOverrides({
 			@AttributeOverride(name = "anomes", column = @Column(name = "anomes", nullable = false)),
-			@AttributeOverride(name = "id", column = @Column(name = "grp")) })
+			@AttributeOverride(name = "id", column = @Column(name = "grp")) })*/
 	public PosfmbID getId() {
 		return this.id;
 	}
@@ -29,7 +29,7 @@ public class Posfmb {
 		this.id = id;
 	}
 	
-	@Column (name="val", columnDefinition="decimal", precision=38, scale=2)  
+	//@Column (name="val", columnDefinition="decimal", precision=38, scale=2)  
 	public double getVal() {
 		return val;
 	}

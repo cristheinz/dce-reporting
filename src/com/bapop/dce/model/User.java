@@ -20,6 +20,7 @@ public class User {
 	private String pwd;
 	private Date lastAccess;
 	private int flag;
+	private String lastIpAddress;
 
 	@Id
 	@GeneratedValue
@@ -57,6 +58,14 @@ public class User {
 	}
 	public void setFlag(int flag) {
 		this.flag = flag;
+	}
+	
+	@Column(name="last_ip_address")
+	public String getLastIpAddress() {
+		return lastIpAddress;
+	}
+	public void setLastIpAddress(String lastIpAddress) {
+		this.lastIpAddress = lastIpAddress;
 	}
 	
 }

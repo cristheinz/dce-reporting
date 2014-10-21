@@ -40,8 +40,8 @@ Ext.define('AM.view.layout.Dashboard' ,{
     		fields: ['data1', 'anomes'],
     	    data: [
        	        { data1: 0, anomes: 'homólogo' },
+    	        { data1: 0, anomes: '-6 meses' },
     	        { data1: 0, anomes: '-3 meses' },
-    	        { data1: 0, anomes: '-2 meses' },
     	        { data1: 0, anomes: 'mês anterior' },
     	        { data1: 0, anomes: 'actual' }
     	    ]
@@ -69,10 +69,10 @@ Ext.define('AM.view.layout.Dashboard' ,{
                 'anomes': 'homólogo',
                 'data1': rec.get('data5')
             }, {
-                'anomes': '-3 meses',
+                'anomes': '-6 meses',
                 'data1': rec.get('data4')
             }, {
-                'anomes': '-2 meses',
+                'anomes': '-3 meses',
                 'data1': rec.get('data3')
             }, {
                 'anomes': 'mês anterior',

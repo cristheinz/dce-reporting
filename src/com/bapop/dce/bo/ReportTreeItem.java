@@ -1,26 +1,19 @@
-package com.bapop.dce.model;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+package com.bapop.dce.bo;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 
 @JsonAutoDetect
-@Entity
-@Table(schema="dce_batch", name="tree_report")
-public class Report {
+public class ReportTreeItem {
 
 	private int id;
-	private String text = null;
-	private String leaf = "false";
-	private String cls = null;
+	private String text;
+	private String leaf;
+	private String cls;
 	private int parent;
-	private String iconCls;
+	private String iconcls;
+	
+	public ReportTreeItem() {}
 
-	@Id
-	@GeneratedValue
 	public int getId() {
 		return id;
 	}
@@ -53,11 +46,11 @@ public class Report {
 	public void setLeaf(String leaf) {
 		this.leaf = leaf;
 	}
-	public String getIconCls() {
-		return iconCls;
+	public String getIconcls() {
+		return iconcls;
 	}
-	public void setIconCls(String iconCls) {
-		this.iconCls = iconCls;
+	public void setIconcls(String iconcls) {
+		this.iconcls = iconcls;
 	}
 	
 }

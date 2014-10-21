@@ -1,7 +1,10 @@
 Ext.define('AM.controller.Application', {
     extend: 'AM.controller.AbstractController',
     
-    stores: ['DashboardData','ReportStore','FaqstStore'],
+    stores: [
+        'DashboardData',
+        'ReportStore',
+        'FaqstStore'],
     views: [
         'layout.MainApp',
         'layout.Head',
@@ -201,7 +204,7 @@ Ext.define('AM.controller.Application', {
         }
         
     },
-    
+
     runReport: function(tree, record) {
     	//var main = Ext.ComponentQuery.query('#mainContent')[0];
     	var main = this.getMainapp();

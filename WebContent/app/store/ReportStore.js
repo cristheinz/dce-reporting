@@ -20,7 +20,7 @@ Ext.define('AM.store.ReportStore', {
 
     root: {
     	text: 'DCE',
-    	cls: null,
+    	//cls: null,
         expanded: true
     }
 });

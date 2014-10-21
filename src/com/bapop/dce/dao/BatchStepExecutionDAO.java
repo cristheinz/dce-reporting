@@ -20,9 +20,6 @@ public class BatchStepExecutionDAO {
 	
 	@SuppressWarnings("unchecked")
 	public List<BatchStepExecution> list(int jobid){
-		/*Session session = hibernateTemplate.getSessionFactory().openSession();
-		Criteria criteria = session.createCriteria(BatchJobExecution.class);
-		return criteria.list();*/
 		return hibernateTemplate.find("from BatchStepExecution where jobid = ?",jobid);
 	}
 	

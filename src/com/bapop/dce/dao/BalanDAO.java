@@ -32,12 +32,12 @@ public class BalanDAO {
 	}
 	
 	public void adjustAfterLoading(String anomes){
-		hibernateTemplate.getSessionFactory().openSession()
-			.createSQLQuery("exec dce_batch.usp_BL_adjust "+anomes+",1").executeUpdate();
-		hibernateTemplate.getSessionFactory().openSession()
-		.createSQLQuery("exec dce_batch.usp_BL_AppAdjust "+anomes).executeUpdate();
+		hibernateTemplate.getSessionFactory().getCurrentSession()
+			.createSQLQuery("exec dce_batch.usp_BL_sum "+anomes+",1")
+			.executeUpdate();
+		hibernateTemplate.getSessionFactory().getCurrentSession()
+			.createSQLQuery("exec dce_batch.usp_BL_adj "+anomes)
+			.executeUpdate();
 	}
-	
-	
 
 }

@@ -56,6 +56,73 @@ background-image: -webkit-gradient(
 	//background-image: url(https://cdn2.iconfinder.com/data/icons/flat-ui-icons-24-px/24/man-24-20.png) !important;
 	background-image: url(icons/man-24-20.png) !important;
 }
+.user-0 {
+	background-image: url(icons/man-24-20.png) !important;
+}
+.user-1 {
+    background-image:url( http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=1363&p_col_ref2=id_sociedade&p_val_ref2=1 ) !important;
+    background-size: 20px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=1363&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=1363&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale')";
+}
+.user-2 {
+	/*background-image: url(icons/user-2.png) !important;*/
+	background-image:url( http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=1182&p_col_ref2=id_sociedade&p_val_ref2=1 ) !important;
+	background-size: 20px; 
+	/*filter: progid:DXImageTransferform.microsoft.AlphaImageLoader(src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=1182&p_col_ref2=id_sociedade&p_val_ref2=1',sizingMethod='scale');*/
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=1182&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=1182&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale')";
+}
+.user-3 {
+    background-image:url( http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=1577&p_col_ref2=id_sociedade&p_val_ref2=1 ) !important;
+    background-size: 20px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=1577&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=1577&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale')";
+}
+.user-4 {
+    background-image:url( http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=19&p_col_ref2=id_sociedade&p_val_ref2=1 ) !important;
+    background-size: 20px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=19&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=19&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale')";
+}
+.user-5 {
+    background-image:url( http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=471&p_col_ref2=id_sociedade&p_val_ref2=1 ) !important;
+    background-size: 20px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=471&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=471&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale')";
+}
+.user-6 {
+    background-image:url( http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=277&p_col_ref2=id_sociedade&p_val_ref2=1 ) !important;
+    background-size: 20px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=277&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=277&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale')";
+}
+.user-7 {
+    background-image:url( http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=713&p_col_ref2=id_sociedade&p_val_ref2=1 ) !important;
+    background-size: 20px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=713&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=713&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale')";
+}
+.user-8 {
+    background-image:url( http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=2085&p_col_ref2=id_sociedade&p_val_ref2=1 ) !important;
+    background-size: 20px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=2085&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=2085&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale')";
+}
+.user-17 {
+    background-image:url( http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=71&p_col_ref2=id_sociedade&p_val_ref2=1 ) !important;
+    background-size: 20px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=71&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=71&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale')";
+}
+.user-18 {
+    background-image:url( http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=1989&p_col_ref2=id_sociedade&p_val_ref2=1 ) !important;
+    background-size: 20px;
+	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=1989&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale');
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader( src='http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=1989&p_col_ref2=id_sociedade&p_val_ref2=1', sizingMethod='scale')";
+}
+
+
 .upload-icon {
 	//background-image: url(https://cdn2.iconfinder.com/data/icons/freecns-cumulus/16/519673-179_Upload-16.png) !important;
 	background-image: url(icons/519673-179_Upload-16.png) !important;

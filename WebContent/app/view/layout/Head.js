@@ -14,7 +14,10 @@ Ext.define('AM.view.layout.Head', {
 		xtype: 'button',
 		name: 'account',
 		scale: 'medium',
-		iconCls: 'user-icon',
+		//iconCls: 'user-icon',
+		icon: 'icons/man-24-20.png',
+		//icon: 'http://swpfa027.gbp.corp.com/portal/pls/portal/banco.ficheiro_download_2param?p_tab=listatelef_colab&p_col_blob=foto&p_col_mime=foto_mimetype&p_col_ref=num_colab&p_val_ref=1182&p_col_ref2=id_sociedade&p_val_ref2=1',
+		iconCls: 'user-'+Ext.String.format(document.getElementById("user").value),
 		//text: Ext.state.Manager.get('username'),
 		menu: [{
 			text:'Importar ficheiro...',

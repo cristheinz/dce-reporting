@@ -139,20 +139,21 @@ Ext.define('AM.controller.PapelController', {
         this.getPapelStoreStore().sync();
     },
     onDelete: function(button) {
-    	var store = this.getPapelStoreStore();
-    	Ext.MessageBox.confirm('Delete', 'Are you sure ?', function(btn){
- 		   if(btn === 'yes'){
- 			  var win    = button.up('window'),
- 		        form   = win.down('form'),
- 		        record = form.getRecord();
- 		        store.remove(record);
- 		        //values = form.getValues();
- 		        //record.set(values);
- 		        win.close();
- 		        //this.getPapelStoreStore().sync();
- 		   }
- 		 });
-        
+    	if(this.getAccess('modulePapel','D')){
+    		var store = this.getPapelStoreStore();
+        	Ext.MessageBox.confirm('Delete', 'Are you sure ?', function(btn){
+     		   if(btn === 'yes'){
+     			  var win    = button.up('window'),
+     		        form   = win.down('form'),
+     		        record = form.getRecord();
+     		        store.remove(record);
+     		        //values = form.getValues();
+     		        //record.set(values);
+     		        win.close();
+     		        //this.getPapelStoreStore().sync();
+     		   }
+     		 });
+    	}
     },
     onCreate: function(button) {
     	//console.log('save!');
@@ -258,13 +259,30 @@ Ext.define('AM.controller.PapelController', {
     	var store = Ext.getStore('PapelStore');
     	//var store = this.getPapellist().getStore();
 		store.clearFilter();
+		
 		if (textfield.value) {
-			store.filter({
-				property : 'nam',
-				value : textfield.value,
-				anyMatch : true,
-				caseSensitive : false
-			});
+			var intValue = parseInt(textfield.value);
+			if (intValue%1 === 0) {
+            	if (textfield.value.length == 9) {
+            		store.filter({
+        				property : 'nif',
+        				value : textfield.value,
+        				anyMatch : false,
+        				caseSensitive : false
+        			});
+        		}
+            } else {
+            	store.filter({
+    				property : 'nam',
+    				value : textfield.value,
+    				anyMatch : true,
+    				caseSensitive : false
+    			});
+            }
+			
+			
+			
+			
 		}
     }
 

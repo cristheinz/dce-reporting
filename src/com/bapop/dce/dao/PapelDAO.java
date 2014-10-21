@@ -2,8 +2,6 @@ package com.bapop.dce.dao;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
@@ -22,10 +20,11 @@ public class PapelDAO {
 	
 	@SuppressWarnings("unchecked")
 	public List<Papel> list(){
-		Session session = hibernateTemplate.getSessionFactory().openSession();
-		Criteria criteria = session.createCriteria(Papel.class);
-		return criteria.list();
-		//return hibernateTemplate.find("from Faqst");
+		/*Session session = hibernateTemplate.getSessionFactory().getCurrentSession();
+		Criteria criteria = session.createCriteria(Papel.class);*/
+		return hibernateTemplate.getSessionFactory().getCurrentSession()
+				.createCriteria(Papel.class)
+				.list();
 	}
 
 	public Papel save(Papel papel){

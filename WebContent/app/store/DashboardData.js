@@ -1,7 +1,7 @@
 Ext.define('AM.store.DashboardData', {
     extend: 'Ext.data.Store',
 
-    autoLoad: true,
+    //autoLoad: true,
     sorters: { property: 'name', direction : 'ASC' },
     
     fields: [{name: 'data1', type: 'number'},
