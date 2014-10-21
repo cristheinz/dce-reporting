@@ -210,10 +210,12 @@ Ext.define('AM.controller.Application', {
     	var main = this.getMainapp();
     	if(main.child('panel[id="'+record.get('text')+'"]')==null && record.get('cls')!=null) {
     		//fazer log de quem pede relatorios:
+    		var rpt=record.get('cls').substring(record.get('cls').indexOf('_report=')+8,record.get('cls').indexOf('.rptdesign'));
+    		
     		var form = Ext.create('Ext.form.Panel');
 			if(form.isValid()){
 				form.getForm().submit({
-					url: 'admin/log.action?action='+2+'&msg='+record.get('id'),
+					url: 'admin/log.action?action='+2+'&msg='+rpt,
 	                success: function(fp, o) {
 	            		main.add(Ext.widget('panel',{
 	            			id: record.get('text'),
