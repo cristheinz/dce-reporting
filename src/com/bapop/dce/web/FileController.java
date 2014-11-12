@@ -102,6 +102,29 @@ public class FileController {
 			return ExtJSReturn.mapError("Error trying to create FREGU File.");
 		}
 	}
+	
+	@RequestMapping(value="/file/bonif-fregu/new.action")
+	public @ResponseBody Map<String,? extends Object> newBonifFregu(HttpSession session) throws Exception {
+		try{
+			//fileService.delete(data.getData());
+			String user_id=session.getAttribute("userID").toString();
+			String maxName=fileService.getLastFreguFileName();
+			String fname=Utils.generateFreguFileName(maxName);
+			
+			//System.out.println("user_id: "+user_id+"; file_id: "+id+"; file_name: "+fname);
+			BatchFiles b=new BatchFiles();
+			int x=b.bulkBonifFregu(user_id,fname);
+			if(x!=0) {
+				return ExtJSReturn.mapError("Error trying to bulk BONIF-FREGU File.");
+			}
+
+			return ExtJSReturn.mapOK();
+
+		} catch (Exception e) {
+			return ExtJSReturn.mapError("Error trying to create BONIF-FREGU File.");
+		}
+	}
+
 	@RequestMapping(value="/file/fseis/new.action")
 	public @ResponseBody Map<String,? extends Object> newFseis(HttpSession session,
 										@RequestParam("name") String name,

@@ -14,6 +14,7 @@ Ext.application({
         'AdjustController',
         'BalanceController',
         'BatchController',
+        'BonifController',
         'BranchController',
         'CtistController',
         'FaqstController',

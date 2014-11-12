@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bapop.batch.dce.bonif.BatchBonif;
 import com.bapop.batch.dce.corep.BatchCorep;
 import com.bapop.batch.dce.fgd.BatchFgd;
 import com.bapop.batch.dce.posfm2.BatchPosfm2;
@@ -159,6 +160,25 @@ public class AdminController {
 			//System.out.println(anomes);
 			BatchPosfm2 b=new BatchPosfm2();
 			b.bulkCapital(anomes);
+
+			return ExtJSReturn.mapOK();
+
+		} catch (Exception e) {
+			//e.printStackTrace();
+			return ExtJSReturn.mapError("Error trying to run POSFM Batch.");
+		}
+	}
+	
+	@RequestMapping(value="runbonif.action")
+	public @ResponseBody Map<String,? extends Object> runBonif(HttpSession session,@RequestParam("anomes") String anomes) throws Exception {
+		try {
+			int id=Integer.parseInt(session.getAttribute("userID").toString());
+			if(id!=admin)
+				return ExtJSReturn.mapError("Not authorized.");
+			
+			//System.out.println(anomes);
+			BatchBonif b=new BatchBonif();
+			b.bulkBonif(anomes);
 
 			return ExtJSReturn.mapOK();
 

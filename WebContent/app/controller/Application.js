@@ -165,6 +165,13 @@ Ext.define('AM.controller.Application', {
         var main = this.getMainapp();
         if(this.getAccess(id,'E')) {
         	switch(id) {
+            case 'moduleBonif':
+            	if(main.child('panel[id="module_bonif"]')==null) {
+            		Ext.getStore('BonifStore').load();
+            		main.add(Ext.widget('boniflist')).show();
+            	}
+            		
+            	break;
             case 'moduleBranch':
             	if(main.child('panel[id="module_branch"]')==null) {
             		Ext.getStore('BranchStore').load();

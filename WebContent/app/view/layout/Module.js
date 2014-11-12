@@ -16,14 +16,14 @@ Ext.define('AM.view.layout.Module' ,{
     	                text: 'Balancete',
     	                iconCls: 'module-icon',
     	                leaf: true
+    	        	},{
+    	        		id: 'moduleBonif',
+    	        		text: 'Bonificados',
+    	        		iconCls: 'module-icon',
+    	        		leaf: true
     	            },{
     	        		id: 'moduleBatch',
     	                text: 'Execuções BATCH',
-    	                iconCls: 'module-icon',
-    	                leaf: true
-    	            },{
-    	            	id: 'module2',
-    	                text: 'Controlo de Contas',
     	                iconCls: 'module-icon',
     	                leaf: true
     	            },{

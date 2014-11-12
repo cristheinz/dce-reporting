@@ -45,7 +45,7 @@ public class FileIO {
 		this.id = id;
 	}
 	
-	@Column(name = "fname", length = 6)
+	@Column(name = "fname"/*, length = 6*/)
 	public String getName() {
 		return name;
 	}

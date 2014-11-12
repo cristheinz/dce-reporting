@@ -26,7 +26,7 @@ Ext.define('AM.view.batch.New', {
                         fieldLabel:'Procedure',
                         name:'job',
                         queryMode:'local',
-                        store:['cambi','crvcd','capital','corep','fgd','posfm'],
+                        store:['bonif','cambi','crvcd','capital','corep','fgd','posfm'],
                         displayField:'job',
                         autoSelect:true,
                         forceSelection:true,
@@ -35,10 +35,10 @@ Ext.define('AM.view.batch.New', {
                     {
                         xtype: 'numberfield',
                         name : 'anomes',
-                        fieldLabel: 'Ano e mes',
+                        fieldLabel: 'Parametro',
                         allowBlank:false ,
-                        minValue : 199912,
-                        maxValue : 999999
+                        /*minValue : 199912,
+                        maxValue : 999999*/
                     }
                 ]
             }
