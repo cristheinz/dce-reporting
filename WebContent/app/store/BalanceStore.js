@@ -36,6 +36,7 @@ Ext.define('AM.store.BalanceStore', {
     
     listeners: {
     	beforeload: function (store, operation, eOpts) {
+    		//console.log(operation.node.data.id+','+operation.node.data.cta);
     		if(operation.node.data.id!='root'){
     			//console.log(operation.node.data.anomes);
     			//console.log(operation.node.data.cta);

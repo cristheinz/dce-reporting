@@ -1,6 +1,7 @@
 Ext.define('AM.store.BonifStore', {
     extend: 'Ext.data.Store',
-
+    
+    id : 'bonifStore',
     model: 'AM.model.Bonif',
     autoLoad: false,
     autoSync: true,

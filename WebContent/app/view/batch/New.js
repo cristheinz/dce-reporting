@@ -36,7 +36,7 @@ Ext.define('AM.view.batch.New', {
                         xtype: 'numberfield',
                         name : 'anomes',
                         fieldLabel: 'Parametro',
-                        allowBlank:false ,
+                        allowBlank:false 
                         /*minValue : 199912,
                         maxValue : 999999*/
                     }

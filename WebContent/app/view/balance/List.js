@@ -18,6 +18,13 @@ Ext.define('AM.view.balance.List' ,{
     	name: 'saldo',
     	//value: '999999,99',
     	readOnly: true
+    },{ 
+    	xtype: 'textfield', 
+    	fieldLabel: 'Extrapatrimonial',
+    	fieldStyle: 'text-align: right;',
+    	name: 'saldoext',
+    	//value: '999999,99',
+    	readOnly: true
     }],
 
     

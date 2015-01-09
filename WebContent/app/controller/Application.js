@@ -167,7 +167,7 @@ Ext.define('AM.controller.Application', {
         	switch(id) {
             case 'moduleBonif':
             	if(main.child('panel[id="module_bonif"]')==null) {
-            		Ext.getStore('BonifStore').load();
+            		//Ext.getStore('BonifStore').load();
             		main.add(Ext.widget('boniflist')).show();
             	}
             		

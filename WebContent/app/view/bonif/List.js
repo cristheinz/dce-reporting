@@ -22,9 +22,16 @@ Ext.define('AM.view.bonif.List' ,{
     	action: 'run',
     	tooltip: 'Gerar ficheiros'
     }],
-    features: [{
+    fbar: [{
+    	xtype: 'textfield', 
+    	fieldLabel: 'Saldo Transitória',
+    	fieldStyle: 'text-align: right;',
+    	name: 'saldo',
+    	readOnly: true
+    }],
+    /*features: [{
     	ftype: 'summary'
-	}],
+	}],*/
     
     initComponent: function() {
     	this.cellEditing = new Ext.grid.plugin.CellEditing({
@@ -36,41 +43,56 @@ Ext.define('AM.view.bonif.List' ,{
     		columns: [{
     					header : 'Documento',
     					dataIndex : 'doc',
-    					flex : 1,
+    					flex : 1/*,
     					summaryType: 'count',
     			        summaryRenderer: function(value, summaryData, dataIndex) {
     			            return 'Saldo:'; 
-    			        }
+    			        }*/
     				}, {
     					text: 'Valor',
     					flex: 1,
     					align: 'right',
     					dataIndex: 'val',
-    					//summaryType: 'sum',
-    					summaryType: function(records){
-    						//console.log(records);
+    					/*summaryType: function(records){
+    						var y=0;
+    						Ext.Array.forEach(records, function (record){
+    							
+    					    	if(record.data.dtl!=null) {
+    					    		y=record.data.val;
+    					    	}
+    					    	if(record.data.dtp!=null) {
+    					    		y=y-(record.data.val-record.data.vali);
+    					    	}
+    					    	if(record.data.dti!=null) {
+    					    		y=y-record.data.vali;
+    					    	}
+    						});*/
+    						/*
     					    var totals = records.reduce(function(sums, record){
-    					    	//console.log(record.data.val);
     					    	var x=0;
     					    	if(record.data.dtl!=null) {
     					    		x=record.data.val;
     					    	}
     					    	if(record.data.dtp!=null) {
-    					    		x=x-(record.data.val-record.data.val_i);
+    					    		x=x-(record.data.val-record.data.vali);
     					    	}
     					    	if(record.data.dti!=null) {
-    					    		x=x-record.data.val_i;
+    					    		x=x-record.data.vali;
     					    	}
     					    	
     					      	return [sums[0] + x, 
     					                sums[1] + 0];
-    					    }, [0,0]);
+    					    }, [0,0]);*/
 
     					    //return (totals[0] * totals[1]) / 100;
-    					    return totals[0];
-    					},
+    					    //return totals[0];
+    						/*return y;
+    					},*/
     					renderer: function(v,p,r){
-    						return Ext.util.Format.number(v, '0.000,00/i');
+    						/*var val=v;
+    						if(!isNaN(r.data.id)) val=Math.abs(v);
+    						return Ext.util.Format.number(val, '0.000,00/i');*/
+    						return Ext.util.Format.number(Math.abs(v), '0.000,00/i');
     					}
     				}, {
     					text: 'Imposto',
@@ -78,7 +100,7 @@ Ext.define('AM.view.bonif.List' ,{
     					align: 'right',
     					dataIndex: 'vali',
     					renderer: function(v,p,r){
-    						return Ext.util.Format.number(v, '0.000,00/i');
+    						return Ext.util.Format.number(Math.abs(v), '0.000,00/i');
     					}
     				}, {
     					header : 'Ficheiro',
