@@ -26,6 +26,7 @@ public class PapelEmi {
 	private Date dti;
 	private Date dtf;
 	private Double val;
+	private String isin;
 	
 	@Id
 	@GeneratedValue
@@ -85,5 +86,11 @@ public class PapelEmi {
 	}
 	public void setVal(Double val) {
 		this.val = val;
+	}
+	public String getIsin() {
+		return isin;
+	}
+	public void setIsin(String isin) {
+		this.isin = isin;
 	}
 }

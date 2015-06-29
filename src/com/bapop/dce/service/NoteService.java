@@ -30,6 +30,15 @@ public class NoteService {
     }
 	
 	@Transactional
+    public List<Note> create(Note note){
+        List<Note> returnObject = new ArrayList<Note>();
+        
+        returnObject.add(noteDAO.save(note));
+ 
+        return returnObject;
+    }
+	
+	@Transactional
     public List<Note> update(Note note){
  
         List<Note> returnObject = new ArrayList<Note>();

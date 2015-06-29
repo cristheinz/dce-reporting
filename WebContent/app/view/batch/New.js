@@ -26,7 +26,7 @@ Ext.define('AM.view.batch.New', {
                         fieldLabel:'Procedure',
                         name:'job',
                         queryMode:'local',
-                        store:['bonif','cambi','crvcd','capital','corep','fgd','posfm'],
+                        store:['bonif','cambi','crvcd','capital','corep','fgd','finrep','perio','posfm2'],
                         displayField:'job',
                         autoSelect:true,
                         forceSelection:true,
@@ -39,6 +39,12 @@ Ext.define('AM.view.batch.New', {
                         allowBlank:false 
                         /*minValue : 199912,
                         maxValue : 999999*/
+                    },
+                    {
+                        xtype: 'textfield',
+                        name : 'notify',
+                        fieldLabel: 'Notificar',
+                        allowBlank:true 
                     }
                 ]
             }

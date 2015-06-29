@@ -3,6 +3,7 @@ package com.bapop.dce;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.InetSocketAddress;
+import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.ProxySelector;
 import java.net.URI;
@@ -22,6 +23,12 @@ public class App {
 	
 	
 	public static void main(String[] args) throws Exception {
+		App a=new App();
+		a.text();
+		
+	}
+	
+	private void test() throws Exception{
 		
 		/*ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:app-config.xml");
 		
@@ -79,8 +86,54 @@ public class App {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }		
+	}
+	
+	
+	private void text(){
+		
+		int rid=4653;
+		int r=550;
+		int id=9000;
+		
+		int c=10;
+		String s="";
+		while(c<220) {
+			String cell="F18r"+r+"c"+c;
+			s="                <cell id=\""+rid+"\">\n"
+					+"                    <property name=\"borderBottomStyle\">solid</property>\n"
+					+"                    <property name=\"borderBottomWidth\">thin</property>\n"
+					+"                    <property name=\"borderLeftStyle\">solid</property>\n"
+					+"                    <property name=\"borderLeftWidth\">thin</property>\n"
+					+"                    <property name=\"borderRightStyle\">solid</property>\n"
+					+"                    <property name=\"borderRightWidth\">thin</property>\n"
+					+"                    <property name=\"borderTopStyle\">solid</property>\n"
+					+"                    <property name=\"borderTopWidth\">thin</property>\n";
+			s+="                    <data id=\""+id+"\">\n"
+					+"                        <structure name=\"numberFormat\">\n"
+					+"                            <property name=\"category\">Fixed</property>\n"
+					+"                            <property name=\"pattern\">#,##0.00{RoundingMode=HALF_UP}</property>\n"
+					+"                        </structure>\n"
+					+"                        <property name=\"textAlign\">right</property>\n"
+					+"                        <property name=\"dataSet\">Data Set</property>\n"
+					+"                        <list-property name=\"boundDataColumns\">\n"
+					+"                            <structure>\n"
+					+"                                <property name=\"name\">"+cell+"</property>\n"
+					+"                                <text-property name=\"displayName\">"+cell+"</text-property>\n"
+					+"                                <expression name=\"expression\" type=\"javascript\">dataSetRow[\""+cell+"\"]</expression>\n"
+					+"                                <property name=\"dataType\">decimal</property>\n"
+					+"                            </structure>\n"
+					+"                        </list-property>\n"
+					+"                        <property name=\"resultSetColumn\">"+cell+"</property>\n"
+					+"                    </data>\n";
+			s+="                </cell>";
+			System.out.println(s);
+			rid++;
+			id++;
+			c=c+10;
+			if(c==200) rid=4821+((r/10)-31);
+			if(c==210) rid=4760+((r/10)-31);
+		}
 		
 	}
-
 }

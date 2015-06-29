@@ -45,5 +45,10 @@ Ext.define('AM.view.papelEmi.Form', {
             	xtype: 'numberfield',
                 name : 'val',
                 fieldLabel: 'Valor'
+        	},{
+        		xtype: 'textfield',
+                name : 'isin',
+                //disabled: 'true',
+                fieldLabel: 'ISIN'
             }]
 });

@@ -29,5 +29,8 @@ Ext.define('AM.model.PapelEmi', {
     }, {
         name: 'val',
         type: 'float'
+    }, {
+        name: 'isin',
+        type: 'string'
     }]
 });
